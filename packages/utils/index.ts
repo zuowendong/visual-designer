@@ -1,0 +1,1 @@
+export const isStr = "string";
