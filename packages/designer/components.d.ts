@@ -7,7 +7,9 @@ export {};
 
 declare module '@vue/runtime-core' {
 	export interface GlobalComponents {
+		DuiInput: typeof import('./src/components/dui-input/DuiInput.vue')['default'];
 		ElButton: typeof import('element-plus/es')['ElButton'];
+		ElInput: typeof import('element-plus/es')['ElInput'];
 		ElOption: typeof import('element-plus/es')['ElOption'];
 		ElSelect: typeof import('element-plus/es')['ElSelect'];
 		RouterLink: typeof import('vue-router')['RouterLink'];

@@ -7,8 +7,20 @@ export const properties = [
 	},
 	{
 		name: '默认值',
-		key: 'input',
+		key: 'modelValue',
 		type: 'dui-input',
-		value: 'This is the default value for the input field'
+		value: ''
+	},
+	{
+		name: '选项',
+		key: 'options',
+		type: 'dui-layout-array',
+		values: []
+	},
+	{
+		name: '提示语',
+		key: 'placeholder',
+		type: 'dui-input',
+		value: ''
 	}
 ];

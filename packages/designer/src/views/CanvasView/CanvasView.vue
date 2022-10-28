@@ -1,13 +1,18 @@
 <template>
 	<div class="main">
 		<div class="formContent">
-			<div v-for="item in canvasComponents" :key="item.id" class="formItem">
+			<div
+				v-for="item in canvasComponents"
+				:key="item.id"
+				class="formItem"
+				@click="chooseComponentHandle(item.components)"
+			>
 				<draggable
 					class="dragArea"
 					:list="item.components"
 					group="DRAGCOMPONENT"
 					:sort="false"
-					@change="log"
+					@change="dragHandle"
 					item-key="id"
 				>
 					<template #item="{ element }">
@@ -29,6 +34,7 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable';
 import { WdInput, WdSelect } from '@form-designer/components';
+import { useComponentStore } from '@/stores/component';
 
 const canvasComponents = reactive([
 	{ id: 1, components: [] },
@@ -37,9 +43,15 @@ const canvasComponents = reactive([
 	{ id: 4, components: [] }
 ]);
 
-const log = (e: MouseEvent) => {
-	console.log(2222222, e);
-	console.log(3333333, canvasComponents);
+const componentStore = useComponentStore();
+const dragHandle = (data: any) => {
+	if (data.added) {
+		componentStore.setCurrentComponent(data.added.element);
+	}
+};
+
+const chooseComponentHandle = (component: any) => {
+	console.log(1111111, component);
 };
 
 const COMPONENTMAP = reactive<any>({
@@ -51,6 +63,11 @@ const options = reactive([
 	{ label: '南京', value: 'nanjing' },
 	{ label: '苏州', value: 'suzhou' }
 ]);
+
+onMounted(() => {
+	console.log(111111, WdInput.__info__);
+	console.log(222222, WdInput.__properties__);
+});
 </script>
 
 <style scoped lang="less">
