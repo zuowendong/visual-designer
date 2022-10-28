@@ -1,0 +1,7 @@
+{
+	"tag": "WdSelect",
+	"name": "选择框",
+	"categoryName": "表单类",
+	"categoryKey": "form",
+	"main": "index.js"
+}

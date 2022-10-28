@@ -1,0 +1,7 @@
+{
+	"tag": "WdInput",
+	"name": "输入框",
+	"categoryName": "表单类",
+	"categoryKey": "form",
+	"main": "index.js"
+}

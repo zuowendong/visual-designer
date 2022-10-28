@@ -1,6 +1,6 @@
 <template>
 	<main>
-		<nav-bar-view class="navbar" />
+		<navbar-view class="navbar" />
 		<sidebar-view />
 		<canvas-view />
 		<attribute-view />
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { NavBarView, SidebarView, CanvasView, AttributeView } from './components';
+import { NavbarView, SidebarView, CanvasView, AttributeView } from './components';
 </script>
 
 <style scoped lang="less">

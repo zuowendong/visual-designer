@@ -26,8 +26,8 @@ interface MenuModel {
 }
 
 const menus = reactive([
-	{ id: 1, name: '输入框', key: 'wd-input' },
-	{ id: 2, name: '选择框', key: 'wd-select' }
+	{ id: 1, name: '输入框', key: 'WdInput' },
+	{ id: 2, name: '选择框', key: 'WdSelect' }
 ]);
 
 const cloneComponent = ({ name, key }: MenuModel) => {

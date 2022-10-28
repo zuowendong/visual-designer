@@ -12,5 +12,9 @@ module.exports = {
 	],
 	parserOptions: {
 		ecmaVersion: 'latest'
+	},
+	globals: { defineOptions: 'writable' },
+	rules: {
+		'vue/multi-word-component-names': 'off'
 	}
 };

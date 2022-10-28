@@ -11,7 +11,14 @@
 					item-key="id"
 				>
 					<template #item="{ element }">
-						<div class="compWrap">{{ element }}</div>
+						<div class="compWrap">
+							<component
+								:is="COMPONENTMAP[element.key]"
+								label="姓名"
+								v-model="element.name"
+								:options="options"
+							></component>
+						</div>
 					</template>
 				</draggable>
 			</div>
@@ -21,6 +28,7 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable';
+import { WdInput, WdSelect } from '@form-designer/components';
 
 const canvasComponents = reactive([
 	{ id: 1, components: [] },
@@ -33,6 +41,16 @@ const log = (e: MouseEvent) => {
 	console.log(2222222, e);
 	console.log(3333333, canvasComponents);
 };
+
+const COMPONENTMAP = reactive<any>({
+	WdInput,
+	WdSelect
+});
+const options = reactive([
+	{ label: '上海', value: 'shanghai' },
+	{ label: '南京', value: 'nanjing' },
+	{ label: '苏州', value: 'suzhou' }
+]);
 </script>
 
 <style scoped lang="less">
@@ -62,8 +80,6 @@ const log = (e: MouseEvent) => {
 		// position: absolute;
 		width: 100%;
 		height: 40px;
-		border: 1px solid #333;
-		box-sizing: border-box;
 	}
 }
 </style>
