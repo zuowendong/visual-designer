@@ -2,7 +2,8 @@
 	"name": "form-table-generator",
 	"version": "1.0.0",
 	"scripts": {
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"dev": "pnpm -F designer dev"
 	},
 	"keywords": [],
 	"author": "",

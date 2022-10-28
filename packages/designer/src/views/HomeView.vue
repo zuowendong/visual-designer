@@ -1,9 +1,26 @@
-<script setup lang="ts">
-const msg = ref<string>('hello');
-</script>
-
 <template>
 	<main>
-		{{ msg }}
+		<nav-bar-view class="navbar" />
+		<sidebar-view />
+		<canvas-view />
+		<attribute-view />
 	</main>
 </template>
+
+<script setup lang="ts">
+import { NavBarView, SidebarView, CanvasView, AttributeView } from './components';
+</script>
+
+<style scoped lang="less">
+main {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 200px auto 400px;
+	grid-template-rows: 60px auto;
+	.navbar {
+		grid-column-start: 1;
+		grid-column-end: 4;
+	}
+}
+</style>

@@ -1,12 +1,6 @@
-/* eslint-disable prettier/prettier */
-
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import ejs from 'ejs';
-
-const people = ['jack', 'tom', 'lucy'];
-const html = ejs.render('<%= people.join(","); %>', { people: people });
-console.log(html);
 
 function renderTemplate(src: string, dest: string) {
 	const stats = fs.statSync(src);
@@ -21,10 +15,17 @@ function renderTemplate(src: string, dest: string) {
 	}
 	fs.copyFileSync(src, dest);
 
-	console.log(fs.readFileSync('./template/form.ejs', 'utf-8'));
+	const filename = path.basename(src);
+	console.log(filename);
 
-	const templateRoot = new URL('./template', import.meta.url).pathname;
-	console.log(11111111, templateRoot);
+	// 递归每个文件修改
+	const templateStr = fs.readFileSync(src, 'utf-8');
+	const people = ['jack', 'tom', 'lucy'];
+	const content = ejs.render(templateStr, { people: people });
+	fs.writeFileSync(`${dest}`, content);
+
+	const genFilePath = dest.replace('ejs', 'vue');
+	fs.rename(dest, genFilePath, function () {});
 }
 
 renderTemplate('./template', './dist');

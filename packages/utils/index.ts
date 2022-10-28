@@ -1,1 +1,1 @@
-export const isStr = 'string';
+export * from './src/renderTemplate';
