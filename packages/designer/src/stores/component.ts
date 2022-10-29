@@ -6,10 +6,15 @@ export interface ComponentModel {
 	key: string;
 	value?: string;
 	values?: string;
+	properties?: any;
 }
 
 export const useComponentStore = defineStore('component', () => {
-	const currentComponent = ref({});
+	const currentComponent = ref<ComponentModel>({
+		id: '',
+		name: '',
+		key: ''
+	});
 	const setCurrentComponent = (component: ComponentModel) => {
 		currentComponent.value = component;
 	};
