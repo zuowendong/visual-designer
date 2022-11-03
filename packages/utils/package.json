@@ -2,10 +2,10 @@
 	"name": "@form-designer/utils",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.ts",
+	"main": "dist/index.js",
 	"type": "module",
 	"scripts": {
-		"build": "tsc index.ts"
+		"build": "tsc"
 	},
 	"keywords": [],
 	"author": "",

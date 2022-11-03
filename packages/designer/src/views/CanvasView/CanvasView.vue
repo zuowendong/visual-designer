@@ -12,6 +12,7 @@
 					:list="item.components"
 					group="DRAGCOMPONENT"
 					:sort="false"
+					:move="checkMove"
 					@change="dragHandle"
 					item-key="id"
 				>
@@ -33,9 +34,10 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable';
-import { WdInput, WdSelect } from '@form-designer/components';
+import * as components from '@form-designer/components';
 import { useComponentStore } from '@/stores/component';
 
+// form layout
 const canvasComponents = reactive([
 	{ id: 1, components: [] },
 	{ id: 2, components: [] },
@@ -43,31 +45,41 @@ const canvasComponents = reactive([
 	{ id: 4, components: [] }
 ]);
 
-const componentStore = useComponentStore();
-const dragHandle = (data: any) => {
-	if (data.added) {
-		componentStore.setCurrentComponent(data.added.element);
-	}
-};
-
-const chooseComponentHandle = (component: any) => {
-	console.log(1111111, component);
-};
-
-const COMPONENTMAP = reactive<any>({
-	WdInput,
-	WdSelect
-});
+const COMPONENTMAP = reactive<any>(components);
 const options = reactive([
 	{ label: '上海', value: 'shanghai' },
 	{ label: '南京', value: 'nanjing' },
 	{ label: '苏州', value: 'suzhou' }
 ]);
 
-onMounted(() => {
-	console.log(111111, WdInput.__info__);
-	console.log(222222, WdInput.__properties__);
-});
+const componentStore = useComponentStore();
+const chooseComponentHandle = (component: any) => {
+	if (component && component.length) {
+		componentStore.setCurrentComponent({
+			...component[0],
+			properties: COMPONENTMAP[component[0].key].__properties__
+		});
+	} else {
+		// 显示表单设置
+	}
+};
+const checkMove = (e: any) => {
+	// data exists in the target array
+	// TODO: exchange item
+	if (e.relatedContext.list && e.relatedContext.list.length) {
+		return false;
+	} else {
+		return true;
+	}
+};
+const dragHandle = (data: any) => {
+	if (data.added) {
+		componentStore.setCurrentComponent({
+			...data.added.element,
+			properties: COMPONENTMAP[data.added.element.key].__properties__
+		});
+	}
+};
 </script>
 
 <style scoped lang="less">

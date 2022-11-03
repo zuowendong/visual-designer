@@ -1,17 +1,24 @@
 <template>
 	<div class="main">
-		{{ currentComponent }}
+		<div v-for="(item, i) in currentComponent.properties" :key="i" class="formItem">
+			<div class="label">{{ item.name }}</div>
+			<div class="compWrap">
+				<component :is="DUICOMPONENTMAP[transformHump(item.type)]"></component>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import { transformHump } from '@form-designer/utils';
 import { useComponentStore } from '@/stores/component';
+import * as DuiComponents from '@/components';
+
+const DUICOMPONENTMAP = reactive<any>(DuiComponents);
 
 const componentStore = useComponentStore();
 const { currentComponent } = storeToRefs(componentStore);
-
-const value = ref('11111111');
 </script>
 
 <style scoped lang="less">
@@ -21,5 +28,17 @@ const value = ref('11111111');
 	padding: 10px 24px;
 	box-sizing: border-box;
 	border-left: 1px solid #5454547a;
+	.formItem {
+		display: flex;
+		align-items: center;
+		margin-bottom: 12px;
+		.label {
+			width: 100px;
+			font-size: 14px;
+		}
+		.compWrap {
+			flex: 1;
+		}
+	}
 }
 </style>
