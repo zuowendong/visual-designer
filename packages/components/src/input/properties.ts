@@ -1,14 +1,16 @@
-export const properties = [
+import { IProperties } from '../types';
+
+export const properties: IProperties[] = [
 	{
 		name: '标签名',
 		key: 'label',
 		type: 'dui-input',
-		value: 'input label'
+		value: 'input'
 	},
 	{
 		name: '默认值',
 		key: 'input',
 		type: 'dui-input',
-		value: 'This is the default value for the input field'
+		value: 'default input'
 	}
 ];

@@ -1,15 +1,11 @@
 <template>
 	<div class="main">
-		<div class="formContent">
-			<div
-				v-for="item in canvasComponents"
-				:key="item.id"
-				class="formItem"
-				@click="chooseComponentHandle(item.components)"
-			>
+		{{ currentComponent }}
+		<WdForm :form-items="canvasComponents" :column="2" class="formCon">
+			<template #default="{ component }">
 				<draggable
 					class="dragArea"
-					:list="item.components"
+					:list="component"
 					group="DRAGCOMPONENT"
 					:sort="false"
 					:move="checkMove"
@@ -20,63 +16,48 @@
 						<div class="compWrap">
 							<component
 								:is="COMPONENTMAP[element.key]"
-								label="姓名"
-								v-model="element.name"
-								:options="options"
+								v-bind="{ ...genProperties(COMPONENTMAP[element.key].__properties__) }"
 							></component>
 						</div>
 					</template>
 				</draggable>
-			</div>
-		</div>
+			</template>
+		</WdForm>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import draggable from 'vuedraggable';
 import * as components from '@form-designer/components';
+import { WdForm } from '@form-designer/components';
 import { useComponentStore } from '@/stores/component';
+import { checkMove } from '@/hooks/dragCheckMove';
+import { genProperties, propertiesToObject } from '@/hooks/componentProperties';
 
 // form layout
-const canvasComponents = reactive([
-	{ id: 1, components: [] },
-	{ id: 2, components: [] },
-	{ id: 3, components: [] },
-	{ id: 4, components: [] }
-]);
+const canvasComponents = reactive([[], [], [], []]);
 
 const COMPONENTMAP = reactive<any>(components);
-const options = reactive([
-	{ label: '上海', value: 'shanghai' },
-	{ label: '南京', value: 'nanjing' },
-	{ label: '苏州', value: 'suzhou' }
-]);
 
 const componentStore = useComponentStore();
-const chooseComponentHandle = (component: any) => {
-	if (component && component.length) {
-		componentStore.setCurrentComponent({
-			...component[0],
-			properties: COMPONENTMAP[component[0].key].__properties__
-		});
-	} else {
-		// 显示表单设置
-	}
-};
-const checkMove = (e: any) => {
-	// data exists in the target array
-	// TODO: exchange item
-	if (e.relatedContext.list && e.relatedContext.list.length) {
-		return false;
-	} else {
-		return true;
-	}
-};
+const { currentComponent } = storeToRefs(componentStore);
+// const chooseComponentHandle = (component: any) => {
+// 	if (component && component.length) {
+// 		componentStore.setCurrentComponent({
+// 			...component[0],
+// 			property: COMPONENTMAP[component[0].key].__properties__
+// 		});
+// 	} else {
+// 		// 显示表单设置
+// 	}
+// };
 const dragHandle = (data: any) => {
 	if (data.added) {
+		const property = propertiesToObject(COMPONENTMAP[data.added.element.key].__properties__);
 		componentStore.setCurrentComponent({
 			...data.added.element,
-			properties: COMPONENTMAP[data.added.element.key].__properties__
+			property
 		});
 	}
 };
@@ -86,20 +67,12 @@ const dragHandle = (data: any) => {
 .main {
 	height: 100%;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	.formContent {
+	.formCon {
 		width: 60%;
 		max-height: 80%;
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		column-gap: 4px;
-		row-gap: 4px;
-		.formItem {
-			height: 40px;
-			background-color: antiquewhite;
-			cursor: grab;
-		}
 	}
 	.dragArea {
 		position: relative;

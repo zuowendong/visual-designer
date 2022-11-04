@@ -1,8 +1,8 @@
 <template>
-	<div style="height: 100%; display: flex; align-items: center">
-		<span style="display: inline-block; width: 80px; padding-left: 6px">{{ label }}</span>
+	<div :style="selectConStyle">
+		<span :style="selectLabelStyle">{{ label }}</span>
 		<div style="flex: 1">
-			<el-select v-model="modelValue" :placeholder="placeholder" style="width: 100%">
+			<el-select v-model="selectedValue" placeholder="please select" style="width: 100%">
 				<el-option
 					v-for="item in options"
 					:key="item.value"
@@ -15,8 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue';
-import type { PropType } from 'vue';
+import { computed, ref } from 'vue';
 
 interface OptionModel {
 	label: string;
@@ -27,27 +26,18 @@ defineOptions({
 	name: 'WdSelect'
 });
 
-const props = defineProps({
-	modelValue: {
-		type: String,
-		default: ''
-	},
-	placeholder: {
-		type: String,
-		default: '请选择'
-	},
-	options: {
-		type: Array as PropType<OptionModel[]>,
-		default: () => {
-			return [];
-		}
-	},
-	label: {
-		type: String,
-		default: ''
-	}
-});
-let { modelValue, placeholder, options, label } = toRefs(props);
+const props = defineProps<{
+	modelValue: string;
+	label: string;
+	options: OptionModel[];
+}>();
+
+let selectedValue = ref<string>(props.modelValue);
+
+const selectConStyle = computed(() => `height: 100%; display: flex; align-items: center`);
+const selectLabelStyle = computed(
+	() => `display: inline-block; width: 80px; padding-left: 6px; font-size: 14px`
+);
 </script>
 
 <style scoped></style>

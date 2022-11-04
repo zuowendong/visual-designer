@@ -1,7 +1,7 @@
 <template>
 	<div class="main">
-		{{ currentComponent }}
-		<div v-for="(item, i) in currentComponent.properties" :key="i" class="formItem">
+		{{ properties }}
+		<div v-for="(item, i) in properties" :key="i" class="formItem">
 			<div class="label">{{ item.name }}</div>
 			<div class="compWrap">
 				<component
@@ -18,11 +18,18 @@ import { storeToRefs } from 'pinia';
 import { transformHump } from '@form-designer/utils';
 import { useComponentStore } from '@/stores/component';
 import * as DuiComponents from '@/components';
+import { propertiesToArray } from '../../hooks/componentProperties';
 
 const DUICOMPONENTMAP = reactive<any>(DuiComponents);
 
 const componentStore = useComponentStore();
 const { currentComponent } = storeToRefs(componentStore);
+
+const properties = computed(() => {
+	if (currentComponent.value.property) {
+		return propertiesToArray(currentComponent.value.property);
+	}
+});
 
 const changeHandle = (val: string, key: string) => {
 	componentStore.updateCurrentByKey(key, val);

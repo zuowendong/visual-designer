@@ -1,0 +1,7 @@
+{
+	"tag": "WdForm",
+	"name": "表单容器",
+	"categoryName": "表单类",
+	"categoryKey": "form",
+	"main": "index.js"
+}

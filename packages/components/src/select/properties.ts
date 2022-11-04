@@ -1,26 +1,22 @@
-export const properties = [
+import { IProperties } from '../types';
+
+export const properties: IProperties[] = [
 	{
 		name: '标签名',
 		key: 'label',
 		type: 'dui-input',
-		value: 'input label'
+		value: 'select'
 	},
 	{
 		name: '默认值',
 		key: 'modelValue',
 		type: 'dui-input',
-		value: ''
+		value: 'default select'
 	},
 	{
 		name: '选项',
 		key: 'options',
 		type: 'dui-layout-array',
-		values: []
-	},
-	{
-		name: '提示语',
-		key: 'placeholder',
-		type: 'dui-input',
-		value: ''
+		value: []
 	}
 ];

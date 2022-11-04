@@ -4,6 +4,7 @@
 			:list="menus"
 			:group="{ name: 'DRAGCOMPONENT', pull: 'clone', put: false }"
 			:clone="cloneComponent"
+			:move="checkMove"
 			item-key="id"
 		>
 			<template #item="{ element }">
@@ -18,6 +19,7 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable';
+import { checkMove } from '@/hooks/dragCheckMove';
 
 interface MenuModel {
 	id: number;

@@ -6,7 +6,10 @@ export interface ComponentModel {
 	key: string;
 	value?: string;
 	values?: string;
-	properties?: any;
+	property?: PropertiesModel;
+}
+export interface PropertiesModel {
+	[k: string]: any;
 }
 
 export const useComponentStore = defineStore('component', () => {
@@ -18,18 +21,23 @@ export const useComponentStore = defineStore('component', () => {
 	const setCurrentComponent = (component: ComponentModel) => {
 		currentComponent.value = component;
 	};
-	const updateCurrentByKey = (key: string, value: string) => {
-		for (let i = 0; i < currentComponent.value.properties.length; i++) {
-			const property = currentComponent.value.properties[i];
-			if (property.key === key) {
-				currentComponent.value.properties[i].value = value;
-			}
-		}
+	// const updateCurrentByKey = (key: string, value: string) => {
+	const updateCurrentByKey = () => {
+		// for (let i = 0; i < currentComponent.value.property.length; i++) {
+		// 	const property = currentComponent.value.property[i];
+		// 	if (property.key === key) {
+		// 		currentComponent.value.property[i].value = value;
+		// 	}
+		// }
 	};
+
+	const components = ref<ComponentModel[]>([]);
 
 	return {
 		currentComponent,
 		setCurrentComponent,
-		updateCurrentByKey
+		updateCurrentByKey,
+
+		components
 	};
 });

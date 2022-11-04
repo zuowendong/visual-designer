@@ -20,7 +20,6 @@ let { modelValue } = toRefs(props);
 const emit = defineEmits(['change']);
 let inputValue = ref<string>(modelValue.value);
 const valChangeHandle = (val: string) => {
-	console.log(1111111, val);
 	emit('change', val);
 };
 </script>

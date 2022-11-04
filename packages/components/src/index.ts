@@ -1,6 +1,7 @@
 import type { App } from 'vue';
 import * as components from './components';
 export * from './components';
+export * from './types';
 
 export default {
 	install(app: App) {
