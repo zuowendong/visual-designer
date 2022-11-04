@@ -18,9 +18,18 @@ export const useComponentStore = defineStore('component', () => {
 	const setCurrentComponent = (component: ComponentModel) => {
 		currentComponent.value = component;
 	};
+	const updateCurrentByKey = (key: string, value: string) => {
+		for (let i = 0; i < currentComponent.value.properties.length; i++) {
+			const property = currentComponent.value.properties[i];
+			if (property.key === key) {
+				currentComponent.value.properties[i].value = value;
+			}
+		}
+	};
 
 	return {
 		currentComponent,
-		setCurrentComponent
+		setCurrentComponent,
+		updateCurrentByKey
 	};
 });

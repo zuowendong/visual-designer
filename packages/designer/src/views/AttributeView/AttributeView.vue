@@ -1,9 +1,13 @@
 <template>
 	<div class="main">
+		{{ currentComponent }}
 		<div v-for="(item, i) in currentComponent.properties" :key="i" class="formItem">
 			<div class="label">{{ item.name }}</div>
 			<div class="compWrap">
-				<component :is="DUICOMPONENTMAP[transformHump(item.type)]"></component>
+				<component
+					:is="DUICOMPONENTMAP[transformHump(item.type)]"
+					@change="(val: string) => changeHandle(val, item.key)"
+				></component>
 			</div>
 		</div>
 	</div>
@@ -19,6 +23,10 @@ const DUICOMPONENTMAP = reactive<any>(DuiComponents);
 
 const componentStore = useComponentStore();
 const { currentComponent } = storeToRefs(componentStore);
+
+const changeHandle = (val: string, key: string) => {
+	componentStore.updateCurrentByKey(key, val);
+};
 </script>
 
 <style scoped lang="less">
