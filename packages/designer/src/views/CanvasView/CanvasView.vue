@@ -1,87 +1,60 @@
 <template>
-	<div class="main">
-		{{ currentComponent }}
-		<WdForm :form-items="canvasComponents" :column="2" class="formCon">
-			<template #default="{ component }">
-				<draggable
-					class="dragArea"
-					:list="component"
-					group="DRAGCOMPONENT"
-					:sort="false"
-					:move="checkMove"
-					@change="dragHandle"
-					item-key="id"
-				>
-					<template #item="{ element }">
-						<div class="compWrap">
-							<component
-								:is="COMPONENTMAP[element.key]"
-								v-bind="{ ...genProperties(COMPONENTMAP[element.key].__properties__) }"
-							></component>
-						</div>
-					</template>
-				</draggable>
-			</template>
-		</WdForm>
+	<div
+		class="content"
+		@drop="dropHandle"
+		@dragover="dragOverHandle"
+		@mousedown="handleMouseDown"
+		@mouseup="deselectCurComponent"
+	>
+		<Editor />
 	</div>
 </template>
 
 <script setup lang="ts">
+import { cloneDeep } from 'lodash-es';
 import { storeToRefs } from 'pinia';
-import draggable from 'vuedraggable';
-import * as components from '@form-designer/components';
-import { WdForm } from '@form-designer/components';
+
+import generateID from '@/utils/generateID';
+import componentList from '@/assets/componnetList';
+import Editor from './Editor.vue';
+
 import { useComponentStore } from '@/stores/component';
-import { checkMove } from '@/hooks/dragCheckMove';
-import { genProperties, propertiesToObject } from '@/hooks/componentProperties';
-
-// form layout
-const canvasComponents = reactive([[], [], [], []]);
-
-const COMPONENTMAP = reactive<any>(components);
 
 const componentStore = useComponentStore();
-const { currentComponent } = storeToRefs(componentStore);
-// const chooseComponentHandle = (component: any) => {
-// 	if (component && component.length) {
-// 		componentStore.setCurrentComponent({
-// 			...component[0],
-// 			property: COMPONENTMAP[component[0].key].__properties__
-// 		});
-// 	} else {
-// 		// 显示表单设置
-// 	}
-// };
-const dragHandle = (data: any) => {
-	if (data.added) {
-		const property = propertiesToObject(COMPONENTMAP[data.added.element.key].__properties__);
-		componentStore.setCurrentComponent({
-			...data.added.element,
-			property
-		});
+const { editorDom } = storeToRefs(componentStore);
+
+const dropHandle = (e: any) => {
+	e.preventDefault();
+	e.stopPropagation();
+
+	const index = e.dataTransfer.getData('index');
+	const canvasInfo = editorDom.value.getBoundingClientRect();
+	if (index) {
+		const component = cloneDeep(componentList[index]);
+		component.style.top = e.clientY - canvasInfo.y;
+		component.style.left = e.clientX - canvasInfo.x;
+		component.compId = generateID();
+		componentStore.setCurrentComponent(component, index);
+		componentStore.addComponent(component);
 	}
 };
+
+const dragOverHandle = (e: any) => {
+	e.preventDefault();
+	e.dataTransfer.dropEffect = 'copy';
+};
+
+const handleMouseDown = (e: any) => {
+	e.stopPropagation();
+};
+
+const deselectCurComponent = () => {};
 </script>
 
 <style scoped lang="less">
-.main {
+.content {
+	width: 100%;
 	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	.formCon {
-		width: 60%;
-		max-height: 80%;
-	}
-	.dragArea {
-		position: relative;
-		height: 100%;
-	}
-	.compWrap {
-		// position: absolute;
-		width: 100%;
-		height: 40px;
-	}
+	overflow: auto;
 }
 </style>

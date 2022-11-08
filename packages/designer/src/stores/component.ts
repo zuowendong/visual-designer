@@ -13,13 +13,25 @@ export interface PropertiesModel {
 }
 
 export const useComponentStore = defineStore('component', () => {
-	const currentComponent = ref<ComponentModel>({
-		id: '',
-		name: '',
-		key: ''
-	});
-	const setCurrentComponent = (component: ComponentModel) => {
-		currentComponent.value = component;
+	const editorDom = ref();
+	const setEditorDom = (refObj: any) => {
+		editorDom.value = refObj;
+	};
+
+	let currentComponent = reactive<any>({});
+	const currentComponentIndex = ref<number>();
+	const setCurrentComponent = (component: any, index: number) => {
+		currentComponent = component;
+		currentComponentIndex.value = index;
+	};
+
+	const setShapeStyle = (props: any) => {
+		const { top, left, width, height, rotate } = props;
+		if (top) currentComponent.style.top = Math.round(top);
+		if (left) currentComponent.style.left = Math.round(left);
+		if (width) currentComponent.style.width = Math.round(width);
+		if (height) currentComponent.style.height = Math.round(height);
+		if (rotate) currentComponent.style.rotate = Math.round(rotate);
 	};
 	// const updateCurrentByKey = (key: string, value: string) => {
 	const updateCurrentByKey = () => {
@@ -31,13 +43,21 @@ export const useComponentStore = defineStore('component', () => {
 		// }
 	};
 
-	const components = ref<ComponentModel[]>([]);
+	const components = reactive<any[]>([]);
+	const addComponent = (component: any) => {
+		components.push(component);
+	};
 
 	return {
+		editorDom,
+		setEditorDom,
+
 		currentComponent,
 		setCurrentComponent,
 		updateCurrentByKey,
+		setShapeStyle,
 
-		components
+		components,
+		addComponent
 	};
 });

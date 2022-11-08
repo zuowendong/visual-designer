@@ -1,8 +1,14 @@
 <template>
 	<main>
-		<navbar-view class="navbar" />
+		<section class="navbar">
+			<navbar-view />
+		</section>
+
 		<sidebar-view />
-		<canvas-view />
+
+		<section class="canvasView">
+			<canvas-view />
+		</section>
 		<attribute-view />
 	</main>
 </template>
@@ -21,6 +27,9 @@ main {
 	.navbar {
 		grid-column-start: 1;
 		grid-column-end: 4;
+	}
+	.canvasView {
+		padding: 20px;
 	}
 }
 </style>
