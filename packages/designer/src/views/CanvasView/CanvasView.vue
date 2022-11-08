@@ -1,9 +1,9 @@
 <template>
 	<div
 		class="content"
-		@drop="dropHandle"
-		@dragover="dragOverHandle"
-		@mousedown="handleMouseDown"
+		@drop.stop.prevent="dropHandle"
+		@dragover.prevent="dragOverHandle"
+		@mousedown.stop="mouseDownHandle"
 		@mouseup="deselectCurComponent"
 	>
 		<Editor />
@@ -21,34 +21,37 @@ import Editor from './Editor.vue';
 import { useComponentStore } from '@/stores/component';
 
 const componentStore = useComponentStore();
-const { editorDom } = storeToRefs(componentStore);
+const { editorDom, isChoosedComponent } = storeToRefs(componentStore);
 
+// 当元素或选中的文本在可释放目标上被释放时触发
 const dropHandle = (e: any) => {
-	e.preventDefault();
-	e.stopPropagation();
-
-	const index = e.dataTransfer.getData('index');
+	const compIndex = e.dataTransfer.getData('index');
 	const canvasInfo = editorDom.value.getBoundingClientRect();
-	if (index) {
-		const component = cloneDeep(componentList[index]);
+	if (compIndex) {
+		let component = cloneDeep(componentList[compIndex]);
+		component.compId = generateID();
+		// 初始拖入位置
 		component.style.top = e.clientY - canvasInfo.y;
 		component.style.left = e.clientX - canvasInfo.x;
-		component.compId = generateID();
-		componentStore.setCurrentComponent(component, index);
+
 		componentStore.addComponent(component);
 	}
 };
 
-const dragOverHandle = (e: any) => {
-	e.preventDefault();
-	e.dataTransfer.dropEffect = 'copy';
+// affect which cursor is displayed while dragging.
+const dragOverHandle = (e: any) => (e.dataTransfer.dropEffect = 'copy');
+
+// 指针设备按钮按下时触发
+const mouseDownHandle = () => {
+	// 取消选中组件
+	componentStore.setChoosedComponentStatus(false);
 };
 
-const handleMouseDown = (e: any) => {
-	e.stopPropagation();
+// 指针设备按钮放开时触发
+const deselectCurComponent = () => {
+	// 未选中组件，currentComponet为空
+	if (!isChoosedComponent.value) componentStore.setCurrentComponent({}, -1);
 };
-
-const deselectCurComponent = () => {};
 </script>
 
 <style scoped lang="less">

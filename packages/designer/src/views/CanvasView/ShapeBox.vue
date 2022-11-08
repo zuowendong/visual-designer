@@ -2,15 +2,15 @@
 	<div
 		class="shapeBox"
 		:class="{ active }"
-		@click="selectCurComponent"
-		@mousedown="mouseDownOnShapeHandle"
+		@click.stop.prevent
+		@mousedown.stop="mouseDownOnShapeHandle"
 	>
 		<div
-			v-for="item in points"
+			v-for="item in active ? points : []"
 			:key="item"
 			class="shapePoint"
 			:style="getPointStyle(item)"
-			@mousedown="(e) => mouseDownOnPointHandle(item, e)"
+			@mousedown.stop.prevent="(e) => mouseDownOnPointHandle(item, e)"
 		></div>
 		<slot></slot>
 	</div>
@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
-import calculateComponentPositonAndSize from '../../utils/calculateComponentPositonAndSize';
 
 const props = defineProps({
 	active: { type: Boolean, default: false },
@@ -29,16 +28,11 @@ const props = defineProps({
 });
 let { active, defaultStyle, element, index } = toRefs(props);
 
-const selectCurComponent = (e: MouseEvent) => {
-	// 阻止向父组件冒泡
-	e.stopPropagation();
-	e.preventDefault();
-};
-
 const componentStore = useComponentStore();
 let cursors = reactive<any>({});
+
 const mouseDownOnShapeHandle = (e: MouseEvent) => {
-	e.stopPropagation();
+	componentStore.setChoosedComponentStatus(true);
 	componentStore.setCurrentComponent(element.value, index.value);
 
 	cursors = getCursor(); // 根据旋转角度获取光标位置
@@ -53,10 +47,10 @@ const mouseDownOnShapeHandle = (e: MouseEvent) => {
 	const move = (moveEvent: MouseEvent) => {
 		const curX = moveEvent.clientX;
 		const curY = moveEvent.clientY;
+		// 鼠标移动的坐标 - 初始按下鼠标时的坐标 = 移动的距离 + 组件原始坐标 = 新坐标
 		pos.top = curY - startY + startTop;
 		pos.left = curX - startX + startLeft;
-
-		// update current componnet style
+		// update current component style
 		componentStore.setShapeStyle(pos);
 	};
 
@@ -69,7 +63,7 @@ const mouseDownOnShapeHandle = (e: MouseEvent) => {
 	document.addEventListener('mouseup', up);
 };
 
-// change width & height
+// change current component of width & height
 const points = reactive(['lt', 't', 'rt', 'r', 'rb', 'b', 'lb', 'l']);
 const getPointStyle = (point: string) => {
 	const { width, height } = defaultStyle.value;
@@ -80,97 +74,74 @@ const getPointStyle = (point: string) => {
 	let newLeft = 0;
 	let newTop = 0;
 
-	// 四个角的点
+	// 四个角的点 lt:0 lb:0 rt:width rb:height
 	if (point.length === 2) {
 		newLeft = hasL ? 0 : width;
 		newTop = hasT ? 0 : height;
 	} else {
 		// 上下两点的点，宽度居中
 		if (hasT || hasB) {
-			newLeft = width / 2;
+			newLeft = Math.floor(width / 2);
 			newTop = hasT ? 0 : height;
 		}
+
 		// 左右两边的点，高度居中
 		if (hasL || hasR) {
 			newLeft = hasL ? 0 : width;
 			newTop = Math.floor(height / 2);
 		}
 	}
-
-	const style = {
+	return {
 		marginLeft: '-4px',
 		marginTop: '-4px',
 		left: `${newLeft}px`,
 		top: `${newTop}px`,
 		cursor: cursors[point]
 	};
-	return style;
 };
 
-const { editorDom, currentComponent } = storeToRefs(componentStore);
+const { currentComponent } = storeToRefs(componentStore);
+
+/**
+ *
+ * 点击小圆点时，记录点击的坐标 xy
+ * 假设向下拖动，那么 y 坐标就会增大
+ * 用新的 y 坐标减去原来的 y 坐标，就可以知道在纵轴方向的移动距离是多少
+ * 最后再将移动距离加上原来组件的高度，就可以得出新的组件高度
+ * 如果是正数，说明是往下拉，组件的高度在增加。如果是负数，说明是往上拉，组件的高度在减少。
+ */
 
 const mouseDownOnPointHandle = (point: string, e: any) => {
-	// this.$store.commit("setInEditorStatus", true);
-	// this.$store.commit("setClickComponentStatus", true);
-	e.stopPropagation();
-	e.preventDefault();
-
-	const style = { ...defaultStyle.value };
-
-	// 组件宽高比
-	const proportion = style.width / style.height;
-
-	// 组件中心点
-	const center = {
-		x: style.left + style.width / 2,
-		y: style.top + style.height / 2
-	};
-
-	// 获取画布位移信息
-	const editorRectInfo = editorDom.value.getBoundingClientRect();
-
-	const pointRect = e.target.getBoundingClientRect();
-	// 当前点击圆点相对于画布的中心坐标
-	const curPoint = {
-		x: Math.round(pointRect.left - editorRectInfo.left + e.target.offsetWidth / 2),
-		y: Math.round(pointRect.top - editorRectInfo.top + e.target.offsetHeight / 2)
-	};
-
-	// 获取对称点的坐标
-	const symmetricPoint = {
-		x: center.x - (curPoint.x - center.x),
-		y: center.y - (curPoint.y - center.y)
-	};
-
-	// 是否需要保存快照
-	let isFirst = true;
+	const pos = { ...defaultStyle.value };
+	const height = Number(pos.height);
+	const width = Number(pos.width);
+	const top = Number(pos.top);
+	const left = Number(pos.left);
+	const startX = e.clientX;
+	const startY = e.clientY;
 
 	const move = (moveEvent: MouseEvent) => {
-		// 第一次点击时也会触发 move，所以会有“刚点击组件但未移动，组件的大小却改变了”的情况发生
-		// 因此第一次点击时不触发 move 事件
-		if (isFirst) {
-			isFirst = false;
-			return;
-		}
+		const currX = moveEvent.clientX;
+		const currY = moveEvent.clientY;
+		const disY = currY - startY;
+		const disX = currX - startX;
+		const hasT = /t/.test(point);
+		const hasB = /b/.test(point);
+		const hasL = /l/.test(point);
+		const hasR = /r/.test(point);
+		const newHeight = height + (hasT ? -disY : hasB ? disY : 0);
+		const newWidth = width + (hasL ? -disX : hasR ? disX : 0);
+		pos.height = newHeight > 0 ? newHeight : 0;
+		pos.width = newWidth > 0 ? newWidth : 0;
+		pos.left = left + (hasL ? disX : 0);
+		pos.top = top + (hasT ? disY : 0);
 
-		const curPositon = {
-			x: moveEvent.clientX - Math.round(editorRectInfo.left),
-			y: moveEvent.clientY - Math.round(editorRectInfo.top)
-		};
-
-		calculateComponentPositonAndSize(point, style, curPositon, proportion, {
-			center,
-			curPoint,
-			symmetricPoint
-		});
-
-		componentStore.setShapeStyle(style);
+		componentStore.setShapeStyle(pos);
 	};
 
 	const up = () => {
 		document.removeEventListener('mousemove', move);
 		document.removeEventListener('mouseup', up);
-		// needSave && this.$store.commit('recordSnapshot');
 	};
 
 	document.addEventListener('mousemove', move);
@@ -231,6 +202,7 @@ const mod360 = (deg: number) => {
 <style scoped lang="less">
 .shapeBox {
 	position: absolute;
+	outline: 1px solid #4c7a9e;
 	&:hover {
 		cursor: move;
 	}
@@ -238,15 +210,14 @@ const mod360 = (deg: number) => {
 .active {
 	outline: 1px solid #70c0ff;
 	user-select: none;
-}
-
-.shapePoint {
-	position: absolute;
-	background: #fff;
-	border: 1px solid #59c7f9;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	z-index: 1;
+	.shapePoint {
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		background-color: #ffffff;
+		border: 1px solid #59c7f9;
+		border-radius: 50%;
+		z-index: 1;
+	}
 }
 </style>

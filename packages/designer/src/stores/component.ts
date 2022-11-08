@@ -13,18 +13,20 @@ export interface PropertiesModel {
 }
 
 export const useComponentStore = defineStore('component', () => {
-	const editorDom = ref(); // 编辑器dom
+	// 编辑器dom
+	const editorDom = ref();
 	const setEditorDom = (refObj: any) => {
 		editorDom.value = refObj;
 	};
 
+	// 当前组件
 	const currentComponent = ref<any>({});
 	const currentComponentIndex = ref<number>();
 	const setCurrentComponent = (component: any, index: number) => {
 		currentComponent.value = component;
 		currentComponentIndex.value = index;
 	};
-
+	// 设置当前组件的shapebox样式
 	const setShapeStyle = (props: any) => {
 		const { top, left, width, height, rotate } = props;
 		if (top) currentComponent.value.style.top = Math.round(top);
@@ -33,16 +35,13 @@ export const useComponentStore = defineStore('component', () => {
 		if (height) currentComponent.value.style.height = Math.round(height);
 		if (rotate) currentComponent.value.style.rotate = Math.round(rotate);
 	};
-	// const updateCurrentByKey = (key: string, value: string) => {
-	const updateCurrentByKey = () => {
-		// for (let i = 0; i < currentComponent.value.property.length; i++) {
-		// 	const property = currentComponent.value.property[i];
-		// 	if (property.key === key) {
-		// 		currentComponent.value.property[i].value = value;
-		// 	}
-		// }
+	// 取消or选中组件
+	const isChoosedComponent = ref(false);
+	const setChoosedComponentStatus = (status: boolean) => {
+		isChoosedComponent.value = status;
 	};
 
+	// 画布中所有组件
 	const components = reactive<any[]>([]);
 	const addComponent = (component: any) => {
 		components.push(component);
@@ -54,8 +53,10 @@ export const useComponentStore = defineStore('component', () => {
 
 		currentComponent,
 		setCurrentComponent,
-		updateCurrentByKey,
 		setShapeStyle,
+
+		isChoosedComponent,
+		setChoosedComponentStatus,
 
 		components,
 		addComponent

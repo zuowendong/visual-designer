@@ -33,12 +33,13 @@ const properties = computed(() => {
 </script>
 
 <style scoped lang="less">
+@import '@/style/base.less';
 .main {
 	width: 100%;
 	box-shadow: 0px 0px 20px 0px rgba(25, 40, 74, 0.1);
 	padding: 10px 24px;
 	box-sizing: border-box;
-	border-left: 1px solid #5454547a;
+	border-left: 1px solid @mainBoderColor;
 	.formItem {
 		display: flex;
 		align-items: center;
