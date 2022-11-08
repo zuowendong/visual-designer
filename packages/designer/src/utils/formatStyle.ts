@@ -1,5 +1,6 @@
 export function getShapeStyle(style: any) {
-	const result: any = {};
+	const result: any = { ...style };
+	// need add units
 	['width', 'height', 'top', 'left', 'rotate'].forEach((attr) => {
 		if (attr != 'rotate') {
 			result[attr] = style[attr] + 'px';
@@ -7,6 +8,5 @@ export function getShapeStyle(style: any) {
 			result.transform = 'rotate(' + style[attr] + 'deg)';
 		}
 	});
-
 	return result;
 }

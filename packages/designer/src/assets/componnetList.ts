@@ -8,7 +8,10 @@ const componentList = [
 		name: '表单容器',
 		icon: 'biaodanzujian-biaoge',
 		key: 'WdInput',
-		style: {}
+		style: {
+			width: 200,
+			height: 28
+		}
 	},
 	{ name: '输入框', icon: 'biaodanzujian-shurukuang', key: 'WdInput' },
 	{ name: '选择框', icon: 'biaodanzujian-xialakuang', key: 'WdSelect' }

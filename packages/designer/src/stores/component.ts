@@ -13,25 +13,25 @@ export interface PropertiesModel {
 }
 
 export const useComponentStore = defineStore('component', () => {
-	const editorDom = ref();
+	const editorDom = ref(); // 编辑器dom
 	const setEditorDom = (refObj: any) => {
 		editorDom.value = refObj;
 	};
 
-	let currentComponent = reactive<any>({});
+	const currentComponent = ref<any>({});
 	const currentComponentIndex = ref<number>();
 	const setCurrentComponent = (component: any, index: number) => {
-		currentComponent = component;
+		currentComponent.value = component;
 		currentComponentIndex.value = index;
 	};
 
 	const setShapeStyle = (props: any) => {
 		const { top, left, width, height, rotate } = props;
-		if (top) currentComponent.style.top = Math.round(top);
-		if (left) currentComponent.style.left = Math.round(left);
-		if (width) currentComponent.style.width = Math.round(width);
-		if (height) currentComponent.style.height = Math.round(height);
-		if (rotate) currentComponent.style.rotate = Math.round(rotate);
+		if (top) currentComponent.value.style.top = Math.round(top);
+		if (left) currentComponent.value.style.left = Math.round(left);
+		if (width) currentComponent.value.style.width = Math.round(width);
+		if (height) currentComponent.value.style.height = Math.round(height);
+		if (rotate) currentComponent.value.style.rotate = Math.round(rotate);
 	};
 	// const updateCurrentByKey = (key: string, value: string) => {
 	const updateCurrentByKey = () => {

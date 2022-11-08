@@ -1,13 +1,9 @@
 <template>
 	<div class="main">
-		{{ properties }}
 		<div v-for="(item, i) in properties" :key="i" class="formItem">
 			<div class="label">{{ item.name }}</div>
 			<div class="compWrap">
-				<component
-					:is="DUICOMPONENTMAP[transformHump(item.type)]"
-					@change="(val: string) => changeHandle(val, item.key)"
-				></component>
+				<component :is="DUICOMPONENTMAP[transformHump(item.type)]"></component>
 			</div>
 		</div>
 	</div>
@@ -31,9 +27,9 @@ const properties = computed(() => {
 	}
 });
 
-const changeHandle = (val: string, key: string) => {
-	componentStore.updateCurrentByKey(key, val);
-};
+// const changeHandle = (val: string, key: string) => {
+// 	componentStore.updateCurrentByKey(key, val);
+// };
 </script>
 
 <style scoped lang="less">
