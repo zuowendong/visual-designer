@@ -14,7 +14,6 @@ import { storeToRefs } from 'pinia';
 import { transformHump } from '@form-designer/utils';
 import { useComponentStore } from '@/stores/component';
 import * as DuiComponents from '@/components';
-import { propertiesToArray } from '../../hooks/componentProperties';
 
 const DUICOMPONENTMAP = reactive<any>(DuiComponents);
 
@@ -23,7 +22,12 @@ const { currentComponent } = storeToRefs(componentStore);
 
 const properties = computed(() => {
 	if (currentComponent.value.property) {
-		return propertiesToArray(currentComponent.value.property);
+		return [
+			{
+				name: '',
+				type: ''
+			}
+		];
 	}
 });
 

@@ -1,6 +1,7 @@
 {
 	"tag": "WdSelect",
-	"name": "选择框",
+	"label": "表单选择框",
+	"icon": "biaodanzujian-xialakuang",
 	"categoryName": "表单类",
 	"categoryKey": "form",
 	"main": "index.js"

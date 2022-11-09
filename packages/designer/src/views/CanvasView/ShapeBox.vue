@@ -35,7 +35,7 @@ const mouseDownOnShapeHandle = (e: MouseEvent) => {
 	componentStore.setChoosedComponentStatus(true);
 	componentStore.setCurrentComponent(element.value, index.value);
 
-	cursors = getCursor(); // 根据旋转角度获取光标位置
+	// cursors = getCursor(); // 根据旋转角度获取光标位置
 
 	const pos = { ...defaultStyle.value };
 	const startY = e.clientY;

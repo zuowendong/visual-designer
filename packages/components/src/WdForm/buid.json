@@ -1,6 +1,7 @@
 {
 	"tag": "WdForm",
-	"name": "表单容器",
+	"label": "表单容器",
+	"icon": "biaodanzujian-biaoge",
 	"categoryName": "表单类",
 	"categoryKey": "form",
 	"main": "index.js"

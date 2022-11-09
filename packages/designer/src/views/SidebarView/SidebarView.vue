@@ -1,23 +1,28 @@
 <template>
 	<div class="componentListMain" @dragstart="dragStartHandle">
 		<div
-			v-for="(item, index) in componentList"
+			v-for="(item, index) in menuOps"
 			:key="index"
 			class="componentItem"
 			:draggable="true"
-			:data-index="index"
+			:data-component="item.key"
 		>
 			<span class="iconfont" :class="'icon-' + item.icon"></span>
-			<span class="title">{{ item.name }}</span>
+			<span class="title">{{ item.label }}</span>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import componentList from '@/assets/componnetList';
+import { genMenuOps } from '@/hooks/genComponentData';
+
+let menuOps = ref<any[]>([]);
+onMounted(async () => {
+	menuOps.value = await genMenuOps();
+});
 
 const dragStartHandle = (e: any) => {
-	e.dataTransfer.setData('index', e.target.dataset.index);
+	e.dataTransfer.setData('component', e.target.dataset.component);
 };
 </script>
 

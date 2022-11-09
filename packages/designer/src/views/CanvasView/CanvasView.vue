@@ -15,26 +15,45 @@ import { cloneDeep } from 'lodash-es';
 import { storeToRefs } from 'pinia';
 
 import generateID from '@/utils/generateID';
-import componentList from '@/assets/componnetList';
+// import componentList from '@/assets/componnetList';
 import Editor from './Editor.vue';
 
 import { useComponentStore } from '@/stores/component';
+import { genCompStyleData } from '@/hooks/genComponentData';
+import { debug } from 'console';
+
+// let componentList = ref<any[]>([]);
+// onMounted(async () => {
+// 	componentList.value = await genEditorCompData();
+
+// 	console.log(222222, componentList.value);
+// });
 
 const componentStore = useComponentStore();
-const { editorDom, isChoosedComponent } = storeToRefs(componentStore);
+const { editorDom, isChoosedComponent, currentComponent } = storeToRefs(componentStore);
 
 // 当元素或选中的文本在可释放目标上被释放时触发
-const dropHandle = (e: any) => {
-	const compIndex = e.dataTransfer.getData('index');
+const dropHandle = async (e: any) => {
+	const compKey = e.dataTransfer.getData('component');
 	const canvasInfo = editorDom.value.getBoundingClientRect();
-	if (compIndex) {
-		let component = cloneDeep(componentList[compIndex]);
-		component.compId = generateID();
+	if (compKey) {
+		let style = await genCompStyleData(compKey);
+		let component = {
+			id: generateID(),
+			key: compKey,
+			style: {
+				...style,
+				top: e.clientY - canvasInfo.y,
+				left: e.clientX - canvasInfo.x
+			}
+		};
 		// 初始拖入位置
-		component.style.top = e.clientY - canvasInfo.y;
-		component.style.left = e.clientX - canvasInfo.x;
+		// component.style.top = e.clientY - canvasInfo.y;
+		// component.style.left = e.clientX - canvasInfo.x;
 
-		componentStore.addComponent(component);
+		console.log(4444444, component);
+		const newComp = cloneDeep(component);
+		componentStore.addComponent(newComp);
 	}
 };
 

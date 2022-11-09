@@ -3,9 +3,9 @@
 		<Grid />
 		<ShapeBox
 			v-for="(item, index) in components"
-			:key="item.compId"
+			:key="item.id"
 			:style="getShapeStyle(item.style)"
-			:active="item.compId === currentComponent.compId"
+			:active="item.id === currentComponent.id"
 			:default-style="item.style"
 			:element="item"
 			:index="index"
