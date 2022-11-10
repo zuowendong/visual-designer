@@ -3,6 +3,5 @@
 	"label": "表单选择框",
 	"icon": "biaodanzujian-xialakuang",
 	"categoryName": "表单类",
-	"categoryKey": "form",
-	"main": "index.js"
+	"categoryKey": "form"
 }

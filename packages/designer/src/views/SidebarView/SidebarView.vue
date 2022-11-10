@@ -1,11 +1,11 @@
 <template>
-	<div class="componentListMain" @dragstart="dragStartHandle">
+	<div class="componentListMain">
 		<div
 			v-for="(item, index) in menuOps"
 			:key="index"
 			class="componentItem"
-			:draggable="true"
-			:data-component="item.key"
+			draggable="true"
+			@dragstart="dragStartHandle($event, item.key)"
 		>
 			<span class="iconfont" :class="'icon-' + item.icon"></span>
 			<span class="title">{{ item.label }}</span>
@@ -14,15 +14,20 @@
 </template>
 
 <script setup lang="ts">
+import { fileConfig } from '@form-designer/components';
 import { genMenuOps } from '@/hooks/genComponentData';
+import { componentInstall } from '@/hooks/component';
 
 let menuOps = ref<any[]>([]);
 onMounted(async () => {
 	menuOps.value = await genMenuOps();
 });
 
-const dragStartHandle = (e: any) => {
-	e.dataTransfer.setData('component', e.target.dataset.component);
+const dragStartHandle = async (e: any, key: string) => {
+	e.dataTransfer.setData('component', key);
+	// 动态注册组件
+	const module = await fileConfig.fetchComponent(key);
+	componentInstall(key, module.default);
 };
 </script>
 

@@ -1,3 +1,20 @@
-export { default as WdInput } from './WdInput';
-export { default as WdSelect } from './WdSelect';
-export { default as WdForm } from './WdForm';
+class FileConfig {
+	public getAllBuildModule = () => {
+		const buildInfoModules = import.meta.globEager('./**/buid.json');
+		return buildInfoModules;
+	};
+
+	public createComponent = async (tag: string) => {
+		// @ts-ignore
+		const properties = await import(`./${tag}/properties.ts`);
+		return properties.properties;
+	};
+
+	public fetchComponent = async (tag: string) => {
+		// @ts-ignore
+		const modules = await import(`./${tag}/index.vue`);
+		return modules;
+	};
+}
+
+export default new FileConfig();

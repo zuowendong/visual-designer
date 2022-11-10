@@ -1,39 +1,37 @@
 <template>
 	<div class="main">
-		<div v-for="(item, i) in properties" :key="i" class="formItem">
+		{{ currentComponent }}
+		<!-- <div v-for="(item, i) in properties" :key="i" class="formItem">
 			<div class="label">{{ item.name }}</div>
 			<div class="compWrap">
 				<component :is="DUICOMPONENTMAP[transformHump(item.type)]"></component>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { transformHump } from '@form-designer/utils';
 import { useComponentStore } from '@/stores/component';
-import * as DuiComponents from '@/components';
-
-const DUICOMPONENTMAP = reactive<any>(DuiComponents);
+import { genComponentProperties } from '@/hooks/genComponentData';
 
 const componentStore = useComponentStore();
 const { currentComponent } = storeToRefs(componentStore);
 
-const properties = computed(() => {
-	if (currentComponent.value.property) {
-		return [
-			{
-				name: '',
-				type: ''
-			}
-		];
-	}
-});
+// watch(
+// 	() => currentComponent,
+// 	async (component) => {
+// 		const data = await genComponentProperties(component.value.key);
+// 		console.log(111, data);
+// 	},
+// 	{ deep: true }
+// );
 
-// const changeHandle = (val: string, key: string) => {
-// 	componentStore.updateCurrentByKey(key, val);
-// };
+// onMounted(async () => {
+// 	if (currentComponent.value.key) {
+// 		console.log(1123, await genComponentProperties(currentComponent.value.key));
+// 	}
+// });
 </script>
 
 <style scoped lang="less">

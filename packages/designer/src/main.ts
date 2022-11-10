@@ -16,3 +16,6 @@ app.use(router);
 app.use(ElementPlus);
 
 app.mount('#app');
+
+// 挂载到 window
+window['$app'] = app;

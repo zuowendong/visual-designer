@@ -3,6 +3,5 @@
 	"label": "表单输入框",
 	"icon": "biaodanzujian-shurukuang",
 	"categoryName": "表单类",
-	"categoryKey": "form",
-	"main": "index.js"
+	"categoryKey": "form"
 }

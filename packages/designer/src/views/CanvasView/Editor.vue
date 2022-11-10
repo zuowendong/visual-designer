@@ -1,6 +1,7 @@
 <template>
 	<div ref="editor" class="editor">
 		<Grid />
+
 		<ShapeBox
 			v-for="(item, index) in components"
 			:key="item.id"
@@ -10,7 +11,7 @@
 			:element="item"
 			:index="index"
 		>
-			<div>测试</div>
+			<component :is="item.key"></component>
 		</ShapeBox>
 	</div>
 </template>

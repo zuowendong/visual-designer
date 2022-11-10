@@ -15,26 +15,18 @@ import { cloneDeep } from 'lodash-es';
 import { storeToRefs } from 'pinia';
 
 import generateID from '@/utils/generateID';
-// import componentList from '@/assets/componnetList';
 import Editor from './Editor.vue';
 
 import { useComponentStore } from '@/stores/component';
 import { genCompStyleData } from '@/hooks/genComponentData';
-import { debug } from 'console';
-
-// let componentList = ref<any[]>([]);
-// onMounted(async () => {
-// 	componentList.value = await genEditorCompData();
-
-// 	console.log(222222, componentList.value);
-// });
 
 const componentStore = useComponentStore();
-const { editorDom, isChoosedComponent, currentComponent } = storeToRefs(componentStore);
+const { editorDom, isChoosedComponent, components } = storeToRefs(componentStore);
 
 // 当元素或选中的文本在可释放目标上被释放时触发
 const dropHandle = async (e: any) => {
 	const compKey = e.dataTransfer.getData('component');
+	console.log(2344444444, compKey);
 	const canvasInfo = editorDom.value.getBoundingClientRect();
 	if (compKey) {
 		let style = await genCompStyleData(compKey);
@@ -43,15 +35,11 @@ const dropHandle = async (e: any) => {
 			key: compKey,
 			style: {
 				...style,
-				top: e.clientY - canvasInfo.y,
+				top: e.clientY - canvasInfo.y, // 初始拖入位置
 				left: e.clientX - canvasInfo.x
 			}
 		};
-		// 初始拖入位置
-		// component.style.top = e.clientY - canvasInfo.y;
-		// component.style.left = e.clientX - canvasInfo.x;
 
-		console.log(4444444, component);
 		const newComp = cloneDeep(component);
 		componentStore.addComponent(newComp);
 	}

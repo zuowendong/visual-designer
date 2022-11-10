@@ -35,7 +35,7 @@ const mouseDownOnShapeHandle = (e: MouseEvent) => {
 	componentStore.setChoosedComponentStatus(true);
 	componentStore.setCurrentComponent(element.value, index.value);
 
-	// cursors = getCursor(); // 根据旋转角度获取光标位置
+	cursors = getCursor(); // 根据旋转角度获取光标位置
 
 	const pos = { ...defaultStyle.value };
 	const startY = e.clientY;
@@ -171,7 +171,7 @@ const initialAngle = reactive<any>({
 	l: 315
 });
 const getCursor = () => {
-	const rotate = mod360(currentComponent.value.style.rotate); // 取余 360
+	const rotate = mod360(currentComponent.value.style.rotate || 0); // 取余 360
 	const result: any = {};
 	let lastMatchIndex = -1; // 从上一个命中的角度的索引开始匹配下一个，降低时间复杂度
 
