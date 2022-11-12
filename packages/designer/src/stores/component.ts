@@ -46,6 +46,10 @@ export const useComponentStore = defineStore('component', () => {
 	const addComponent = (component: any) => {
 		components.push(component);
 	};
+	const deleteComponent = (id: string) => {
+		const index = components.findIndex((compItem) => compItem.id === id);
+		components.splice(index, 1);
+	};
 
 	return {
 		editorDom,
@@ -59,6 +63,7 @@ export const useComponentStore = defineStore('component', () => {
 		setChoosedComponentStatus,
 
 		components,
-		addComponent
+		addComponent,
+		deleteComponent
 	};
 });

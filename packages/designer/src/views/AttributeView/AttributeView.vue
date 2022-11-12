@@ -1,6 +1,9 @@
 <template>
 	<div class="main">
 		{{ currentComponent }}
+
+		<div>-------------------------------------------------</div>
+		{{ components }}
 		<!-- <div v-for="(item, i) in properties" :key="i" class="formItem">
 			<div class="label">{{ item.name }}</div>
 			<div class="compWrap">
@@ -16,7 +19,7 @@ import { useComponentStore } from '@/stores/component';
 import { genComponentProperties } from '@/hooks/genComponentData';
 
 const componentStore = useComponentStore();
-const { currentComponent } = storeToRefs(componentStore);
+const { currentComponent, components } = storeToRefs(componentStore);
 
 // watch(
 // 	() => currentComponent,

@@ -26,7 +26,6 @@ const { editorDom, isChoosedComponent, components } = storeToRefs(componentStore
 // 当元素或选中的文本在可释放目标上被释放时触发
 const dropHandle = async (e: any) => {
 	const compKey = e.dataTransfer.getData('component');
-	console.log(2344444444, compKey);
 	const canvasInfo = editorDom.value.getBoundingClientRect();
 	if (compKey) {
 		let style = await genCompStyleData(compKey);
