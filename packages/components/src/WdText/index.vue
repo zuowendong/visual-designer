@@ -19,6 +19,6 @@ const props = defineProps<{
 const { text, fontSize, color } = toRefs(props);
 
 const textStyle = computed(
-	() => `font-size: ${fontSize.value}px; background-color: ${color.value}`
+	() => `width: 100%; height: 100%; font-size: ${fontSize.value}px; color: ${color.value}`
 );
 </script>

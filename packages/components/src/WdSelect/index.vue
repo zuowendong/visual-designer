@@ -34,7 +34,9 @@ const props = defineProps<{
 
 let selectedValue = ref<string>(props.modelValue);
 
-const selectConStyle = computed(() => `height: 100%; display: flex; align-items: center`);
+const selectConStyle = computed(
+	() => `width: 100%; height: 100%; display: flex; align-items: center`
+);
 const selectLabelStyle = computed(
 	() => `display: inline-block; width: 80px; padding-left: 6px; font-size: 14px`
 );

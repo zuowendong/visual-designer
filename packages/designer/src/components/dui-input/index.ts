@@ -1,9 +1,9 @@
 import type { App, Plugin } from 'vue';
-import DuiInput from './DuiInput.vue';
+import DuiInputText from './DuiInput.vue';
 
-DuiInput.install = (app: App) => {
-	app.component(DuiInput.name, DuiInput);
+DuiInputText.install = (app: App) => {
+	app.component(DuiInputText.name, DuiInputText);
 	return app;
 };
 
-export default DuiInput as typeof DuiInput & Plugin;
+export default DuiInputText as typeof DuiInputText & Plugin;

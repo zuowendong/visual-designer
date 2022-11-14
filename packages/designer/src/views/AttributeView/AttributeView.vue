@@ -1,15 +1,17 @@
 <template>
 	<div class="main">
-		{{ currentComponent }}
-
-		<div>-------------------------------------------------</div>
-		{{ components }}
-		<!-- <div v-for="(item, i) in properties" :key="i" class="formItem">
-			<div class="label">{{ item.name }}</div>
-			<div class="compWrap">
-				<component :is="DUICOMPONENTMAP[transformHump(item.type)]"></component>
+		<div v-for="(groupItem, i) in properties" :key="i" class="groupItem">
+			<div class="groupLabel">{{ groupItem.name }}</div>
+			<div v-for="attr in groupItem.attrs" :key="attr.key" class="formItem">
+				<span class="formLabel">{{ attr.name }}</span>
+				<component
+					:is="transformHump(attr.type)"
+					class="formCon"
+					v-bind="{ modelValue: genCompAttrs(attr.key) }"
+					@change="(val: any) => updateCurrentStyle(val, attr.key)"
+				></component>
 			</div>
-		</div> -->
+		</div>
 	</div>
 </template>
 
@@ -17,24 +19,31 @@
 import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
 import { genComponentProperties } from '@/hooks/genComponentData';
+import { transformHump } from '@form-designer/utils';
 
 const componentStore = useComponentStore();
-const { currentComponent, components } = storeToRefs(componentStore);
+const { currentComponentId, currentComponent } = storeToRefs(componentStore);
 
-// watch(
-// 	() => currentComponent,
-// 	async (component) => {
-// 		const data = await genComponentProperties(component.value.key);
-// 		console.log(111, data);
-// 	},
-// 	{ deep: true }
-// );
+let properties = ref<any>([]);
+watch(currentComponentId, async () => {
+	await getProperties();
+});
 
-// onMounted(async () => {
-// 	if (currentComponent.value.key) {
-// 		console.log(1123, await genComponentProperties(currentComponent.value.key));
-// 	}
-// });
+const getProperties = async () => {
+	if (currentComponent.value.key) {
+		properties.value = await genComponentProperties(currentComponent.value.key);
+	} else {
+		properties.value = [];
+	}
+	console.log(properties.value, currentComponent.value);
+};
+
+const genCompAttrs = (attrKey: string) => currentComponent.value.style[attrKey];
+
+const updateCurrentStyle = (val: any, attrKey: string) => {
+	// componentStore.setShapeStyle({ [attrKey]: val });
+	componentStore.updateCurrentComponent({ [attrKey]: val });
+};
 </script>
 
 <style scoped lang="less">
@@ -45,16 +54,34 @@ const { currentComponent, components } = storeToRefs(componentStore);
 	padding: 10px 24px;
 	box-sizing: border-box;
 	border-left: 1px solid @mainBoderColor;
-	.formItem {
+	.groupItem {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		margin-bottom: 12px;
-		.label {
-			width: 100px;
-			font-size: 14px;
+		.groupLabel {
+			width: 100%;
+			height: 40ox;
+			line-height: 40px;
+			border-bottom: 1px solid @mainBoderColor;
+			font-size: 16px;
+			font-weight: 500;
 		}
-		.compWrap {
-			flex: 1;
+		.formItem {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			margin-top: 10px;
+			.formLabel {
+				display: inline-block;
+				width: 100px;
+				overflow: hidden;
+				text-align: right;
+				padding-right: 20px;
+			}
+			.formCon {
+				flex: 1;
+			}
 		}
 	}
 }

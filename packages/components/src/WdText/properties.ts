@@ -32,13 +32,13 @@ export const properties: IProperties[] = [
 			{
 				name: '颜色',
 				key: 'color',
-				type: 'dui-input',
+				type: 'dui-input-text',
 				value: '#fff'
 			},
 			{
 				name: '文本',
 				key: 'text',
-				type: 'dui-input',
+				type: 'dui-input-text',
 				value: '文本标签'
 			}
 		]

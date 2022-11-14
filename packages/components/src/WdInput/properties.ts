@@ -26,13 +26,13 @@ export const properties: IProperties[] = [
 			{
 				name: '标签名',
 				key: 'label',
-				type: 'dui-input',
+				type: 'dui-input-text',
 				value: 'input'
 			},
 			{
 				name: '输入值',
-				key: 'input',
-				type: 'dui-input',
+				key: 'modelValue',
+				type: 'dui-input-text',
 				value: ''
 			}
 		]

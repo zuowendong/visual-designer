@@ -9,7 +9,7 @@ export const properties: IProperties[] = [
 				name: '宽度',
 				key: 'width',
 				type: 'dui-input-number',
-				value: 200
+				value: 400
 			},
 			{
 				name: '高度',
@@ -26,13 +26,13 @@ export const properties: IProperties[] = [
 			{
 				name: '标签名',
 				key: 'label',
-				type: 'dui-input',
+				type: 'dui-input-text',
 				value: 'select'
 			},
 			{
 				name: '选择值',
 				key: 'modelValue',
-				type: 'dui-input',
+				type: 'dui-input-text',
 				value: 'default select'
 			},
 			{

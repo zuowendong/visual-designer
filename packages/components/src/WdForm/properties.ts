@@ -16,6 +16,18 @@ export const properties: IProperties[] = [
 				key: 'height',
 				type: 'dui-input-number',
 				value: 200
+			},
+			{
+				name: '坐标X',
+				key: 'left',
+				type: 'dui-input-number',
+				value: 0
+			},
+			{
+				name: '坐标Y',
+				key: 'top',
+				type: 'dui-input-number',
+				value: 0
 			}
 		]
 	},

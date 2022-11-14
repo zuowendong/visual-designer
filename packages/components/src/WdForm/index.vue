@@ -30,7 +30,8 @@ const chooseComponentHandle = (component: any) => {
 
 let columnNum = ref<number>(props.column);
 const formConStyle = computed(
-	() => `display: grid; grid-template-columns: repeat(${columnNum.value}, 1fr); gap: 4px`
+	() =>
+		`width: 100%; height: 100%; display: grid; grid-template-columns: repeat(${columnNum.value}, 1fr); gap: 4px`
 );
 const formItemStyle = computed(() => `height: 40px; background-color: antiquewhite; cursor: grab;`);
 </script>

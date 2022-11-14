@@ -7,8 +7,12 @@ export {};
 
 declare module '@vue/runtime-core' {
 	export interface GlobalComponents {
+		copy: typeof import('./src/components/dui-input copy/index.vue')['default'];
 		DuiInput: typeof import('./src/components/dui-input/DuiInput.vue')['default'];
+		DuiInputNumber: typeof import('./src/components/dui-input-number/DuiInputNumber.vue')['default'];
+		DuiLayoutNumber: typeof import('./src/components/dui-layout-number/DuiLayoutNumber.vue')['default'];
 		ElInput: typeof import('element-plus/es')['ElInput'];
+		ElInputNumber: typeof import('element-plus/es')['ElInputNumber'];
 		RouterLink: typeof import('vue-router')['RouterLink'];
 		RouterView: typeof import('vue-router')['RouterView'];
 	}

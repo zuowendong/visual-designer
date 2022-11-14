@@ -40,6 +40,12 @@ export const useComponentStore = defineStore('component', () => {
 	const setChoosedComponentStatus = (status: boolean) => {
 		isChoosedComponent.value = status;
 	};
+	const updateCurrentComponent = (props: any) => {
+		Object.keys(props).forEach((propKey: string) => {
+			const propValue = props[propKey];
+			currentComponent.value.style[propKey] = propValue;
+		});
+	};
 
 	// 画布中所有组件
 	const components = reactive<any[]>([]);
@@ -62,6 +68,7 @@ export const useComponentStore = defineStore('component', () => {
 		currentComponentId,
 		setCurrentComponent,
 		setShapeStyle,
+		updateCurrentComponent,
 
 		isChoosedComponent,
 		setChoosedComponentStatus,

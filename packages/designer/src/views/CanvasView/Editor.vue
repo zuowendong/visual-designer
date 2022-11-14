@@ -11,7 +11,7 @@
 			:element="item"
 			:component-id="item.id"
 		>
-			<component :is="item.key"></component>
+			<component :is="item.key" v-bind="{ ...getComponentProps(item.id) }"></component>
 		</ShapeBox>
 
 		<ContextMenu />
@@ -44,6 +44,10 @@ const contextMenuHandle = (e: any) => {
 	let top = e.clientY - editorStyle.y;
 	let left = e.clientX - editorStyle.x;
 	contextMenu.showContextMenu(top, left);
+};
+
+const getComponentProps = (id: string) => {
+	return components.value.find((compItem) => compItem.id === id).style;
 };
 </script>
 
