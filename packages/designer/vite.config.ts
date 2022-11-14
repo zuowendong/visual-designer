@@ -9,6 +9,7 @@ import defineOptions from 'unplugin-vue-define-options/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	base: 'form-designer',
 	plugins: [
 		vue(),
 		defineOptions(),

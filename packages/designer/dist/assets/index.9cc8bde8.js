@@ -5551,7 +5551,7 @@ const H_ = ko(B_, [
 	]),
 	z_ = 'modulepreload',
 	K_ = function (e) {
-		return '/' + e;
+		return '/form-designer/' + e;
 	},
 	Jh = {},
 	Qo = function (t, n, o) {
@@ -5696,10 +5696,10 @@ class e$ {
 					(
 						await Qh(
 							Object.assign({
-								'./WdForm/properties.ts': () => Qo(() => import('./properties.50d1af81.js'), []),
-								'./WdInput/properties.ts': () => Qo(() => import('./properties.af195e17.js'), []),
-								'./WdSelect/properties.ts': () => Qo(() => import('./properties.9e58a922.js'), []),
-								'./WdText/properties.ts': () => Qo(() => import('./properties.9f672a31.js'), [])
+								'./WdForm/properties.ts': () => Qo(() => import('./properties.3885f627.js'), []),
+								'./WdInput/properties.ts': () => Qo(() => import('./properties.aa78575f.js'), []),
+								'./WdSelect/properties.ts': () => Qo(() => import('./properties.41cbcd03.js'), []),
+								'./WdText/properties.ts': () => Qo(() => import('./properties.bc60bc31.js'), [])
 							}),
 							`./${t}/properties.ts`
 						)
@@ -5711,10 +5711,10 @@ class e$ {
 				async (t) =>
 					await Qh(
 						Object.assign({
-							'./WdForm/index.vue': () => Qo(() => import('./index.ddcbaec5.js'), []),
-							'./WdInput/index.vue': () => Qo(() => import('./index.890d6f40.js'), []),
-							'./WdSelect/index.vue': () => Qo(() => import('./index.dafbb76b.js'), []),
-							'./WdText/index.vue': () => Qo(() => import('./index.a720f0e9.js'), [])
+							'./WdForm/index.vue': () => Qo(() => import('./index.94873463.js'), []),
+							'./WdInput/index.vue': () => Qo(() => import('./index.79a5000f.js'), []),
+							'./WdSelect/index.vue': () => Qo(() => import('./index.10fc4ed4.js'), []),
+							'./WdText/index.vue': () => Qo(() => import('./index.f4d1f473.js'), [])
 						}),
 						`./${t}/index.vue`
 					)
@@ -7722,7 +7722,7 @@ const mO = ko(vO, [['__scopeId', 'data-v-22f2f4b3']]),
 		}
 	});
 const wO = ko(bO, [['__scopeId', 'data-v-df1c2fd7']]),
-	CO = L_({ history: JS('/'), routes: [{ path: '/', name: 'home', component: wO }] }),
+	CO = L_({ history: JS('/form-designer/'), routes: [{ path: '/', name: 'home', component: wO }] }),
 	kO =
 		'a[href],button:not([disabled]),button:not([hidden]),:not([tabindex="-1"]),input:not([disabled]),input:not([type="hidden"]),select:not([disabled]),textarea:not([disabled])',
 	SO = (e) => (getComputedStyle(e).position === 'fixed' ? !1 : e.offsetParent !== null),
