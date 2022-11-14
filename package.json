@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"scripts": {
 		"prepare": "husky install",
-		"dev": "pnpm -F designer dev"
+		"dev": "pnpm -F designer dev",
+		"build": "pnpm -F designer build"
 	},
 	"keywords": [],
 	"author": "",
