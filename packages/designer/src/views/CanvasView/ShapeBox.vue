@@ -24,16 +24,16 @@ const props = defineProps({
 	active: { type: Boolean, default: false },
 	defaultStyle: { type: Object, default: () => {} },
 	element: { type: Object, default: () => {} },
-	index: { type: Number, default: 0 }
+	componentId: { type: String, default: '' }
 });
-let { active, defaultStyle, element, index } = toRefs(props);
+let { active, defaultStyle, element, componentId } = toRefs(props);
 
 const componentStore = useComponentStore();
 let cursors = reactive<any>({});
 
 const mouseDownOnShapeHandle = (e: MouseEvent) => {
 	componentStore.setChoosedComponentStatus(true);
-	componentStore.setCurrentComponent(element.value, index.value);
+	componentStore.setCurrentComponent(element.value, componentId.value);
 
 	cursors = getCursor(); // 根据旋转角度获取光标位置
 

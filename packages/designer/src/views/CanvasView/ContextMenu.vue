@@ -18,16 +18,14 @@ import { useComponentStore } from '@/stores/component';
 const contextMenu = useContextMenu();
 const { menuTop, menuLeft, showMenu } = storeToRefs(contextMenu);
 
+const componentStore = useComponentStore();
 const mouseUpHandle = () => {
-	contextMenu.hideContextMenu();
+	componentStore.setChoosedComponentStatus(true);
+	// contextMenu.hideContextMenu();
 };
 
-const componentStore = useComponentStore();
-const { currentComponent } = storeToRefs(componentStore);
 const deleteComp = () => {
-	// if (currentComponent.value.id) {
-	// 	componentStore.deleteComponent(currentComponent.value.id);
-	// }
+	componentStore.deleteComponent();
 };
 </script>
 

@@ -21,10 +21,10 @@ export const useComponentStore = defineStore('component', () => {
 
 	// 当前组件
 	const currentComponent = ref<any>({});
-	const currentComponentIndex = ref<number>();
-	const setCurrentComponent = (component: any, index: number) => {
+	const currentComponentId = ref<string>('');
+	const setCurrentComponent = (component: any, compId: string) => {
 		currentComponent.value = component;
-		currentComponentIndex.value = index;
+		currentComponentId.value = compId;
 	};
 	// 设置当前组件的shapebox样式
 	const setShapeStyle = (props: any) => {
@@ -46,9 +46,12 @@ export const useComponentStore = defineStore('component', () => {
 	const addComponent = (component: any) => {
 		components.push(component);
 	};
-	const deleteComponent = (id: string) => {
-		const index = components.findIndex((compItem) => compItem.id === id);
-		components.splice(index, 1);
+	const deleteComponent = () => {
+		const index = components.findIndex((compItem) => compItem.id === currentComponentId.value);
+		if (index !== -1) {
+			components.splice(index, 1);
+			setCurrentComponent({}, ''); // 清空当前组件
+		}
 	};
 
 	return {
@@ -56,6 +59,7 @@ export const useComponentStore = defineStore('component', () => {
 		setEditorDom,
 
 		currentComponent,
+		currentComponentId,
 		setCurrentComponent,
 		setShapeStyle,
 

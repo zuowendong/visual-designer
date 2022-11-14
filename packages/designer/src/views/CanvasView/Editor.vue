@@ -3,13 +3,13 @@
 		<Grid />
 
 		<ShapeBox
-			v-for="(item, index) in components"
+			v-for="item in components"
 			:key="item.id"
 			:style="getShapeStyle(item.style)"
 			:active="item.id === currentComponent.id"
 			:default-style="item.style"
 			:element="item"
-			:index="index"
+			:component-id="item.id"
 		>
 			<component :is="item.key"></component>
 		</ShapeBox>

@@ -19,9 +19,10 @@ import Editor from './Editor.vue';
 
 import { useComponentStore } from '@/stores/component';
 import { genCompStyleData } from '@/hooks/genComponentData';
+import { useContextMenu } from '@/stores/contextMenu';
 
 const componentStore = useComponentStore();
-const { editorDom, isChoosedComponent, components } = storeToRefs(componentStore);
+const { editorDom, isChoosedComponent } = storeToRefs(componentStore);
 
 // 当元素或选中的文本在可释放目标上被释放时触发
 const dropHandle = async (e: any) => {
@@ -53,10 +54,13 @@ const mouseDownHandle = () => {
 	componentStore.setChoosedComponentStatus(false);
 };
 
+const contextMenu = useContextMenu();
 // 指针设备按钮放开时触发
-const deselectCurComponent = () => {
+const deselectCurComponent = (e: MouseEvent) => {
 	// 未选中组件，currentComponet为空
-	if (!isChoosedComponent.value) componentStore.setCurrentComponent({}, -1);
+	if (!isChoosedComponent.value) componentStore.setCurrentComponent({}, '');
+	// 右击才显示菜单
+	if (e.button !== 2) contextMenu.hideContextMenu();
 };
 </script>
 
