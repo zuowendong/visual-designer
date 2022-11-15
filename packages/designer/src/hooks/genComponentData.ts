@@ -1,4 +1,12 @@
 import { setComponentData, getProperties, getAttrs } from './component';
+import generateID from '@/utils/generateID';
+
+export interface ComponentModle {
+	id: string;
+	key: string;
+	style: any;
+	children?: ComponentModle[];
+}
 
 // 生成菜单 - 组件列表
 export const genMenuOps = async () => {
@@ -22,4 +30,15 @@ export const genCompStyleData = async (tag: string) => {
 export const genComponentProperties = async (tag: string) => {
 	const properties = await getProperties(tag);
 	return properties;
+};
+
+// 生成组件数据
+export const initCompDataByDrop = (key: string, style: any, top: number, left: number) => {
+	const component: ComponentModle = {
+		id: generateID(),
+		key,
+		style: { ...style, top, left }
+	};
+	if (key === 'WdForm') component.children = [];
+	return component;
 };

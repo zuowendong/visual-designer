@@ -1,7 +1,7 @@
 <template>
 	<div ref="editor" class="editor" @contextmenu="contextMenuHandle">
+		{{ components }}
 		<Grid />
-
 		<ShapeBox
 			v-for="item in components"
 			:key="item.id"
@@ -11,9 +11,15 @@
 			:element="item"
 			:component-id="item.id"
 		>
-			<component :is="item.key" v-bind="{ ...getComponentProps(item.id) }"></component>
+			<Container v-if="item.key === 'WdForm'" :comp-item="item" />
+			<component
+				v-else
+				:is="item.key"
+				:data-key="item.key"
+				:data-compid="item.id"
+				v-bind="{ ...getComponentProps(item.id) }"
+			></component>
 		</ShapeBox>
-
 		<ContextMenu />
 	</div>
 </template>
@@ -27,6 +33,7 @@ import { getShapeStyle } from '../../utils/formatStyle';
 import Grid from './Grid.vue';
 import ShapeBox from './ShapeBox.vue';
 import ContextMenu from './ContextMenu.vue';
+import Container from './Container.vue';
 
 const componentStore = useComponentStore();
 const { currentComponent, components } = storeToRefs(componentStore);
@@ -39,7 +46,6 @@ const contextMenu = useContextMenu();
 const contextMenuHandle = (e: any) => {
 	e.stopPropagation();
 	e.preventDefault();
-
 	const editorStyle = editor.value.getBoundingClientRect();
 	let top = e.clientY - editorStyle.y;
 	let left = e.clientX - editorStyle.x;
@@ -47,7 +53,7 @@ const contextMenuHandle = (e: any) => {
 };
 
 const getComponentProps = (id: string) => {
-	return components.value.find((compItem) => compItem.id === id).style;
+	return components.value.find((item) => item.id === id).style;
 };
 </script>
 

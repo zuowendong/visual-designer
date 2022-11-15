@@ -9,13 +9,13 @@ export const properties: IProperties[] = [
 				name: '宽度',
 				key: 'width',
 				type: 'dui-input-number',
-				value: 200
+				value: 520
 			},
 			{
 				name: '高度',
 				key: 'height',
 				type: 'dui-input-number',
-				value: 200
+				value: 250
 			},
 			{
 				name: '坐标X',
@@ -35,6 +35,12 @@ export const properties: IProperties[] = [
 		id: 'layerSetting',
 		name: '布局配置',
 		attrs: [
+			{
+				name: '行数',
+				key: 'row',
+				type: 'dui-input-number',
+				value: 2
+			},
 			{
 				name: '列数',
 				key: 'column',

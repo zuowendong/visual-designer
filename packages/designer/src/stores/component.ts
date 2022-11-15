@@ -52,6 +52,13 @@ export const useComponentStore = defineStore('component', () => {
 	const addComponent = (component: any) => {
 		components.push(component);
 	};
+	// 添加组件到容器
+	const addCompInContainer = (id: string, component: any) => {
+		const containerComp = components.find((compItem) => compItem.id === id);
+		if (containerComp) {
+			containerComp.children.push(component);
+		}
+	};
 	const deleteComponent = () => {
 		const index = components.findIndex((compItem) => compItem.id === currentComponentId.value);
 		if (index !== -1) {
@@ -59,6 +66,9 @@ export const useComponentStore = defineStore('component', () => {
 			setCurrentComponent({}, ''); // 清空当前组件
 		}
 	};
+
+	// 是否为容器组件
+	const isContainer = ref(false);
 
 	return {
 		editorDom,
@@ -75,6 +85,9 @@ export const useComponentStore = defineStore('component', () => {
 
 		components,
 		addComponent,
-		deleteComponent
+		addCompInContainer,
+		deleteComponent,
+
+		isContainer
 	};
 });

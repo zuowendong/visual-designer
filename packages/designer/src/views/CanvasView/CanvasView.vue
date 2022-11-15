@@ -11,18 +11,16 @@
 </template>
 
 <script setup lang="ts">
-import { cloneDeep } from 'lodash-es';
 import { storeToRefs } from 'pinia';
 
-import generateID from '@/utils/generateID';
 import Editor from './Editor.vue';
-
 import { useComponentStore } from '@/stores/component';
 import { genCompStyleData } from '@/hooks/genComponentData';
 import { useContextMenu } from '@/stores/contextMenu';
+import { initCompDataByDrop } from '@/hooks/genComponentData';
 
 const componentStore = useComponentStore();
-const { editorDom, isChoosedComponent } = storeToRefs(componentStore);
+const { editorDom, isChoosedComponent, isContainer } = storeToRefs(componentStore);
 
 // 当元素或选中的文本在可释放目标上被释放时触发
 const dropHandle = async (e: any) => {
@@ -30,23 +28,33 @@ const dropHandle = async (e: any) => {
 	const canvasInfo = editorDom.value.getBoundingClientRect();
 	if (compKey) {
 		let style = await genCompStyleData(compKey);
-		let component = {
-			id: generateID(),
-			key: compKey,
-			style: {
-				...style,
-				top: e.clientY - canvasInfo.y, // 初始拖入位置
-				left: e.clientX - canvasInfo.x
-			}
-		};
+		const initTop = e.clientY - canvasInfo.y;
+		const initLeft = e.clientX - canvasInfo.x;
+		const componentData = initCompDataByDrop(compKey, style, initTop, initLeft);
 
-		const newComp = cloneDeep(component);
-		componentStore.addComponent(newComp);
+		if (isContainer.value) {
+			// 处理拖入容器的逻辑
+			componentStore.addCompInContainer(e.target.dataset.compid, componentData);
+		} else {
+			componentStore.addComponent(componentData);
+		}
+		// 元素放下时恢复默认
+		isContainer.value = false;
 	}
 };
 
 // affect which cursor is displayed while dragging.
-const dragOverHandle = (e: any) => (e.dataTransfer.dropEffect = 'copy');
+const dragOverHandle = (e: any) => {
+	e.dataTransfer.dropEffect = 'copy';
+
+	console.log(e);
+	// 拖入到容器组件上方
+	if (e.target.dataset.key === 'WdForm') {
+		isContainer.value = true;
+	} else {
+		isContainer.value = false;
+	}
+};
 
 // 指针设备按钮按下时触发
 const mouseDownHandle = () => {

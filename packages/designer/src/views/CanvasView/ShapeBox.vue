@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="shapeBox"
-		:class="{ active }"
+		:class="{ active, isContainer }"
 		@click.stop.prevent
 		@mousedown.stop="mouseDownOnShapeHandle"
 	>
@@ -100,7 +100,7 @@ const getPointStyle = (point: string) => {
 	};
 };
 
-const { currentComponent } = storeToRefs(componentStore);
+const { currentComponent, isContainer } = storeToRefs(componentStore);
 
 /**
  *
@@ -219,5 +219,8 @@ const mod360 = (deg: number) => {
 		border-radius: 50%;
 		z-index: 1;
 	}
+}
+.isContainer {
+	outline: 1px solid #70ffa7;
 }
 </style>
