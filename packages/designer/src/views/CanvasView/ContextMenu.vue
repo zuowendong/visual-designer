@@ -21,7 +21,6 @@ const { menuTop, menuLeft, showMenu } = storeToRefs(contextMenu);
 const componentStore = useComponentStore();
 const mouseUpHandle = () => {
 	componentStore.setChoosedComponentStatus(true);
-	// contextMenu.hideContextMenu();
 };
 
 const deleteComp = () => {

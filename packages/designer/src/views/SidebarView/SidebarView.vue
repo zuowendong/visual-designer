@@ -14,17 +14,18 @@
 </template>
 
 <script setup lang="ts">
+import type { IMenuModel } from '@/types/menus';
 import { fileConfig } from '@form-designer/components';
 import { genMenuOps } from '@/hooks/genComponentData';
 import { componentInstall } from '@/hooks/component';
 
-let menuOps = ref<any[]>([]);
+let menuOps = ref<IMenuModel[]>([]);
 onMounted(async () => {
 	menuOps.value = await genMenuOps();
 });
 
-const dragStartHandle = async (e: any, key: string) => {
-	e.dataTransfer.setData('component', key);
+const dragStartHandle = async (e: DragEvent, key: string) => {
+	e!.dataTransfer!.setData('component', key);
 	// 动态注册组件
 	const module = await fileConfig.fetchComponent(key);
 	componentInstall(key, module.default);

@@ -1,33 +1,22 @@
 import { defineStore } from 'pinia';
-
-export interface ComponentModel {
-	id: string;
-	name: string;
-	key: string;
-	value?: string;
-	values?: string;
-	property?: PropertiesModel;
-}
-export interface PropertiesModel {
-	[k: string]: any;
-}
+import type { ComponentModel, propertyModel } from '../types/component';
 
 export const useComponentStore = defineStore('component', () => {
 	// 编辑器dom
 	const editorDom = ref();
-	const setEditorDom = (refObj: any) => {
+	const setEditorDom = (refObj: HTMLElement) => {
 		editorDom.value = refObj;
 	};
 
 	// 当前组件
-	const currentComponent = ref<any>({});
+	const currentComponent = ref<ComponentModel>({ id: '', key: '', style: {} });
 	const currentComponentId = ref<string>('');
-	const setCurrentComponent = (component: any, compId: string) => {
+	const setCurrentComponent = (component: ComponentModel, compId: string) => {
 		currentComponent.value = component;
 		currentComponentId.value = compId;
 	};
 	// 设置当前组件的shapebox样式
-	const setShapeStyle = (props: any) => {
+	const setShapeStyle = (props: propertyModel) => {
 		const { top, left, width, height, rotate } = props;
 		if (top) currentComponent.value.style.top = Math.round(top);
 		if (left) currentComponent.value.style.left = Math.round(left);
@@ -36,11 +25,11 @@ export const useComponentStore = defineStore('component', () => {
 		if (rotate) currentComponent.value.style.rotate = Math.round(rotate);
 	};
 	// 取消or选中组件
-	const isChoosedComponent = ref(false);
+	const isChoosedComponent = ref<boolean>(false);
 	const setChoosedComponentStatus = (status: boolean) => {
 		isChoosedComponent.value = status;
 	};
-	const updateCurrentComponent = (props: any) => {
+	const updateCurrentComponent = (props: propertyModel) => {
 		Object.keys(props).forEach((propKey: string) => {
 			const propValue = props[propKey];
 			currentComponent.value.style[propKey] = propValue;
@@ -48,30 +37,27 @@ export const useComponentStore = defineStore('component', () => {
 	};
 
 	// 画布中所有组件
-	const components = reactive<any[]>([]);
-	const addComponent = (component: any) => {
+	const components = reactive<ComponentModel[]>([]);
+	const addComponent = (component: ComponentModel) => {
 		components.push(component);
 	};
 	// 添加组件到容器
-	const addCompInContainer = (id: string, component: any, index: number) => {
+	const addCompInContainer = (id: string, component: ComponentModel, index: number) => {
 		const containerComp = components.find((compItem) => compItem.id === id);
 		if (containerComp) {
-			// containerComp.children.unshift(component);
-			containerComp.children.splice(index, 1, component);
-
-			console.log(11111, containerComp.children);
+			containerComp.children!.splice(index, 1, component);
 		}
 	};
 	const deleteComponent = () => {
 		const index = components.findIndex((compItem) => compItem.id === currentComponentId.value);
 		if (index !== -1) {
 			components.splice(index, 1);
-			setCurrentComponent({}, ''); // 清空当前组件
+			setCurrentComponent({ id: '', key: '', style: {} }, ''); // 清空当前组件
 		}
 	};
 
 	// 是否为容器组件
-	const isContainer = ref(false);
+	const isContainer = ref<boolean>(false);
 
 	return {
 		editorDom,

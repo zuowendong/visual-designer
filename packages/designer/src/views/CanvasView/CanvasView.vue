@@ -17,7 +17,7 @@ import Editor from './Editor.vue';
 import { useComponentStore } from '@/stores/component';
 import { genCompStyleData } from '@/hooks/genComponentData';
 import { useContextMenu } from '@/stores/contextMenu';
-import { initCompDataByDrop } from '@/hooks/genComponentData';
+import { initCompDataByDrop } from '@/hooks/initCompData';
 
 const componentStore = useComponentStore();
 const { editorDom, isChoosedComponent, isContainer } = storeToRefs(componentStore);
@@ -51,7 +51,6 @@ const dropHandle = async (e: any) => {
 const dragOverHandle = (e: any) => {
 	e.dataTransfer.dropEffect = 'copy';
 
-	console.log(e);
 	// 拖入到容器组件上方
 	if (e.target.dataset.key === 'WdForm' || e.target.parentElement.dataset.key === 'WdForm') {
 		isContainer.value = true;
@@ -70,7 +69,9 @@ const contextMenu = useContextMenu();
 // 指针设备按钮放开时触发
 const deselectCurComponent = (e: MouseEvent) => {
 	// 未选中组件，currentComponet为空
-	if (!isChoosedComponent.value) componentStore.setCurrentComponent({}, '');
+	if (!isChoosedComponent.value) {
+		componentStore.setCurrentComponent({ id: '', key: '', style: {} }, '');
+	}
 	// 右击才显示菜单
 	if (e.button !== 2) contextMenu.hideContextMenu();
 };

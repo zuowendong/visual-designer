@@ -1,6 +1,12 @@
 <template>
 	<div>
-		<el-input-number v-model="numValue" :min="0" style="width: 100%" @change="valChangeHandle" />
+		<el-input-number
+			v-model="numValue"
+			:min="0"
+			style="width: 100%"
+			controls-position="right"
+			@change="valChangeHandle"
+		/>
 	</div>
 </template>
 

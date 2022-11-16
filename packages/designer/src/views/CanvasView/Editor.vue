@@ -43,7 +43,7 @@ onMounted(() => componentStore.setEditorDom(editor.value));
 
 const contextMenu = useContextMenu();
 // 菜单选择
-const contextMenuHandle = (e: any) => {
+const contextMenuHandle = (e: MouseEvent) => {
 	e.stopPropagation();
 	e.preventDefault();
 	const editorStyle = editor.value.getBoundingClientRect();
@@ -53,7 +53,7 @@ const contextMenuHandle = (e: any) => {
 };
 
 const getComponentProps = (id: string) => {
-	return components.value.find((item) => item.id === id).style;
+	return components.value.find((item) => item.id === id)!.style;
 };
 </script>
 

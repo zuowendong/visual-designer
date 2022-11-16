@@ -29,7 +29,7 @@ const { compItem } = toRefs(props);
 const componentStore = useComponentStore();
 const { components } = storeToRefs(componentStore);
 const getComponentProps = (id: string) => {
-	return components.value.find((item) => item.id === id).style;
+	return components.value.find((item) => item.id === id)!.style;
 };
 // const getCompPropsInContainer = (id: string, list: any) => {
 // 	const targetComp = list.find((item: any) => {

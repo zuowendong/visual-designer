@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="shapeBox"
-		:class="{ active, isContainer }"
+		:class="{ active, isContainer: isContainer && element.key === 'WdForm' }"
 		@click.stop.prevent
 		@mousedown.stop="mouseDownOnShapeHandle"
 	>
@@ -18,18 +18,20 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import type { PropType } from 'vue';
 import { useComponentStore } from '@/stores/component';
+import type { ComponentModel } from '@/types/component';
 
 const props = defineProps({
 	active: { type: Boolean, default: false },
 	defaultStyle: { type: Object, default: () => {} },
-	element: { type: Object, default: () => {} },
+	element: { type: Object as PropType<ComponentModel>, default: () => {} },
 	componentId: { type: String, default: '' }
 });
 let { active, defaultStyle, element, componentId } = toRefs(props);
 
 const componentStore = useComponentStore();
-let cursors = reactive<any>({});
+let cursors: { [k: string]: string } = reactive<any>({});
 
 const mouseDownOnShapeHandle = (e: MouseEvent) => {
 	componentStore.setChoosedComponentStatus(true);
@@ -64,7 +66,7 @@ const mouseDownOnShapeHandle = (e: MouseEvent) => {
 };
 
 // change current component of width & height
-const points = reactive(['lt', 't', 'rt', 'r', 'rb', 'b', 'lb', 'l']);
+const points: string[] = reactive(['lt', 't', 'rt', 'r', 'rb', 'b', 'lb', 'l']);
 const getPointStyle = (point: string) => {
 	const { width, height } = defaultStyle.value;
 	const hasT = /t/.test(point);
@@ -111,7 +113,7 @@ const { currentComponent, isContainer } = storeToRefs(componentStore);
  * 如果是正数，说明是往下拉，组件的高度在增加。如果是负数，说明是往上拉，组件的高度在减少。
  */
 
-const mouseDownOnPointHandle = (point: string, e: any) => {
+const mouseDownOnPointHandle = (point: string, e: MouseEvent) => {
 	const pos = { ...defaultStyle.value };
 	const height = Number(pos.height);
 	const width = Number(pos.width);
@@ -159,8 +161,9 @@ const angleToCursor = reactive([
 	{ start: 248, end: 293, cursor: 'sw' },
 	{ start: 293, end: 338, cursor: 'w' }
 ]);
-const initialAngle = reactive<any>({
-	// 每个点对应的初始角度
+
+// 每个点对应的初始角度
+const initialAngle: { [k: string]: number } = reactive({
 	lt: 0,
 	t: 45,
 	rt: 90,
@@ -172,7 +175,7 @@ const initialAngle = reactive<any>({
 });
 const getCursor = () => {
 	const rotate = mod360(currentComponent.value.style.rotate || 0); // 取余 360
-	const result: any = {};
+	const result: { [k: string]: string } = {};
 	let lastMatchIndex = -1; // 从上一个命中的角度的索引开始匹配下一个，降低时间复杂度
 
 	points.forEach((point) => {
