@@ -9,17 +9,17 @@ import {
 	n as i,
 	u as s,
 	h,
-	w as x,
+	k as x,
 	F as V,
 	b as v,
-	k as g,
+	l as g,
 	i as k,
 	j as u
-} from './index.9cc8bde8.js';
-const w = { style: { flex: '1' } },
-	S = p({ name: 'WdSelect' }),
+} from './index.7a139e19.js';
+const S = { style: { flex: '1' } },
+	w = p({ name: 'WdSelect' }),
 	F = p({
-		...S,
+		...w,
 		props: { modelValue: null, label: null, options: null },
 		setup(t) {
 			let l = _(t.modelValue);
@@ -35,7 +35,7 @@ const w = { style: { flex: '1' } },
 						{ style: i(s(r)) },
 						[
 							d('span', { style: i(s(m)) }, b(t.label), 5),
-							d('div', w, [
+							d('div', S, [
 								h(
 									y,
 									{
