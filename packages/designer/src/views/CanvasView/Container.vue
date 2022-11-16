@@ -5,11 +5,14 @@
 		v-bind="{ ...getComponentProps(compItem.id) }"
 		:list="compItem.children"
 	>
-		<template v-if="compItem.children" #default="{ component }">
-			<component
-				:is="component.key"
-				v-bind="{ ...getCompPropsInContainer(component.id, compItem.children) }"
-			></component>
+		<template v-if="compItem.children.length" #default="{ component }">
+			<div v-if="component">
+				{{ component.key }}
+				<!-- <component
+					:is="component.key"
+					v-bind="{ ...getCompPropsInContainer(component.id, compItem.children) }"
+				></component> -->
+			</div>
 		</template>
 	</WdForm>
 </template>
@@ -28,9 +31,15 @@ const { components } = storeToRefs(componentStore);
 const getComponentProps = (id: string) => {
 	return components.value.find((item) => item.id === id).style;
 };
-const getCompPropsInContainer = (id: string, list: any) => {
-	return list.find((item: any) => item.id === id).style;
-};
+// const getCompPropsInContainer = (id: string, list: any) => {
+// 	const targetComp = list.find((item: any) => {
+// 		if (item && item.id) item.id === id;
+// 	});
+// 	if (targetComp) {
+// 		return targetComp.style;
+// 	}
+// 	// return list.find((item: any) => item.id === id).style;
+// };
 </script>
 
 <style scoped lang="less">

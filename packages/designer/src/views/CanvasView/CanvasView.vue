@@ -34,7 +34,11 @@ const dropHandle = async (e: any) => {
 
 		if (isContainer.value) {
 			// 处理拖入容器的逻辑
-			componentStore.addCompInContainer(e.target.dataset.compid, componentData);
+			componentStore.addCompInContainer(
+				e.target.dataset.compid || e.target.parentElement.dataset.compid,
+				componentData,
+				e.target.dataset.index
+			);
 		} else {
 			componentStore.addComponent(componentData);
 		}
@@ -49,7 +53,7 @@ const dragOverHandle = (e: any) => {
 
 	console.log(e);
 	// 拖入到容器组件上方
-	if (e.target.dataset.key === 'WdForm') {
+	if (e.target.dataset.key === 'WdForm' || e.target.parentElement.dataset.key === 'WdForm') {
 		isContainer.value = true;
 	} else {
 		isContainer.value = false;

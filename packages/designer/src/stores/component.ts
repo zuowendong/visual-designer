@@ -53,10 +53,13 @@ export const useComponentStore = defineStore('component', () => {
 		components.push(component);
 	};
 	// 添加组件到容器
-	const addCompInContainer = (id: string, component: any) => {
+	const addCompInContainer = (id: string, component: any, index: number) => {
 		const containerComp = components.find((compItem) => compItem.id === id);
 		if (containerComp) {
-			containerComp.children.push(component);
+			// containerComp.children.unshift(component);
+			containerComp.children.splice(index, 1, component);
+
+			console.log(11111, containerComp.children);
 		}
 	};
 	const deleteComponent = () => {

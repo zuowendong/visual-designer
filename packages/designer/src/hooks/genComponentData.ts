@@ -39,6 +39,6 @@ export const initCompDataByDrop = (key: string, style: any, top: number, left: n
 		key,
 		style: { ...style, top, left }
 	};
-	if (key === 'WdForm') component.children = [];
+	if (key === 'WdForm') component.children = new Array(4).fill(1);
 	return component;
 };

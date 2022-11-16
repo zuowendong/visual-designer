@@ -1,37 +1,52 @@
 <template>
 	<div :style="formConStyle">
-		<div v-for="(item, i) in list" :key="i" :data-key="item.key" :data-compid="item.id">
-			<slot :component="item"></slot>
+		<div v-for="(item, i) in maskList" :key="i" :data-index="i" style="outline: 1px dashed #ccc">
+			<!-- <slot :component="item"></slot> -->
+			<slot :component="item" :index="i"></slot>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
 
 defineOptions({
 	name: 'WdForm'
 });
 
-const props = defineProps<{
-	list: any[];
-	row: number;
-	column: number;
-}>();
+const props = defineProps({
+	list: { type: Array, default: () => [] },
+	row: { type: Number, default: 0 },
+	column: { type: Number, default: 0 }
+});
+const { row, column } = toRefs(props);
 
-let rowNum = ref<number>(props.row);
+let maskList = ref<any[]>([]);
+maskList.value = new Array(row.value * column.value);
+
+watch(
+	() => props.list,
+	(val) => {
+		maskList.value = Object.assign(maskList.value, val);
+	},
+	{ deep: true }
+);
+
+let rowNum = ref<number>(row.value);
 watch(
 	() => props.row,
 	(num) => {
 		rowNum.value = num;
+		maskList.value = new Array(num * column.value);
 	}
 );
 
-let columnNum = ref<number>(props.column);
+let columnNum = ref<number>(column.value);
 watch(
 	() => props.column,
 	(num) => {
 		columnNum.value = num;
+		maskList.value = new Array(row.value * num);
 	}
 );
 
