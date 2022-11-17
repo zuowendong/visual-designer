@@ -35,7 +35,6 @@ const getProperties = async () => {
 	} else {
 		properties.value = [];
 	}
-	console.log(properties.value, currentComponent.value);
 };
 
 const genCompAttrs = (attrKey: string) => currentComponent.value.style[attrKey];

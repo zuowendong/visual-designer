@@ -17,11 +17,14 @@ import Editor from './Editor.vue';
 import { useComponentStore } from '@/stores/component';
 import { genCompStyleData } from '@/hooks/genComponentData';
 import { useContextMenu } from '@/stores/contextMenu';
-import { initCompDataByDrop } from '@/hooks/initCompData';
+import { initCompDataByDrop } from '@/hooks/formatComponentData';
+import { useSideMenus } from '@/stores/sideMenus';
 
 const componentStore = useComponentStore();
-const { editorDom, isChoosedComponent, isContainer } = storeToRefs(componentStore);
+const { editorDom, isChoosedComponent, isContainer, components } = storeToRefs(componentStore);
 
+const sideMenus = useSideMenus();
+const { checkedMenu } = storeToRefs(sideMenus);
 // 当元素或选中的文本在可释放目标上被释放时触发
 const dropHandle = async (e: any) => {
 	const compKey = e.dataTransfer.getData('component');
@@ -30,7 +33,13 @@ const dropHandle = async (e: any) => {
 		let style = await genCompStyleData(compKey);
 		const initTop = e.clientY - canvasInfo.y;
 		const initLeft = e.clientX - canvasInfo.x;
-		const componentData = initCompDataByDrop(compKey, style, initTop, initLeft);
+		const componentData = initCompDataByDrop(
+			checkedMenu.value.label,
+			compKey,
+			style,
+			initTop,
+			initLeft
+		);
 
 		if (isContainer.value) {
 			// 处理拖入容器的逻辑
@@ -42,8 +51,13 @@ const dropHandle = async (e: any) => {
 		} else {
 			componentStore.addComponent(componentData);
 		}
+
+		// 设置活动对象列表
+		sideMenus.setLiveTimeComps(components.value);
 		// 元素放下时恢复默认
 		isContainer.value = false;
+		// 重置选中的左侧菜单
+		sideMenus.resetMenu();
 	}
 };
 
@@ -70,7 +84,7 @@ const contextMenu = useContextMenu();
 const deselectCurComponent = (e: MouseEvent) => {
 	// 未选中组件，currentComponet为空
 	if (!isChoosedComponent.value) {
-		componentStore.setCurrentComponent({ id: '', key: '', style: {} }, '');
+		componentStore.setCurrentComponent({ id: '', label: '', key: '', style: {} }, '');
 	}
 	// 右击才显示菜单
 	if (e.button !== 2) contextMenu.hideContextMenu();

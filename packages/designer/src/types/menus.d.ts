@@ -3,3 +3,10 @@ export interface IMenuModel {
 	key: string;
 	icon: string;
 }
+
+export interface ILiveTimeCompModel {
+	id: string;
+	label: string;
+	key: string;
+	level: number;
+}

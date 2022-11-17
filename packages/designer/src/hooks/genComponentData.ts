@@ -3,13 +3,6 @@ import { setComponentData, getProperties, getAttrs } from './component';
 import type { IMenuModel } from '@/types/menus';
 import type { propertyModel } from '@/types/component';
 
-export interface ComponentModle {
-	id: string;
-	key: string;
-	style: any;
-	children?: ComponentModle[];
-}
-
 // 生成菜单 - 组件列表
 export const genMenuOps = async (): Promise<IMenuModel[]> => {
 	const compData = await setComponentData();

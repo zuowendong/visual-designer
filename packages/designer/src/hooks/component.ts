@@ -39,6 +39,8 @@ export const getAttrs = (properties: any[]) => {
 	for (let i = 0; i < properties.length; i++) {
 		AttrsWalk(properties[i].attrs, attrObj);
 	}
+
+	console.log(222222, attrObj);
 	return attrObj;
 };
 
