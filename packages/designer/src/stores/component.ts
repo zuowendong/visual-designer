@@ -9,11 +9,18 @@ export const useComponentStore = defineStore('component', () => {
 	};
 
 	// 当前组件
-	const currentComponent = ref<ComponentModel>({ id: '', key: '', style: {} });
+	const currentComponent = ref<ComponentModel>({ id: '', label: '', key: '', style: {} });
 	const currentComponentId = ref<string>('');
 	const setCurrentComponent = (component: ComponentModel, compId: string) => {
 		currentComponent.value = component;
 		currentComponentId.value = compId;
+	};
+	const setCurrentComponentById = (compId: string) => {
+		const targetComp = components.find((compItem) => compItem.id === compId);
+		if (targetComp) {
+			currentComponent.value = targetComp;
+			currentComponentId.value = compId;
+		}
 	};
 	// 设置当前组件的shapebox样式
 	const setShapeStyle = (props: propertyModel) => {
@@ -52,7 +59,7 @@ export const useComponentStore = defineStore('component', () => {
 		const index = components.findIndex((compItem) => compItem.id === currentComponentId.value);
 		if (index !== -1) {
 			components.splice(index, 1);
-			setCurrentComponent({ id: '', key: '', style: {} }, ''); // 清空当前组件
+			setCurrentComponent({ id: '', label: '', key: '', style: {} }, ''); // 清空当前组件
 		}
 	};
 
@@ -66,6 +73,7 @@ export const useComponentStore = defineStore('component', () => {
 		currentComponent,
 		currentComponentId,
 		setCurrentComponent,
+		setCurrentComponentById,
 		setShapeStyle,
 		updateCurrentComponent,
 

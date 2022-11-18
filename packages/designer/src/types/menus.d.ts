@@ -8,5 +8,5 @@ export interface ILiveTimeCompModel {
 	id: string;
 	label: string;
 	key: string;
-	level: number;
+	depth: number;
 }

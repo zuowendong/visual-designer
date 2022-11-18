@@ -56,7 +56,8 @@ const dragStartHandle = async (e: DragEvent, data: IMenuModel) => {
 	.menus {
 		padding: 10px 24px;
 		height: 50%;
-		overflow: auto;
+		overflow-x: hidden;
+		overflow-y: auto;
 		.componentItem {
 			width: 140px;
 			height: 32px;
@@ -92,6 +93,8 @@ const dragStartHandle = async (e: DragEvent, data: IMenuModel) => {
 	.liveTimeContent {
 		border-top: 1px solid @mainBoderColor;
 		height: 50%;
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 }
 </style>

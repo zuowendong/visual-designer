@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import type { IMenuModel, ILiveTimeCompModel } from '@/types/menus';
-import { tileComponents } from '@/hooks/formatComponentData';
 import type { ComponentModel } from '@/types/component';
+import { DFSLiveTimeComps } from '@/utils/DFS';
 
 export const useSideMenus = defineStore('sideMenu', () => {
 	const checkedMenu = ref<IMenuModel>({
@@ -20,9 +20,14 @@ export const useSideMenus = defineStore('sideMenu', () => {
 	// let level = ref(0);
 	const setLiveTimeComps = (components: ComponentModel[]) => {
 		liveTimeComps.value.length = 0;
-		// level.value = 0;
-		const level = 0;
-		tileComponents(components, liveTimeComps.value, level);
+		const root: ComponentModel = {
+			id: 'root',
+			label: '活动对象树',
+			key: 'root',
+			style: [],
+			children: components
+		};
+		DFSLiveTimeComps(root, -1, liveTimeComps.value);
 
 		console.log(111, liveTimeComps.value);
 	};
