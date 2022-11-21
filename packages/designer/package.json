@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@form-designer/components": "workspace:*",
 		"@form-designer/utils": "workspace:*",
+		"axios": "^1.1.3",
 		"element-plus": "^2.2.19",
 		"nanoid": "^4.0.0",
 		"pinia": "^2.0.23",

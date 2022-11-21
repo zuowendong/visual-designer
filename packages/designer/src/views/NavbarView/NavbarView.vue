@@ -1,8 +1,21 @@
 <template>
-	<div class="main">navbar</div>
+	<div class="main">
+		<el-button type="primary" plain @click="apiHandle">接口</el-button>
+		{{ msg }}
+	</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import axios from 'axios';
+
+let msg = ref('');
+const apiHandle = () => {
+	axios.get('/api').then((res) => {
+		console.log(res);
+		msg.value = res.data;
+	});
+};
+</script>
 
 <style scoped lang="less">
 @import '@/style/base.less';
