@@ -20,6 +20,6 @@ router.use('/user', user.routes());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen(3001, () => {
-	console.log('The service starts at http://127.0.0.1:3001');
+app.listen(3000, () => {
+	console.log('The service starts at http://127.0.0.1:3000');
 });
