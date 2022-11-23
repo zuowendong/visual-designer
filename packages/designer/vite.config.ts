@@ -11,7 +11,7 @@ import defineOptions from 'unplugin-vue-define-options/vite';
 export default defineConfig(({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd());
 	return {
-		base: '/form-designer/',
+		// base: '/form-designer/',
 		plugins: [
 			vue(),
 			defineOptions(),

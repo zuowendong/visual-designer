@@ -8,7 +8,7 @@ import {
 	h as d,
 	u as e,
 	n as m
-} from './index.c4091019.js';
+} from './index.a27eab18.js';
 const _ = t({ name: 'WdText' }),
 	y = t({
 		..._,
