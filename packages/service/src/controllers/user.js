@@ -1,3 +1,5 @@
+const createTemplate = require('../utils/createTmeplate');
+
 class User {
 	async getUser(ctx) {
 		ctx.body = { name: 'jack' };
@@ -5,10 +7,16 @@ class User {
 
 	async getUserInfo(ctx) {
 		let { name, age } = ctx.request.body;
+
+		let data = createTemplate();
+		console.log('user.js', data);
+
 		ctx.body = {
 			code: 0,
 			data: {
-				name: `${name}今年${age}岁了`
+				data: data,
+				name: `${name}今年${age}岁了`,
+				...ctx.request.body
 			},
 			msg: 'success'
 		};

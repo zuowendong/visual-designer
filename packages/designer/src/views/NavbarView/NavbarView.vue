@@ -1,18 +1,29 @@
 <template>
 	<div class="main">
 		<el-button type="primary" plain @click="apiHandle">接口</el-button>
-		{{ msg }}
+
+		<CodeBox v-model="isCodeBox" :code="codeContent" />
 	</div>
 </template>
 
 <script setup lang="ts">
 import axios from 'axios';
+import { storeToRefs } from 'pinia';
+import { useComponentStore } from '@/stores/component';
+import { genFormCode } from '@/hooks/genFormCode';
+import CodeBox from './CodeBox.vue';
 
-let msg = ref('');
+const componentStore = useComponentStore();
+const { components } = storeToRefs(componentStore);
+
+let codeContent = ref('');
+let isCodeBox = ref(false);
 const apiHandle = () => {
-	axios.get('/api/user/user').then((res) => {
-		console.log(res);
-		msg.value = res.data.name;
+	const formCode = genFormCode(components.value);
+	axios.post('/api/user/info', formCode).then((response) => {
+		console.log(5555555, response.data.data.data);
+		isCodeBox.value = true;
+		codeContent.value = response.data.data.data;
 	});
 };
 </script>
@@ -28,5 +39,12 @@ const apiHandle = () => {
 	align-items: center;
 	padding: 0 20px;
 	color: #ffffff;
+	position: relative;
+	.codeEditor {
+		position: absolute;
+		top: 40px;
+		left: 100px;
+		z-index: 10;
+	}
 }
 </style>
