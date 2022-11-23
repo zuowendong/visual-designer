@@ -10,9 +10,9 @@ import axios from 'axios';
 
 let msg = ref('');
 const apiHandle = () => {
-	axios.get('/api').then((res) => {
+	axios.get('/api/user/user').then((res) => {
 		console.log(res);
-		msg.value = res.data;
+		msg.value = res.data.name;
 	});
 };
 </script>
