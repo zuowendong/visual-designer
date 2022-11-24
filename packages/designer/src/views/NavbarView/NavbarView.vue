@@ -20,10 +20,9 @@ let codeContent = ref('');
 let isCodeBox = ref(false);
 const apiHandle = () => {
 	const formCode = genFormCode(components.value);
-	axios.post('/api/user/info', formCode).then((response) => {
-		console.log(5555555, response.data.data.data);
+	axios.post('/api/user/info', formCode).then(({ data }) => {
 		isCodeBox.value = true;
-		codeContent.value = response.data.data.data;
+		codeContent.value = data.data;
 	});
 };
 </script>

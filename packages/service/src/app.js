@@ -3,19 +3,20 @@ const Router = require('koa-router');
 const { koaBody } = require('koa-body');
 
 const user = require('./routes/user.js');
+const component = require('./routes/components.js');
 
 //koa实例化
 const app = new Koa();
 const router = new Router();
 
 app.use(koaBody());
-// router.prefix('/api');
 
 router.get('/', async (ctx) => {
-	ctx.body = 'hello World111';
+	ctx.body = 'hello World !!';
 });
 
 router.use('/user', user.routes());
+router.use('/component', component.routes());
 
 app.use(router.routes());
 app.use(router.allowedMethods());

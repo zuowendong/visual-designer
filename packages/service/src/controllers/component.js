@@ -1,16 +1,10 @@
 const genTempConfig = require('../utils/genTempConfig');
 const createTemplate = require('../utils/createTmeplate');
 
-class User {
-	async getUser(ctx) {
-		ctx.body = { name: 'jack' };
-	}
-
-	async getUserInfo(ctx) {
+class Component {
+	async getCode(ctx) {
 		const config = await genTempConfig(ctx.request.body);
-		console.log('user.js', config);
-
-		let templateCode = createTemplate(config);
+		let templateCode = createTemplate(ctx.request.body);
 		ctx.body = {
 			code: 0,
 			data: templateCode,
@@ -19,4 +13,4 @@ class User {
 	}
 }
 
-module.exports = new User();
+module.exports = new Component();
