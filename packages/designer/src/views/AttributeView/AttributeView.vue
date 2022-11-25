@@ -44,6 +44,7 @@ const getProperties = async () => {
 const genCompAttrs = (attrKey: string) => currentComponent.value.style[attrKey];
 
 const updateCurrentStyle = (val: any, attrKey: string) => {
+	console.log(1111111, val);
 	// componentStore.setShapeStyle({ [attrKey]: val });
 	componentStore.updateCurrentComponent({ [attrKey]: val });
 };

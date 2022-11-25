@@ -37,16 +37,28 @@ export const useComponentStore = defineStore('component', () => {
 		isChoosedComponent.value = status;
 	};
 	const updateCurrentComponent = (props: propertyModel) => {
+		// 当前数据已经先push components，更新当前数据也会更新数组中数据
 		Object.keys(props).forEach((propKey: string) => {
 			const propValue = props[propKey];
 			currentComponent.value.style[propKey] = propValue;
 		});
+		// updateComponents(currentComponent.value.id);
 	};
 
 	// 画布中所有组件
 	const components = reactive<ComponentModel[]>([]);
 	const addComponent = (component: ComponentModel) => {
 		components.push(component);
+	};
+	const updateComponents = (id: string) => {
+		for (let i = 0; i < components.length; i++) {
+			if (components[i].id === id) {
+				components[i] = currentComponent.value;
+			}
+			if (components[i].children && components[i].children!.length) {
+				updateComponents(id);
+			}
+		}
 	};
 	// 添加组件到容器
 	const addCompInContainer = (id: string, component: ComponentModel, index: number) => {

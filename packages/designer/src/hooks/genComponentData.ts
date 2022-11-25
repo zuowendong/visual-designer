@@ -18,6 +18,7 @@ export const genMenuOps = async (): Promise<IMenuModel[]> => {
 // 生成组件初始样式数据
 export const genCompStyleData = async (tag: string): Promise<propertyModel[]> => {
 	const properties = await getProperties(tag);
+	console.log(33333333, properties);
 	return getAttrs(properties);
 };
 

@@ -38,7 +38,7 @@ const { liveTimeComps } = storeToRefs(sideMenus);
 
 const dragStartHandle = async (e: DragEvent, data: IMenuModel) => {
 	e!.dataTransfer!.setData('component', data.key);
-	// 动态注册组件
+	// dynamic register components
 	const module = await fileConfig.fetchComponent(data.key);
 	componentInstall(data.key, module.default);
 	sideMenus.setCheckedMenu(data);
@@ -47,7 +47,6 @@ const dragStartHandle = async (e: DragEvent, data: IMenuModel) => {
 
 <style scoped lang="less">
 @import '@/style/base.less';
-
 .componentListMain {
 	width: 100%;
 	box-shadow: 0px 0px 20px 0px rgba(25, 40, 74, 0.1);

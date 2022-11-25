@@ -7,10 +7,11 @@ export const genFormCode = (components: ComponentModel[]): IFormCodeModel => {
 		type: 'c',
 		items: components.map((compItem) => {
 			return {
+				type: compItem.key.substring(2).toLowerCase(),
 				label: compItem.style.label,
 				value: compItem.style.modelValue,
-				field: compItem.style.modelValue,
-				type: 'select'
+				field: compItem.style.field,
+				options: compItem.style.options
 			};
 		})
 	};

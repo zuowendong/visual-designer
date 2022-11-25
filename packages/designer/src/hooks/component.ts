@@ -1,4 +1,5 @@
 import { fileConfig } from '@form-designer/components';
+import { cloneDeep } from 'lodash-es';
 
 /**
  * 获取组件初始数据
@@ -26,7 +27,7 @@ export const setComponentData = async () => {
  */
 export const getProperties = async (tag: string) => {
 	const properties = await fileConfig.getComponentProps(tag);
-	return properties;
+	return cloneDeep(properties);
 };
 
 /**
