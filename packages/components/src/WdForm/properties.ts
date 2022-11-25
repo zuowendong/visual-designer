@@ -39,7 +39,7 @@ export const properties: IProperties[] = [
 				name: '行数',
 				key: 'row',
 				type: 'dui-input-number',
-				value: 2
+				value: 4
 			},
 			{
 				name: '列数',

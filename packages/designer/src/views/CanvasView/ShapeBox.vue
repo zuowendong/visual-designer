@@ -203,15 +203,16 @@ const mod360 = (deg: number) => {
 </script>
 
 <style scoped lang="less">
+@import '@/style/base.less';
 .shapeBox {
 	position: absolute;
-	outline: 1px solid #4c7a9e;
+	outline: 1px solid @shapeBorderColor;
 	&:hover {
 		cursor: move;
 	}
 }
 .active {
-	outline: 1px solid #70c0ff;
+	outline: 1px solid @shapeActiveBorderColor;
 	user-select: none;
 	.shapePoint {
 		position: absolute;

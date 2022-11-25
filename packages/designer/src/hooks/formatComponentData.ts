@@ -15,6 +15,7 @@ export const initCompDataByDrop = (
 		key,
 		style: { ...style, top, left }
 	};
+	// 容器组件默认children长度
 	if (key === 'WdForm') component.children = [];
 	return component;
 };

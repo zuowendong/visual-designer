@@ -1,7 +1,13 @@
 <template>
 	<div class="main">
-		<el-button type="primary" plain @click="apiHandle">接口</el-button>
-
+		<el-button
+			type="primary"
+			plain
+			:disabled="!(currentComponent.children && currentComponent.children.length)"
+			@click="apiHandle"
+		>
+			代码生成
+		</el-button>
 		<CodeBox v-model="isCodeBox" :code="codeContent" />
 	</div>
 </template>
@@ -14,12 +20,12 @@ import { genFormCode } from '@/hooks/genFormCode';
 import CodeBox from './CodeBox.vue';
 
 const componentStore = useComponentStore();
-const { components } = storeToRefs(componentStore);
+const { currentComponent } = storeToRefs(componentStore);
 
 let codeContent = ref('');
 let isCodeBox = ref(false);
 const apiHandle = () => {
-	const formCode = genFormCode(components.value);
+	const formCode = genFormCode(currentComponent.value);
 	axios.post('/api/user/info', formCode).then(({ data }) => {
 		isCodeBox.value = true;
 		codeContent.value = data.data;

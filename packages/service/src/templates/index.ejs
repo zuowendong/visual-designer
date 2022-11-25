@@ -15,8 +15,8 @@
             <% if(item.type === 'input') { %>
               <el-input v-model="formData.<%= item.field %>" />
             <% } else if(item.type === 'select') { %>
-              <el-select v-model="formData.<%= item.field %>" placeholder="please select your zone">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+              <el-select v-model="formData.<%= item.field %>">
+                <el-option v-for="item in <%= item.field %>Options" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             <% } %>
             
@@ -67,7 +67,7 @@
 <%# 渲染下拉框数据 %>
 <% config.items.forEach(function(item) { _%>
   <% if(item.type === 'select') { _%>
-    let options = reactive([
+    let <%= item.field %>Options = reactive([
     <% item.options.forEach(function(opItem) { _%>
       {label: "<%= opItem.label %>", value: "<%= opItem.value %>"},
     <% }) %>

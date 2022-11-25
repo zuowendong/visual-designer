@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { cloneDeep } from 'lodash-es';
 import type { ComponentModel, propertyModel } from '../types/component';
 
 export const useComponentStore = defineStore('component', () => {
@@ -15,11 +16,34 @@ export const useComponentStore = defineStore('component', () => {
 		currentComponent.value = component;
 		currentComponentId.value = compId;
 	};
-	const setCurrentComponentById = (compId: string) => {
-		const targetComp = components.find((compItem) => compItem.id === compId);
-		if (targetComp) {
-			currentComponent.value = targetComp;
-			currentComponentId.value = compId;
+	// 活动对象树设置当前组件
+	const setCurrentComponentById = (id: string) => {
+		// 递归 ---err---> 堆栈溢出
+		// for (let i = 0; i < components.length; i++) {
+		// 	if (components[i].id === id) {
+		// 		currentComponent.value = components[i];
+		// 		currentComponentId.value = id;
+		// 		return;
+		// 	}
+		// 	if (components[i].children && components[i].children?.length) {
+		// 		setCurrentComponentById(id);
+		// 	}
+		// }
+
+		// bfs
+		const queue = cloneDeep(components);
+		while (queue.length) {
+			const node = queue.shift();
+			if (node?.id === id) {
+				currentComponent.value = node;
+				currentComponentId.value = id;
+			}
+			if (!node?.children?.length) {
+				continue;
+			}
+			Array.from(node.children).forEach((item) => {
+				queue.push(item);
+			});
 		}
 	};
 	// 设置当前组件的shapebox样式

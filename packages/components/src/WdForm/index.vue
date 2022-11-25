@@ -16,8 +16,8 @@ defineOptions({
 
 const props = defineProps({
 	list: { type: Array, default: () => [] },
-	row: { type: Number, default: 0 },
-	column: { type: Number, default: 0 }
+	row: { type: Number, default: 4 },
+	column: { type: Number, default: 2 }
 });
 const { row, column } = toRefs(props);
 
