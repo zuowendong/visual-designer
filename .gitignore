@@ -27,3 +27,5 @@ dist-ssr
 # components
 es
 lib
+
+.vscode
