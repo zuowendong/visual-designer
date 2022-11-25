@@ -7,13 +7,21 @@ export {};
 
 declare module '@vue/runtime-core' {
 	export interface GlobalComponents {
+		DuiColor: typeof import('./src/components/dui-color/DuiColor.vue')['default'];
+		DuiConfigArray: typeof import('./src/components/dui-config-array/DuiConfigArray.vue')['default'];
 		DuiInput: typeof import('./src/components/dui-input/DuiInput.vue')['default'];
 		DuiInputNumber: typeof import('./src/components/dui-input-number/DuiInputNumber.vue')['default'];
+		DuiLayoutArray: typeof import('./src/components/dui-layout-array/DuiLayoutArray.vue')['default'];
 		DuiLayoutNumber: typeof import('./src/components/dui-layout-number/DuiLayoutNumber.vue')['default'];
+		DuiSwitch: typeof import('./src/components/dui-switch/DuiSwitch.vue')['default'];
 		ElButton: typeof import('element-plus/es')['ElButton'];
+		ElColorPicker: typeof import('element-plus/es')['ElColorPicker'];
 		ElDialog: typeof import('element-plus/es')['ElDialog'];
 		ElInput: typeof import('element-plus/es')['ElInput'];
 		ElInputNumber: typeof import('element-plus/es')['ElInputNumber'];
+		ElOption: typeof import('element-plus/es')['ElOption'];
+		ElSelect: typeof import('element-plus/es')['ElSelect'];
+		ElSwitch: typeof import('element-plus/es')['ElSwitch'];
 		RouterLink: typeof import('vue-router')['RouterLink'];
 		RouterView: typeof import('vue-router')['RouterView'];
 	}

@@ -17,7 +17,6 @@ export const useSideMenus = defineStore('sideMenu', () => {
 	};
 
 	const liveTimeComps = ref<ILiveTimeCompModel[]>([]);
-	// let level = ref(0);
 	const setLiveTimeComps = (components: ComponentModel[]) => {
 		liveTimeComps.value.length = 0;
 		const root: ComponentModel = {
@@ -28,8 +27,6 @@ export const useSideMenus = defineStore('sideMenu', () => {
 			children: components
 		};
 		DFSLiveTimeComps(root, -1, liveTimeComps.value);
-
-		console.log(111, liveTimeComps.value);
 	};
 
 	return {

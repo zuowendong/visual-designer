@@ -4,9 +4,10 @@ class FileConfig {
 		return buildInfoModules;
 	};
 
-	public createComponent = async (tag: string) => {
+	public getComponentProps = async (tag: string) => {
 		// @ts-ignore
 		const properties = await import(`./${tag}/properties.ts`);
+		// TODO: 统一设置 基本配置[width, height, top, left]
 		return properties.properties;
 	};
 

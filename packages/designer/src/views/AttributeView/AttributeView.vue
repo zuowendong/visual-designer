@@ -2,7 +2,11 @@
 	<div class="main">
 		<div v-for="(groupItem, i) in properties" :key="i" class="groupItem">
 			<div class="groupLabel">{{ groupItem.name }}</div>
-			<div v-for="attr in groupItem.attrs" :key="attr.key" class="formItem">
+			<div
+				v-for="attr in groupItem.attrs"
+				:key="attr.key"
+				:class="['formItem', branchItem(attr.type) ? 'branchItem' : '']"
+			>
 				<span class="formLabel">{{ attr.name }}</span>
 				<component
 					:is="transformHump(attr.type)"
@@ -43,6 +47,12 @@ const updateCurrentStyle = (val: any, attrKey: string) => {
 	// componentStore.setShapeStyle({ [attrKey]: val });
 	componentStore.updateCurrentComponent({ [attrKey]: val });
 };
+
+// 垂直布局
+const branchItem = (type: string) => {
+	const whiteList = ['dui-config-array'];
+	return whiteList.includes(type);
+};
 </script>
 
 <style scoped lang="less">
@@ -80,6 +90,14 @@ const updateCurrentStyle = (val: any, attrKey: string) => {
 			}
 			.formCon {
 				flex: 1;
+			}
+		}
+		.branchItem {
+			flex-direction: column;
+			align-items: flex-start;
+			.formLabel {
+				text-align: left;
+				margin-bottom: 6px;
 			}
 		}
 	}

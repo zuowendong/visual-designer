@@ -32,7 +32,7 @@ export const properties: IProperties[] = [
 			{
 				name: '颜色',
 				key: 'color',
-				type: 'dui-input-text',
+				type: 'dui-color-picker',
 				value: '#fff'
 			},
 			{
@@ -45,4 +45,4 @@ export const properties: IProperties[] = [
 	}
 ];
 
-export default properties;
+// export default properties;

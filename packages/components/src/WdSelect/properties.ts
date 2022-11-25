@@ -27,19 +27,29 @@ export const properties: IProperties[] = [
 				name: '标签名',
 				key: 'label',
 				type: 'dui-input-text',
-				value: 'select'
+				value: '地区'
 			},
 			{
-				name: '选择值',
+				name: '默认值',
 				key: 'modelValue',
 				type: 'dui-input-text',
-				value: 'default select'
+				value: '上海'
+			},
+			{
+				name: '字段',
+				key: 'field',
+				type: 'dui-input-text',
+				value: 'region'
 			},
 			{
 				name: '选项',
 				key: 'options',
-				type: 'dui-layout-array',
-				value: []
+				type: 'dui-config-array',
+				value: [
+					{ label: '上海', value: '上海' },
+					{ label: '南京', value: '南京' },
+					{ label: '苏州', value: '苏州' }
+				]
 			}
 		]
 	}

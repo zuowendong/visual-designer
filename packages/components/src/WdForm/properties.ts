@@ -48,7 +48,27 @@ export const properties: IProperties[] = [
 				value: 2
 			}
 		]
+	},
+	{
+		id: 'formConfig',
+		name: '表单属性',
+		attrs: [
+			{
+				name: '是否弹窗',
+				key: 'isDialog',
+				type: 'dui-switch',
+				value: false
+			},
+			{
+				name: '展示类型',
+				key: 'formShowType',
+				type: 'dui-layout-array',
+				value: [
+					{ label: '查看', value: 'r' },
+					{ label: '新增', value: 'c' },
+					{ label: '更新', value: 'u' }
+				]
+			}
+		]
 	}
 ];
-
-export default properties;

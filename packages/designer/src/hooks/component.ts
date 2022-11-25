@@ -25,7 +25,7 @@ export const setComponentData = async () => {
  * @returns
  */
 export const getProperties = async (tag: string) => {
-	const properties = await fileConfig.createComponent(tag);
+	const properties = await fileConfig.getComponentProps(tag);
 	return properties;
 };
 
@@ -39,8 +39,6 @@ export const getAttrs = (properties: any[]) => {
 	for (let i = 0; i < properties.length; i++) {
 		AttrsWalk(properties[i].attrs, attrObj);
 	}
-
-	console.log(222222, attrObj);
 	return attrObj;
 };
 
