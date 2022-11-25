@@ -21,7 +21,7 @@ import { initCompDataByDrop } from '@/hooks/formatComponentData';
 import { useSideMenus } from '@/stores/sideMenus';
 
 const componentStore = useComponentStore();
-const { editorDom, isChoosedComponent, isContainer, components } = storeToRefs(componentStore);
+const { editorDom, isChoosedComponent, isContainer } = storeToRefs(componentStore);
 
 const sideMenus = useSideMenus();
 const { checkedMenu } = storeToRefs(sideMenus);
@@ -46,14 +46,14 @@ const dropHandle = async (e: any) => {
 			componentStore.addCompInContainer(
 				e.target.dataset.compid || e.target.parentElement.dataset.compid,
 				componentData,
-				e.target.dataset.index
+				Number(e.target.dataset.index)
 			);
 		} else {
 			componentStore.addComponent(componentData);
 		}
 
 		// 设置活动对象列表
-		sideMenus.setLiveTimeComps(components.value);
+		sideMenus.setLiveTimeComps();
 		// 元素放下时恢复默认
 		isContainer.value = false;
 		// 重置选中的左侧菜单

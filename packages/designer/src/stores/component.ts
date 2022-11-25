@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { cloneDeep } from 'lodash-es';
 import type { ComponentModel, propertyModel } from '../types/component';
+import { useSideMenus } from './sideMenus';
 
 export const useComponentStore = defineStore('component', () => {
 	// 编辑器dom
@@ -18,7 +19,7 @@ export const useComponentStore = defineStore('component', () => {
 	};
 	// 活动对象树设置当前组件
 	const setCurrentComponentById = (id: string) => {
-		// 递归 ---err---> 堆栈溢出
+		// 递归 ---Maximum call stack size exceeded---> 堆栈溢出
 		// for (let i = 0; i < components.length; i++) {
 		// 	if (components[i].id === id) {
 		// 		currentComponent.value = components[i];
@@ -74,21 +75,27 @@ export const useComponentStore = defineStore('component', () => {
 	const addComponent = (component: ComponentModel) => {
 		components.push(component);
 	};
-	const updateComponents = (id: string) => {
-		for (let i = 0; i < components.length; i++) {
-			if (components[i].id === id) {
-				components[i] = currentComponent.value;
-			}
-			if (components[i].children && components[i].children!.length) {
-				updateComponents(id);
-			}
-		}
-	};
+	// const updateComponents = (id: string) => {
+	// 	for (let i = 0; i < components.length; i++) {
+	// 		if (components[i].id === id) {
+	// 			components[i] = currentComponent.value;
+	// 		}
+	// 		if (components[i].children && components[i].children!.length) {
+	// 			updateComponents(id);
+	// 		}
+	// 	}
+	// };
 	// 添加组件到容器
 	const addCompInContainer = (id: string, component: ComponentModel, index: number) => {
 		const containerComp = components.find((compItem) => compItem.id === id);
 		if (containerComp) {
-			containerComp.children!.splice(index, 1, component);
+			// 指定插入
+			if (containerComp.children?.length! < index) {
+				containerComp.children?.push(...containerComp.children, ...new Array(index));
+				containerComp.children!.splice(index, 1, component);
+			} else {
+				containerComp.children!.splice(index, 1, component);
+			}
 		}
 	};
 	const deleteComponent = () => {
@@ -97,6 +104,10 @@ export const useComponentStore = defineStore('component', () => {
 			components.splice(index, 1);
 			setCurrentComponent({ id: '', label: '', key: '', style: {} }, ''); // 清空当前组件
 		}
+
+		// 更新 活动对象树
+		const sideMenus = useSideMenus();
+		sideMenus.setLiveTimeComps();
 	};
 
 	// 是否为容器组件
