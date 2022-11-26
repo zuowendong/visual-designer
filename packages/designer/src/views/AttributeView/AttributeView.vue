@@ -23,7 +23,7 @@
 import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
 import { genComponentProperties } from '@/hooks/genComponentData';
-import { transformHump } from '@form-designer/utils';
+import { transformHump } from '@/utils/tool';
 
 const componentStore = useComponentStore();
 const { currentComponentId, currentComponent } = storeToRefs(componentStore);
