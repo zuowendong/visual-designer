@@ -98,16 +98,22 @@ export const useComponentStore = defineStore('component', () => {
 			}
 		}
 	};
+
+	// 组件删除
 	const deleteComponent = () => {
 		const index = components.findIndex((compItem) => compItem.id === currentComponentId.value);
 		if (index !== -1) {
 			components.splice(index, 1);
 			setCurrentComponent({ id: '', label: '', key: '', style: {} }, ''); // 清空当前组件
 		}
-
 		// 更新 活动对象树
 		const sideMenus = useSideMenus();
 		sideMenus.setLiveTimeComps();
+	};
+
+	// 画布清空
+	const clearComponents = () => {
+		components.length = 0;
 	};
 
 	// 是否为容器组件
@@ -131,6 +137,7 @@ export const useComponentStore = defineStore('component', () => {
 		addComponent,
 		addCompInContainer,
 		deleteComponent,
+		clearComponents,
 
 		isContainer
 	};

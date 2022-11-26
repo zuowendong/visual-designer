@@ -22,8 +22,6 @@ export const useSideMenus = defineStore('sideMenu', () => {
 		const componentStore = useComponentStore();
 		const { components } = storeToRefs(componentStore);
 
-		console.log(44444, components.value);
-
 		liveTimeComps.value.length = 0;
 		const root: ComponentModel = {
 			id: 'root',

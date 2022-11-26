@@ -3,11 +3,17 @@
 		<el-button
 			type="primary"
 			plain
+			:disabled="!components.length"
+			@click="componentStore.clearComponents"
+			>清空画布</el-button
+		>
+		<el-button
+			type="primary"
+			plain
 			:disabled="!(currentComponent.children && currentComponent.children.length)"
 			@click="apiHandle"
+			>代码生成</el-button
 		>
-			代码生成
-		</el-button>
 		<CodeBox v-model="isCodeBox" :code="codeContent" />
 	</div>
 </template>
@@ -20,7 +26,7 @@ import { genFormCode } from '@/hooks/genFormCode';
 import CodeBox from './CodeBox.vue';
 
 const componentStore = useComponentStore();
-const { currentComponent } = storeToRefs(componentStore);
+const { currentComponent, components } = storeToRefs(componentStore);
 
 let codeContent = ref('');
 let isCodeBox = ref(false);

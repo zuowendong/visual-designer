@@ -19,3 +19,12 @@ export const initCompDataByDrop = (
 	if (key === 'WdForm') component.children = [];
 	return component;
 };
+
+// 复制的组件数据
+export const initCompDataByCopy = (component: ComponentModel, top: number, left: number) => {
+	return {
+		...component,
+		id: generateID(),
+		style: { ...component.style, top, left }
+	};
+};

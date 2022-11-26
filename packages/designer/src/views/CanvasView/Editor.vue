@@ -1,6 +1,7 @@
 <template>
 	<div ref="editor" class="editor" @contextmenu="contextMenuHandle">
 		{{ components }}
+		{{ currentComponent }}
 		<Grid />
 		<ShapeBox
 			v-for="item in components"

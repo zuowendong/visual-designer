@@ -5,7 +5,23 @@
 		:style="{ top: menuTop + 'px', left: menuLeft + 'px' }"
 	>
 		<ul @mouseup="mouseUpHandle">
-			<li @click="deleteComp">删除</li>
+			<li>
+				<el-button text size="small" :disabled="!currentComponent.id" @click="contextMenu.copy"
+					>复制</el-button
+				>
+			</li>
+			<li>
+				<el-button text size="small" @click="pasteHandle">粘贴</el-button>
+			</li>
+			<li>
+				<el-button
+					text
+					size="small"
+					:disabled="!currentComponent.id"
+					@click="componentStore.deleteComponent"
+					>删除</el-button
+				>
+			</li>
 		</ul>
 	</div>
 </template>
@@ -14,17 +30,27 @@
 import { storeToRefs } from 'pinia';
 import { useContextMenu } from '@/stores/contextMenu';
 import { useComponentStore } from '@/stores/component';
+import { initCompDataByCopy } from '@/hooks/formatComponentData';
+import { useSideMenus } from '@/stores/sideMenus';
 
 const contextMenu = useContextMenu();
-const { menuTop, menuLeft, showMenu } = storeToRefs(contextMenu);
+const { menuTop, menuLeft, showMenu, copyCompData } = storeToRefs(contextMenu);
 
 const componentStore = useComponentStore();
+const { currentComponent, editorDom } = storeToRefs(componentStore);
 const mouseUpHandle = () => {
 	componentStore.setChoosedComponentStatus(true);
 };
 
-const deleteComp = () => {
-	componentStore.deleteComponent();
+const sideMenus = useSideMenus();
+const pasteHandle = (e: MouseEvent) => {
+	const canvasInfo = editorDom.value.getBoundingClientRect();
+	const initTop = e.clientY - canvasInfo.y;
+	const initLeft = e.clientX - canvasInfo.x;
+
+	const componentData = initCompDataByCopy(copyCompData.value, initTop, initLeft);
+	componentStore.addComponent(componentData);
+	sideMenus.setLiveTimeComps();
 };
 </script>
 
