@@ -1,29 +1,59 @@
 <template>
-	<div
+	<ul
 		v-show="showMenu"
-		class="contextmenu"
+		class="context-menu"
 		:style="{ top: menuTop + 'px', left: menuLeft + 'px' }"
+		@mouseup="mouseUpHandle"
 	>
-		<ul @mouseup="mouseUpHandle">
-			<li>
-				<el-button text size="small" :disabled="!currentComponent.id" @click="contextMenu.copy"
-					>复制</el-button
-				>
-			</li>
-			<li>
-				<el-button text size="small" @click="pasteHandle">粘贴</el-button>
-			</li>
-			<li>
-				<el-button
-					text
-					size="small"
-					:disabled="!currentComponent.id"
-					@click="componentStore.deleteComponent"
-					>删除</el-button
-				>
-			</li>
-		</ul>
-	</div>
+		<li class="menu-item" :class="{ disable: !currentComponent.id }" @click.stop="contextMenu.copy">
+			<div class="menu-item-content">
+				<span class="text">复制</span>
+				<span class="sub-text">Ctrl + C</span>
+			</div>
+		</li>
+		<li class="menu-item" @click.stop="pasteHandle">
+			<div class="menu-item-content">
+				<span class="text">粘贴</span>
+				<span class="sub-text">Ctrl + V</span>
+			</div>
+		</li>
+		<li
+			class="menu-item"
+			:class="{ disable: !currentComponent.id }"
+			@click.stop="componentStore.deleteComponent"
+		>
+			<div class="menu-item-content">
+				<span class="text">删除</span>
+				<span class="sub-text">Delete</span>
+			</div>
+		</li>
+		<li
+			class="menu-item"
+			:class="{ disable: !currentComponent.id }"
+			@click.stop="contextMenu.setTopLevel"
+		>
+			<div class="menu-item-content">
+				<span class="text">置顶</span>
+			</div>
+		</li>
+		<li class="menu-item" :class="{ disable: !currentComponent.id }" @click.stop="">
+			<div class="menu-item-content">
+				<span class="text">上一层</span>
+				<span class="sub-text">Ctrl + ↑</span>
+			</div>
+		</li>
+		<li class="menu-item" :class="{ disable: !currentComponent.id }" @click.stop="">
+			<div class="menu-item-content">
+				<span class="text">下一层</span>
+				<span class="sub-text">Ctrl + ↓</span>
+			</div>
+		</li>
+		<li class="menu-item" :class="{ disable: !currentComponent.id }" @click.stop="">
+			<div class="menu-item-content">
+				<span class="text">置底</span>
+			</div>
+		</li>
+	</ul>
 </template>
 
 <script setup lang="ts">
@@ -55,34 +85,60 @@ const pasteHandle = (e: MouseEvent) => {
 </script>
 
 <style scoped lang="less">
-.contextmenu {
+.context-menu {
+	width: 170px;
+	padding: 5px 0;
+	background: #fff;
+	border: 1px solid #eee;
+	box-shadow: 3px 3px 3px rgba(#000, 0.15);
+	border-radius: 2px;
+	list-style: none;
+	margin: 0;
 	position: absolute;
-	z-index: 1000;
-
-	ul {
-		border: 1px solid #e4e7ed;
-		border-radius: 4px;
+	z-index: 999;
+	.menu-item {
+		padding: 0 20px;
+		color: #555;
+		font-size: 12px;
+		transition: all 0.1s;
+		white-space: nowrap;
+		height: 30px;
+		line-height: 30px;
 		background-color: #fff;
-		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-		box-sizing: border-box;
-		margin: 5px 0;
-		padding: 6px 0;
+		cursor: pointer;
 
-		li {
-			font-size: 14px;
-			padding: 0 20px;
+		&:not(.disable):hover > .menu-item-content > .sub-menu {
+			display: block;
+		}
+
+		&:not(.disable):hover > .has-children.has-handler::after {
+			transform: scale(1);
+		}
+
+		&:hover:not(.disable) {
+			background-color: rgba(209, 68, 36, 0.2);
+		}
+
+		&.disable {
+			color: #b1b1b1;
+			cursor: no-drop;
+		}
+
+		.menu-item-content {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 			position: relative;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			color: #606266;
-			height: 34px;
-			line-height: 34px;
-			box-sizing: border-box;
-			cursor: pointer;
 
-			&:hover {
-				background-color: #f5f7fa;
+			.sub-text {
+				opacity: 0.6;
+			}
+			.sub-menu {
+				width: 120px;
+				position: absolute;
+				display: none;
+				left: 112%;
+				top: -6px;
 			}
 		}
 	}

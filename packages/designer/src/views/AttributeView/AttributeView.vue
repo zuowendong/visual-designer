@@ -5,7 +5,8 @@
 			<div
 				v-for="attr in groupItem.attrs"
 				:key="attr.key"
-				:class="['formItem', branchItem(attr.type) ? 'branchItem' : '']"
+				class="formItem"
+				:class="{ branchItem: branchItem(attr.type) }"
 			>
 				<span class="formLabel">{{ attr.name }}</span>
 				<component
@@ -44,7 +45,6 @@ const getProperties = async () => {
 const genCompAttrs = (attrKey: string) => currentComponent.value.style[attrKey];
 
 const updateCurrentStyle = (val: any, attrKey: string) => {
-	console.log(1111111, val);
 	// componentStore.setShapeStyle({ [attrKey]: val });
 	componentStore.updateCurrentComponent({ [attrKey]: val });
 };
@@ -64,6 +64,8 @@ const branchItem = (type: string) => {
 	padding: 10px 24px;
 	box-sizing: border-box;
 	border-left: 1px solid @mainBoderColor;
+	overflow-x: hidden;
+	overflow-y: auto;
 	.groupItem {
 		display: flex;
 		flex-direction: column;

@@ -2,6 +2,10 @@
 	<div
 		class="shapeBox"
 		:class="{ active, isContainer: isContainer && element.key === 'WdForm' }"
+		:style="{
+			backgroundColor: element.style.bgColor,
+			zIndex: element.style.zIndex
+		}"
 		@click.stop.prevent
 		@mousedown.stop="mouseDownOnShapeHandle"
 	>
@@ -63,6 +67,11 @@ const mouseDownOnShapeHandle = (e: MouseEvent) => {
 
 	document.addEventListener('mousemove', move);
 	document.addEventListener('mouseup', up);
+};
+
+const shapBoxStyle = (style: any) => {
+	// 背景色 | 层级
+	return `background-color: ${style.bgColor}; z-index: ${style.zIndex}`;
 };
 
 // change current component of width & height

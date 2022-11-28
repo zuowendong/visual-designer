@@ -17,18 +17,30 @@ export const useContextMenu = defineStore('contextMenu', () => {
 		showMenu.value = false;
 	};
 
-	// 复制粘贴
-	const copyCompData = ref<ComponentModel>({ id: '', label: '', key: '', style: {} });
+	// 获取当前组件数据
 	const currentCompData = computed(() => {
 		const componentStore = useComponentStore();
 		const { currentComponent } = storeToRefs(componentStore);
 		return currentComponent.value;
 	});
+
+	// 复制粘贴
+	const copyCompData = ref<ComponentModel>({ id: '', label: '', key: '', style: {} });
 	const copy = () => {
 		copyCompData.value = cloneDeep(currentCompData.value);
 	};
-	const paste = () => {
-		console.log(copyCompData.value);
+
+	// 层级
+	const maxLevel = ref<number>(0); // 最大层级
+	const setTopLevel = () => {
+		// let currentLevel = currentCompData.value.style.zIndex;
+		// maxLevel.value = currentLevel;
+		maxLevel.value++;
+		const componentStore = useComponentStore();
+		componentStore.updateCurrentComponent({
+			...currentCompData.value.style,
+			zIndex: maxLevel.value
+		});
 	};
 
 	return {
@@ -40,6 +52,8 @@ export const useContextMenu = defineStore('contextMenu', () => {
 
 		copyCompData,
 		copy,
-		paste
+
+		maxLevel,
+		setTopLevel
 	};
 });
