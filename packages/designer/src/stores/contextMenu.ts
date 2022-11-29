@@ -17,29 +17,34 @@ export const useContextMenu = defineStore('contextMenu', () => {
 		showMenu.value = false;
 	};
 
-	// 获取当前组件数据
-	const currentCompData = computed(() => {
-		const componentStore = useComponentStore();
-		const { currentComponent } = storeToRefs(componentStore);
-		return currentComponent.value;
-	});
+	const componentStore = useComponentStore();
+	const { components, currentComponent } = storeToRefs(componentStore);
 
 	// 复制粘贴
 	const copyCompData = ref<ComponentModel>({ id: '', label: '', key: '', style: {} });
 	const copy = () => {
-		copyCompData.value = cloneDeep(currentCompData.value);
+		copyCompData.value = cloneDeep(currentComponent.value);
 	};
 
 	// 层级
 	const maxLevel = ref<number>(0); // 最大层级
 	const setTopLevel = () => {
-		// let currentLevel = currentCompData.value.style.zIndex;
-		// maxLevel.value = currentLevel;
+		// 初始阶段，还没有组件置顶
+		if (maxLevel.value === 0) {
+			maxLevel.value = components.value.reduce((preVal: number, currVal: ComponentModel) => {
+				return preVal > currVal.style.zIndex ? preVal : currVal.style.zIndex;
+			}, 0);
+		}
 		maxLevel.value++;
-		const componentStore = useComponentStore();
 		componentStore.updateCurrentComponent({
-			...currentCompData.value.style,
+			...currentComponent.value.style,
 			zIndex: maxLevel.value
+		});
+	};
+	const upLevel = () => {
+		componentStore.updateCurrentComponent({
+			...currentComponent.value.style,
+			zIndex: ++currentComponent.value.style.zIndex
 		});
 	};
 
@@ -54,6 +59,7 @@ export const useContextMenu = defineStore('contextMenu', () => {
 		copy,
 
 		maxLevel,
-		setTopLevel
+		setTopLevel,
+		upLevel
 	};
 });

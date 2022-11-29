@@ -36,7 +36,11 @@
 				<span class="text">置顶</span>
 			</div>
 		</li>
-		<li class="menu-item" :class="{ disable: !currentComponent.id }" @click.stop="">
+		<li
+			class="menu-item"
+			:class="{ disable: !currentComponent.id }"
+			@click.stop="contextMenu.upLevel"
+		>
 			<div class="menu-item-content">
 				<span class="text">上一层</span>
 				<span class="sub-text">Ctrl + ↑</span>
@@ -81,6 +85,10 @@ const pasteHandle = (e: MouseEvent) => {
 	const componentData = initCompDataByCopy(copyCompData.value, initTop, initLeft);
 	componentStore.addComponent(componentData);
 	sideMenus.setLiveTimeComps();
+};
+
+const aaa = () => {
+	console.log(111111);
 };
 </script>
 

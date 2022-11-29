@@ -7,10 +7,10 @@
 			:style="{ paddingLeft: `${compItem.depth * 16}px` }"
 		>
 			<span
-				:class="[
-					compItem.key === 'root' ? 'title' : '',
-					currentComponent.id === compItem.id ? 'activeItem' : ''
-				]"
+				:class="{
+					title: compItem.key === 'root',
+					activeItem: currentComponent.id === compItem.id
+				}"
 				@click="chooseHandle(compItem)"
 			>
 				{{ compItem.label }}

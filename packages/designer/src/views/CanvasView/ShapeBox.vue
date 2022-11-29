@@ -69,11 +69,6 @@ const mouseDownOnShapeHandle = (e: MouseEvent) => {
 	document.addEventListener('mouseup', up);
 };
 
-const shapBoxStyle = (style: any) => {
-	// 背景色 | 层级
-	return `background-color: ${style.bgColor}; z-index: ${style.zIndex}`;
-};
-
 // change current component of width & height
 const points: string[] = reactive(['lt', 't', 'rt', 'r', 'rb', 'b', 'lb', 'l']);
 const getPointStyle = (point: string) => {

@@ -5,11 +5,8 @@ import { DFSLiveTimeComps } from '@/utils/DFS';
 import { useComponentStore } from './component';
 
 export const useSideMenus = defineStore('sideMenu', () => {
-	const checkedMenu = ref<IMenuModel>({
-		label: '',
-		key: '',
-		icon: ''
-	});
+	// 当前选中拖拽的组件元素 --- 获取当前组件的信息
+	const checkedMenu = ref<IMenuModel>({ label: '', key: '', icon: '' });
 	const setCheckedMenu = (menu: IMenuModel) => {
 		checkedMenu.value = menu;
 	};
