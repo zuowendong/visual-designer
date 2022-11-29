@@ -47,6 +47,19 @@ export const useContextMenu = defineStore('contextMenu', () => {
 			zIndex: ++currentComponent.value.style.zIndex
 		});
 	};
+	const downLevel = () => {
+		if (currentComponent.value.style.zIndex === 0) return;
+		componentStore.updateCurrentComponent({
+			...currentComponent.value.style,
+			zIndex: --currentComponent.value.style.zIndex
+		});
+	};
+	const setBottomLevel = () => {
+		componentStore.updateCurrentComponent({
+			...currentComponent.value.style,
+			zIndex: 0
+		});
+	};
 
 	return {
 		showMenu,
@@ -60,6 +73,8 @@ export const useContextMenu = defineStore('contextMenu', () => {
 
 		maxLevel,
 		setTopLevel,
-		upLevel
+		upLevel,
+		downLevel,
+		setBottomLevel
 	};
 });

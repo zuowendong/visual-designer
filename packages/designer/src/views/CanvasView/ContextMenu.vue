@@ -46,13 +46,21 @@
 				<span class="sub-text">Ctrl + ↑</span>
 			</div>
 		</li>
-		<li class="menu-item" :class="{ disable: !currentComponent.id }" @click.stop="">
+		<li
+			class="menu-item"
+			:class="{ disable: !currentComponent.id }"
+			@click.stop="contextMenu.downLevel"
+		>
 			<div class="menu-item-content">
 				<span class="text">下一层</span>
 				<span class="sub-text">Ctrl + ↓</span>
 			</div>
 		</li>
-		<li class="menu-item" :class="{ disable: !currentComponent.id }" @click.stop="">
+		<li
+			class="menu-item"
+			:class="{ disable: !currentComponent.id }"
+			@click.stop="contextMenu.setBottomLevel"
+		>
 			<div class="menu-item-content">
 				<span class="text">置底</span>
 			</div>
@@ -85,10 +93,6 @@ const pasteHandle = (e: MouseEvent) => {
 	const componentData = initCompDataByCopy(copyCompData.value, initTop, initLeft);
 	componentStore.addComponent(componentData);
 	sideMenus.setLiveTimeComps();
-};
-
-const aaa = () => {
-	console.log(111111);
 };
 </script>
 
