@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"build": "vite build"
+		"build": "vite build",
+		"create:comp": "component-cli"
 	},
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -17,6 +18,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"@form-designer/cli": "workspace:*",
 		"@types/less": "^3.0.3",
 		"@vitejs/plugin-vue": "^3.1.2",
 		"less": "^4.1.3",

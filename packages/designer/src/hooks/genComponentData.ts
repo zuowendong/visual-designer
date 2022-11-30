@@ -1,6 +1,6 @@
 import { setComponentData, getProperties, getAttrs } from './component';
 
-import type { IMenusModel, IMenuModel } from '@/types/menus';
+import type { IMenusModel } from '@/types/menus';
 import type { propertyModel } from '@/types/component';
 
 // 生成菜单 - 组件列表
@@ -20,7 +20,6 @@ export const genMenuOps = async (): Promise<IMenusModel> => {
 			};
 		}
 	}
-	console.log(categoryMap);
 	return categoryMap;
 };
 

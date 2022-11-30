@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"outDir": "./lib",
+		"target": "ES2017",
+		"module": "ESNext",
+		"strict": true,
+		"downlevelIteration": true,
+		"declaration": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"jsx": "preserve",
+		"lib": ["esnext", "dom"],
+		"moduleResolution": "Node"
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules"]
+}
