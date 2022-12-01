@@ -1,6 +1,7 @@
 class FileConfig {
 	public getAllBuildModule = () => {
-		const buildInfoModules = import.meta.globEager('./**/buid.json');
+		const buildInfoModules = import.meta.globEager('./**/build.json');
+		console.log(33333, buildInfoModules);
 		return buildInfoModules;
 	};
 

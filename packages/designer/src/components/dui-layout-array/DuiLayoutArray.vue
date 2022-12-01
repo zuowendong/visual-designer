@@ -35,6 +35,13 @@ watch(
 	{ deep: true }
 );
 
+onMounted(() => {
+	const target = modelValue.value.find((item) => item.active);
+	if (target) {
+		selectedVal.value = target.value;
+	}
+});
+
 const changeHandle = (val: string) => {
 	for (let i = 0; i < optionList.value.length; i++) {
 		optionList.value[i].active = false;

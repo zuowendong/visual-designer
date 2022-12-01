@@ -9,6 +9,7 @@ export const setComponentData = async () => {
 	const originCompData: any[] = [];
 	// 获取所有组件 build.json 数据
 	const allBuilInfo = fileConfig.getAllBuildModule();
+	console.log(2222222, allBuilInfo);
 	for (const key in allBuilInfo) {
 		const infoVal: any = allBuilInfo[key];
 		const properties = await getProperties(infoVal.tag);
@@ -17,6 +18,7 @@ export const setComponentData = async () => {
 			properties
 		});
 	}
+	console.log(111111111, originCompData);
 	return originCompData;
 };
 
