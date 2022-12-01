@@ -1,9 +1,21 @@
 #! /usr/bin/env node
-import chalk from 'chalk';
-import question from './question/index.js';
-import { createConfig } from './config.js';
 
-const answer = await question();
-const config = createConfig(answer);
+import logger from './shared/logger';
+import { Command } from 'commander';
+import { create } from './commands/create';
 
-console.log(chalk.red(config.componentName));
+const program = new Command();
+
+program
+	.command('create')
+	.description('Create a component directory')
+	.option('-n, --name <componentName>', 'Component name')
+	.action(create);
+
+program.on('command:*', ([cmd]) => {
+	program.outputHelp();
+	logger.error(`\nUnknown command ${cmd}.\n`);
+	process.exitCode = 1;
+});
+
+program.parse();

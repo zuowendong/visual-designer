@@ -1,0 +1,9 @@
+import type { App, Plugin } from 'vue';
+import <%= name %> from './<%= name %>.vue';
+
+<%= name %>.install = (app: App) => {
+	app.component(<%= name %>.name, <%= name %>);
+	return app;
+};
+
+export default <%= name %> as typeof <%= name %> & Plugin;

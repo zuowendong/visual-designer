@@ -1,0 +1,21 @@
+<template>
+	<div></div>
+</template>
+
+<script setup lang="ts">
+defineOptions({
+	name: '<%= name %>'
+});
+
+const props = defineProps({
+	modelValue: {}
+});
+
+let { modelValue } = toRefs(props);
+
+const valChangeHandle = (val: string) => {
+	emit('change', val);
+};
+</script>
+
+<style scoped lang="less"></style>
