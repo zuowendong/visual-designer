@@ -19,6 +19,14 @@ pnpm dev
 pnpm serve
 ```
 
+Develop wdComponent
+
+```shell
+pnpm build:cli
+
+pnpm gen:wd
+```
+
 ## :construction: Todo
 
 1. ~~monorepo 架构（pnpm 实现）~~

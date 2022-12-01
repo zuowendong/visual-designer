@@ -6,7 +6,9 @@
 		"dev": "pnpm -F designer dev",
 		"build": "pnpm -F designer build",
 		"serve": "pnpm -F service serve",
-		"build:components": "pnpm -F components build"
+		"build:components": "pnpm -F components build",
+		"build:cli": "pnpm -F cli build",
+		"gen:wd": "pnpm -F components gen"
 	},
 	"keywords": [],
 	"author": "",
