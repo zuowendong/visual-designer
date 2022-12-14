@@ -31,6 +31,7 @@ const dropHandle = async (e: any) => {
 	const canvasInfo = editorDom.value.getBoundingClientRect();
 	if (compKey) {
 		let style = await genCompStyleData(compKey);
+		console.log(11111, style);
 		const initTop = e.clientY - canvasInfo.y;
 		const initLeft = e.clientX - canvasInfo.x;
 		const componentData = initCompDataByDrop(

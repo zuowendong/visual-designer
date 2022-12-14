@@ -6,7 +6,6 @@ import type { propertyModel } from '@/types/component';
 // 生成菜单 - 组件列表
 export const genMenuOps = async (): Promise<IMenusModel> => {
 	const compData = await setComponentData();
-
 	const categoryMap: IMenusModel = {};
 	for (let i = 0; i < compData.length; i++) {
 		const { categoryKey, categoryName, label, tag, icon } = compData[i].info;

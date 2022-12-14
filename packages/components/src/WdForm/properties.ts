@@ -28,7 +28,8 @@ export const properties: IProperties[] = [
 				name: '展示类型',
 				key: 'formShowType',
 				type: 'dui-layout-array',
-				value: [
+				value: 'r',
+				values: [
 					{ label: '查看', value: 'r' },
 					{ label: '新增', value: 'c' },
 					{ label: '更新', value: 'u' }

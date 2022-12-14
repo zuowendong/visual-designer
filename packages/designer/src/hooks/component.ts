@@ -9,7 +9,6 @@ export const setComponentData = async () => {
 	const originCompData: any[] = [];
 	// 获取所有组件 build.json 数据
 	const allBuilInfo = fileConfig.getAllBuildModule();
-	console.log(2222222, allBuilInfo);
 	for (const key in allBuilInfo) {
 		const infoVal: any = allBuilInfo[key];
 		const properties = await getProperties(infoVal.tag);
@@ -18,7 +17,6 @@ export const setComponentData = async () => {
 			properties
 		});
 	}
-	console.log(111111111, originCompData);
 	return originCompData;
 };
 
@@ -29,6 +27,7 @@ export const setComponentData = async () => {
  */
 export const getProperties = async (tag: string) => {
 	const properties = await fileConfig.getComponentProps(tag);
+	console.log(111, properties);
 	return cloneDeep(properties);
 };
 
@@ -42,6 +41,7 @@ export const getAttrs = (properties: any[]) => {
 	for (let i = 0; i < properties.length; i++) {
 		AttrsWalk(properties[i].attrs, attrObj);
 	}
+	console.log(222, attrObj);
 	return attrObj;
 };
 
@@ -52,7 +52,15 @@ export const getAttrs = (properties: any[]) => {
  */
 const AttrsWalk = (attrs: any[], property: any) => {
 	for (let i = 0; i < attrs.length; i++) {
+		// format data
 		property[attrs[i].key] = attrs[i].value;
+		// 存在 数组数据时
+		if (attrs[i].values) {
+			property[attrs[i].key] = {
+				value: attrs[i].value, // 响应值
+				values: attrs[i].values // 数组数据
+			};
+		}
 		if (attrs[i].children && attrs[i].children.length) {
 			AttrsWalk(attrs[i].children, property);
 		}

@@ -20,36 +20,22 @@ defineOptions({
 });
 
 const props = defineProps({
-	modelValue: { type: Array as PropType<ISelectOp[]>, default: () => [] }
-});
-
-let { modelValue } = toRefs(props);
-
-let selectedVal = ref<string | number>('');
-let optionList = ref<ISelectOp[]>(modelValue.value);
-watch(
-	() => props.modelValue,
-	(list) => {
-		optionList.value = list;
-	},
-	{ deep: true }
-);
-
-onMounted(() => {
-	const target = modelValue.value.find((item) => item.active);
-	if (target) {
-		selectedVal.value = target.value;
+	modelValue: {
+		type: Object as PropType<{ value: string; values: ISelectOp[] }>,
+		default: () => {}
 	}
 });
+let { modelValue } = toRefs(props);
+const emit = defineEmits(['change']);
+
+let selectedVal = ref<string | number>(modelValue.value.value);
+let optionList = ref<ISelectOp[]>(modelValue.value.values);
 
 const changeHandle = (val: string) => {
-	for (let i = 0; i < optionList.value.length; i++) {
-		optionList.value[i].active = false;
-		if (optionList.value[i].value === val) {
-			optionList.value[i].active = true;
-			// selectedVal.value = optionList.value[i].value;
-		}
-	}
+	emit('change', {
+		...modelValue.value,
+		value: val
+	});
 };
 </script>
 

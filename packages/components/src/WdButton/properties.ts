@@ -19,7 +19,8 @@ export const properties: IProperties[] = [
 				name: '类型',
 				key: 'type',
 				type: 'dui-layout-array',
-				value: [
+				value: '',
+				values: [
 					{ label: '无', value: '' },
 					{ label: 'Primary', value: 'primary' },
 					{ label: 'Success', value: 'success' },
@@ -33,7 +34,8 @@ export const properties: IProperties[] = [
 				name: '风格',
 				key: 'showStyle',
 				type: 'dui-layout-array',
-				value: [
+				value: 'text',
+				values: [
 					{ label: '文字', value: 'text' },
 					{ label: '扁平', value: 'round' }
 				]
