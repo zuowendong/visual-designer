@@ -1,14 +1,12 @@
 <template>
-	<div>
-		<el-select v-model="selectedVal" style="width: 100%" @change="changeHandle">
-			<el-option
-				v-for="item in optionList"
-				:key="item.value"
-				:label="item.label"
-				:value="item.value"
-			/>
-		</el-select>
-	</div>
+	<el-select v-model="selectedVal" @change="changeHandle">
+		<el-option
+			v-for="item in optionList"
+			:key="item.value"
+			:label="item.label"
+			:value="item.value"
+		/>
+	</el-select>
 </template>
 
 <script setup lang="ts">
@@ -38,5 +36,3 @@ const changeHandle = (val: string) => {
 	});
 };
 </script>
-
-<style scoped lang="less"></style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="numberLayout">
+	<div class="grid grid-cols-2 gap-x-1.5">
 		<el-input-number v-model="leftValue" style="width: 100%" @change="lValChangeHandle" />
 		<el-input-number v-model="rightValue" style="width: 100%" @change="rValChangeHandle" />
 	</div>
@@ -39,11 +39,3 @@ const rValChangeHandle = (val: number) => {
 	emit('change', [leftVal, val]);
 };
 </script>
-
-<style scoped lang="less">
-.numberLayout {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	column-gap: 6px;
-}
-</style>

@@ -1,7 +1,11 @@
 <template>
-	<div :style="formConStyle">
-		<div v-for="(item, i) in maskList" :key="i" :data-index="i" style="outline: 1px dashed #ccc">
-			<!-- <slot :component="item"></slot> -->
+	<div class="w-full h-full grid gap-1" :style="formConStyle">
+		<div
+			v-for="(item, i) in maskList"
+			:key="i"
+			:data-index="i"
+			class="outline-1 outline-dashed outline-[#ccc] bg-white"
+		>
 			<slot :component="item" :index="i"></slot>
 		</div>
 	</div>
@@ -52,7 +56,7 @@ watch(
 
 const formConStyle = computed(
 	() =>
-		`width: 100%; height: 100%; display: grid; grid-template-columns: repeat(${columnNum.value}, 1fr); grid-template-rows: repeat(${rowNum.value}, 1fr); gap: 4px`
+		`grid-template-columns: repeat(${columnNum.value}, 1fr); grid-template-rows: repeat(${rowNum.value}, 1fr);`
 );
 </script>
 

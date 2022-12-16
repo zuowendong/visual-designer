@@ -34,13 +34,14 @@ export const properties: IProperties[] = [
 				name: '风格',
 				key: 'showStyle',
 				type: 'dui-layout-array',
-				value: 'text',
+				value: '',
 				values: [
+					{ label: '无', value: '' },
 					{ label: '文字', value: 'text' },
 					{ label: '扁平', value: 'round' }
 				]
-			},
-			{ name: '是否禁用', key: 'isDisabled', type: 'dui-switch', value: false }
+			}
+			// { name: '是否禁用', key: 'isDisabled', type: 'dui-switch', value: false }
 		]
 	},
 	{

@@ -1,7 +1,5 @@
 <template>
-	<div>
-		<el-switch v-model="switchVal" @change="valChangeHandle" />
-	</div>
+	<el-switch v-model="switchVal" @change="valChangeHandle" />
 </template>
 
 <script setup lang="ts">
@@ -28,5 +26,3 @@ const valChangeHandle = (val: boolean) => {
 	emit('change', val);
 };
 </script>
-
-<style scoped lang="less"></style>

@@ -16,11 +16,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-
-interface OptionModel {
-	label: string;
-	value: string;
-}
+import { ISelectOp } from '../types';
 
 defineOptions({
 	name: 'WdSelect'
@@ -29,7 +25,7 @@ defineOptions({
 const props = defineProps<{
 	modelValue: string;
 	label: string;
-	options: OptionModel[];
+	options: ISelectOp[];
 }>();
 
 let selectedValue = ref<string>(props.modelValue);

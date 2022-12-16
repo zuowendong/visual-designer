@@ -1,68 +1,20 @@
 <template>
 	<ul
 		v-show="showMenu"
-		class="context-menu"
+		class="w-44 py-1.5 bg-white border border-solid border-[#eee] rounded-sm shadow-[3px_3px_3px_rgba(#000, 0.15)] list-none absolute z-[999]"
 		:style="{ top: menuTop + 'px', left: menuLeft + 'px' }"
 		@mouseup="mouseUpHandle"
 	>
-		<li class="menu-item" :class="{ disable: !currentComponent.id }" @click.stop="contextMenu.copy">
-			<div class="menu-item-content">
-				<span class="text">复制</span>
-				<span class="sub-text">Ctrl + C</span>
-			</div>
-		</li>
-		<li class="menu-item" @click.stop="pasteHandle">
-			<div class="menu-item-content">
-				<span class="text">粘贴</span>
-				<span class="sub-text">Ctrl + V</span>
-			</div>
-		</li>
 		<li
-			class="menu-item"
-			:class="{ disable: !currentComponent.id }"
-			@click.stop="componentStore.deleteComponent"
+			v-for="(item, i) in contextMenus"
+			:key="i"
+			class="h-8 leading-8 px-5 text-[#555] text-[12px] transition-[all_0.1s] whitespace-nowrap bg-white cursor-pointer menu-item"
+			:class="{ disable: item.disableFun() }"
+			@click.stop="item.event"
 		>
-			<div class="menu-item-content">
-				<span class="text">删除</span>
-				<span class="sub-text">Delete</span>
-			</div>
-		</li>
-		<li
-			class="menu-item"
-			:class="{ disable: !currentComponent.id }"
-			@click.stop="contextMenu.setTopLevel"
-		>
-			<div class="menu-item-content">
-				<span class="text">置顶</span>
-			</div>
-		</li>
-		<li
-			class="menu-item"
-			:class="{ disable: !currentComponent.id }"
-			@click.stop="contextMenu.upLevel"
-		>
-			<div class="menu-item-content">
-				<span class="text">上一层</span>
-				<span class="sub-text">Ctrl + ↑</span>
-			</div>
-		</li>
-		<li
-			class="menu-item"
-			:class="{ disable: !currentComponent.id }"
-			@click.stop="contextMenu.downLevel"
-		>
-			<div class="menu-item-content">
-				<span class="text">下一层</span>
-				<span class="sub-text">Ctrl + ↓</span>
-			</div>
-		</li>
-		<li
-			class="menu-item"
-			:class="{ disable: !currentComponent.id }"
-			@click.stop="contextMenu.setBottomLevel"
-		>
-			<div class="menu-item-content">
-				<span class="text">置底</span>
+			<div class="relative flex items-center justify-between">
+				<span>{{ item.title }}</span>
+				<span class="opacity-60">{{ item.subtitle }}</span>
 			</div>
 		</li>
 	</ul>
@@ -94,65 +46,64 @@ const pasteHandle = (e: MouseEvent) => {
 	componentStore.addComponent(componentData);
 	sideMenus.setLiveTimeComps();
 };
+
+const contextMenus = reactive([
+	{
+		title: '复制',
+		subtitle: 'Ctrl + C',
+		disableFun: () => !currentComponent.value.id,
+		event: contextMenu.copy
+	},
+	{
+		title: '粘贴',
+		subtitle: 'Ctrl + V',
+		disableFun: () => !copyCompData.value.id,
+		event: pasteHandle
+	},
+	{
+		title: '删除',
+		subtitle: 'Delete',
+		disableFun: () => !currentComponent.value.id,
+		event: componentStore.deleteComponent
+	},
+	{
+		title: '置顶',
+		subtitle: '',
+		disableFun: () => !currentComponent.value.id,
+		event: contextMenu.setTopLevel
+	},
+	{
+		title: '上一层',
+		subtitle: 'Ctrl + ↑',
+		disableFun: () => !currentComponent.value.id,
+		event: contextMenu.upLevel
+	},
+	{
+		title: '下一层',
+		subtitle: 'Ctrl + ↓',
+		disableFun: () => !currentComponent.value.id,
+		event: contextMenu.downLevel
+	},
+	{
+		title: '置底',
+		subtitle: '',
+		disableFun: () => !currentComponent.value.id,
+		event: contextMenu.setBottomLevel
+	}
+]);
 </script>
 
 <style scoped lang="less">
-.context-menu {
-	width: 170px;
-	padding: 5px 0;
-	background: #fff;
-	border: 1px solid #eee;
-	box-shadow: 3px 3px 3px rgba(#000, 0.15);
-	border-radius: 2px;
-	list-style: none;
-	margin: 0;
-	position: absolute;
-	z-index: 999;
-	.menu-item {
-		padding: 0 20px;
-		color: #555;
-		font-size: 12px;
-		transition: all 0.1s;
-		white-space: nowrap;
-		height: 30px;
-		line-height: 30px;
-		background-color: #fff;
-		cursor: pointer;
-
-		&:not(.disable):hover > .menu-item-content > .sub-menu {
-			display: block;
-		}
-
-		&:not(.disable):hover > .has-children.has-handler::after {
-			transform: scale(1);
-		}
-
-		&:hover:not(.disable) {
-			background-color: rgba(209, 68, 36, 0.2);
-		}
-
-		&.disable {
-			color: #b1b1b1;
-			cursor: no-drop;
-		}
-
-		.menu-item-content {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			position: relative;
-
-			.sub-text {
-				opacity: 0.6;
-			}
-			.sub-menu {
-				width: 120px;
-				position: absolute;
-				display: none;
-				left: 112%;
-				top: -6px;
-			}
-		}
+.menu-item {
+	&:not(.disable):hover > .has-children.has-handler::after {
+		transform: scale(1);
+	}
+	&:hover:not(.disable) {
+		background-color: rgba(209, 68, 36, 0.2);
+	}
+	&.disable {
+		color: #b1b1b1;
+		cursor: no-drop;
 	}
 }
 </style>

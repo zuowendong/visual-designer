@@ -1,17 +1,25 @@
 <template>
-	<div class="main">
-		<div v-for="(groupItem, i) in properties" :key="i" class="groupItem">
-			<div class="groupLabel">{{ groupItem.name }}</div>
+	<div
+		class="w-full py-2.5 px-6 border-l border-solid border-[#363636] overflow-x-hidden overflow-y-auto"
+	>
+		<div v-for="(groupItem, i) in properties" :key="i" class="flex flex-col items-center mb-3">
+			<div
+				class="w-full h-10 leading-10 border-b border-solid border-[#363636] text-[16px] font-medium"
+			>
+				{{ groupItem.name }}
+			</div>
 			<div
 				v-for="attr in groupItem.attrs"
 				:key="attr.key"
-				class="formItem"
+				class="w-full flex items-center mt-2.5"
 				:class="{ branchItem: branchItem(attr.type) }"
 			>
-				<span class="formLabel">{{ attr.name }}</span>
+				<span class="inline-block w-24 overflow-hidden text-right pr-5 formLabel">{{
+					attr.name
+				}}</span>
 				<component
 					:is="transformHump(attr.type)"
-					class="formCon"
+					class="flex-1"
 					v-bind="{ modelValue: genCompAttrs(attr.key) }"
 					@change="(val: any) => updateCurrentStyle(val, attr.key)"
 				></component>
@@ -59,52 +67,12 @@ const branchItem = (type: string) => {
 </script>
 
 <style scoped lang="less">
-@import '@/style/base.less';
-.main {
-	width: 100%;
-	box-shadow: 0px 0px 20px 0px rgba(25, 40, 74, 0.1);
-	padding: 10px 24px;
-	box-sizing: border-box;
-	border-left: 1px solid @mainBoderColor;
-	overflow-x: hidden;
-	overflow-y: auto;
-	.groupItem {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: 12px;
-		.groupLabel {
-			width: 100%;
-			height: 40ox;
-			line-height: 40px;
-			border-bottom: 1px solid @mainBoderColor;
-			font-size: 16px;
-			font-weight: 500;
-		}
-		.formItem {
-			width: 100%;
-			display: flex;
-			align-items: center;
-			margin-top: 10px;
-			.formLabel {
-				display: inline-block;
-				width: 100px;
-				overflow: hidden;
-				text-align: right;
-				padding-right: 20px;
-			}
-			.formCon {
-				flex: 1;
-			}
-		}
-		.branchItem {
-			flex-direction: column;
-			align-items: flex-start;
-			.formLabel {
-				text-align: left;
-				margin-bottom: 6px;
-			}
-		}
+.branchItem {
+	flex-direction: column;
+	align-items: flex-start;
+	.formLabel {
+		text-align: left;
+		margin-bottom: 6px;
 	}
 }
 </style>

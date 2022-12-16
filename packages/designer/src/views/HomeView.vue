@@ -1,10 +1,12 @@
 <template>
-	<main>
-		<section class="navbar">
+	<main
+		class="w-screen h-screen grid grid-cols-[200px_auto_400px] grid-rows-[60px_auto] bg-[#1a1a1a] text-white"
+	>
+		<section class="col-start-1 col-end-4">
 			<NavbarView />
 		</section>
 		<SidebarView />
-		<section class="canvasView">
+		<section class="p-5 bg-[#242424]">
 			<CanvasView />
 		</section>
 		<AttributeView />
@@ -14,25 +16,3 @@
 <script setup lang="ts">
 import { NavbarView, SidebarView, CanvasView, AttributeView } from './components';
 </script>
-
-<style scoped lang="less">
-@import '@/style/base.less';
-
-main {
-	width: 100vw;
-	height: 100vh;
-	display: grid;
-	grid-template-columns: 200px auto 400px;
-	grid-template-rows: 60px auto;
-	background-color: @mainBgColor;
-	color: @mainColor;
-	.navbar {
-		grid-column-start: 1;
-		grid-column-end: 4;
-	}
-	.canvasView {
-		padding: 20px;
-		background-color: @canvasBgColor;
-	}
-}
-</style>

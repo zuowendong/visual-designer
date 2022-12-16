@@ -1,5 +1,5 @@
 <template>
-	<svg class="grid" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+	<svg class="absolute inset-0" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
 		<defs>
 			<pattern
 				id="smallGrid"
@@ -27,11 +27,3 @@
 		<rect width="100%" height="100%" fill="url(#grid)"></rect>
 	</svg>
 </template>
-
-<style lang="less" scoped>
-.grid {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-</style>

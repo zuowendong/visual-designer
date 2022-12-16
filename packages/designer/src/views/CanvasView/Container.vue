@@ -8,7 +8,8 @@
 		<template #default="{ component }">
 			<div
 				v-if="component && component.key"
-				:class="['formItemWrap', component.id === currentComponent.id ? 'activeItem' : '']"
+				:class="[component.id === currentComponent.id ? 'outline-1 outline outline-[#70c0ff]' : '']"
+				class="w-[calc(100%-8px)] h-[calc(100%-8px)] outline-1 outline outline-transparent m-1"
 				@mousedown.stop="mouseDownOnFormItem(component)"
 			>
 				<component :is="component.key" v-bind="{ ...component.style }"></component>
@@ -38,16 +39,3 @@ const mouseDownOnFormItem = (componentData: ComponentModel) => {
 	componentStore.setCurrentComponent(componentData, componentData.id);
 };
 </script>
-
-<style scoped lang="less">
-@import '@/style/base.less';
-.formItemWrap {
-	width: calc(100% - 8px);
-	height: calc(100% - 8px);
-	outline: 1px solid transparent;
-	margin: 4px;
-}
-.activeItem {
-	outline: 1px dashed @shapeActiveBorderColor;
-}
-</style>

@@ -4,7 +4,7 @@ import type { ISelectOp } from '@form-designer/components';
 
 export const genFormCode = (component: ComponentModel): IFormCodeModel => {
 	// 展示类型
-	const targetType = component.style.formShowType.find((typeItem: ISelectOp) => typeItem.active);
+	const targetType = component.style.formShowType.value;
 	const formShowType = targetType ? targetType.value : component.style.formShowType[0].value;
 
 	const formItems = component!.children!.map((compItem) => {

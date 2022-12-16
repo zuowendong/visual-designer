@@ -1,10 +1,10 @@
 <template>
 	<el-button
-		:type="btnType"
+		class="w-full h-full"
+		:type="type.value"
 		:plain="isPlain"
-		:round="btnStyle === 'round'"
-		:text="btnStyle === 'text'"
-		:disabled="isDisabled"
+		:round="showStyle.value === 'round'"
+		:text="showStyle.value === 'text'"
 		:color="bgColor"
 		>{{ btnText }}</el-button
 	>
@@ -21,13 +21,16 @@ defineOptions({
 
 const props = defineProps({
 	text: { type: String, default: '确定' },
-	type: { type: Array as PropType<ISelectOp[]>, default: () => [] }, // '' | primary | success | info | warning | danger
+	type: { type: Object as PropType<{ value: string; values: ISelectOp[] }>, default: () => {} }, // '' | primary | success | info | warning | danger
 	isPlain: { type: Boolean, default: false },
-	showStyle: { type: Array as PropType<ISelectOp[]>, default: () => [] }, // 风格： round 扁平 | text 文字
-	isDisabled: { type: Boolean, default: false },
+	showStyle: {
+		type: Object as PropType<{ value: string; values: ISelectOp[] }>,
+		default: () => {}
+	}, // 风格： round 扁平 | text 文字
+	// isDisabled: { type: Boolean, default: false },
 	bgColor: { type: String, default: '' }
 });
-const { text } = toRefs(props);
+const { text, type } = toRefs(props);
 
 let btnText = ref(text.value);
 watch(
@@ -35,29 +38,5 @@ watch(
 	(str) => {
 		btnText.value = str;
 	}
-);
-
-let btnType = ref<string>('');
-watch(
-	() => props.type,
-	(val) => {
-		const target = val.find((item: ISelectOp) => item.active);
-		if (target) {
-			btnType.value = target!.value as string;
-		}
-	},
-	{ deep: true }
-);
-
-let btnStyle = ref<string>('');
-watch(
-	() => props.showStyle,
-	(val) => {
-		const target = val.find((item: ISelectOp) => item.active);
-		if (target) {
-			btnStyle.value = target!.value as string;
-		}
-	},
-	{ deep: true }
 );
 </script>

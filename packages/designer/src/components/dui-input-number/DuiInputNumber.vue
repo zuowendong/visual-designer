@@ -1,13 +1,10 @@
 <template>
-	<div>
-		<el-input-number
-			v-model="numValue"
-			:min="0"
-			style="width: 100%"
-			controls-position="right"
-			@change="valChangeHandle"
-		/>
-	</div>
+	<el-input-number
+		v-model="numValue"
+		:min="0"
+		controls-position="right"
+		@change="valChangeHandle"
+	/>
 </template>
 
 <script setup lang="ts">
@@ -34,5 +31,3 @@ const valChangeHandle = (val: number) => {
 	emit('change', val);
 };
 </script>
-
-<style scoped lang="less"></style>

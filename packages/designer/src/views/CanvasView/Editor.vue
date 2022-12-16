@@ -1,6 +1,10 @@
 <template>
-	<div ref="editor" class="editor" @contextmenu="contextMenuHandle">
-		{{ components }}
+	<div
+		ref="editor"
+		class="relative w-full h-full bg-[#2f2f2f] m-auto select-none overflow-hidden"
+		@contextmenu="contextMenuHandle"
+	>
+		<div class="w-full pl-1.5 text-[14px]">{{ components }}</div>
 		<Grid />
 		<ShapeBox
 			v-for="item in components"
@@ -56,21 +60,3 @@ const getComponentProps = (id: string) => {
 	return components.value.find((item) => item.id === id)!.style;
 };
 </script>
-
-<style scoped lang="less">
-@import '@/style/base.less';
-.editor {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background-color: @editorBgColor;
-	margin: auto;
-	user-select: none;
-	overflow: hidden;
-	.component {
-		outline: none;
-		width: 100%;
-		height: 100%;
-	}
-}
-</style>

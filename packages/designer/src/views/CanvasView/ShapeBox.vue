@@ -1,7 +1,7 @@
 <template>
 	<div
-		class="shapeBox"
-		:class="{ active, isContainer: isContainer && element.key === 'WdForm' }"
+		class="absolute outline-1 outline outline-[#70c0ff] hover:cursor-move"
+		:class="{ active, 'outline-[#70ffa7]': isContainer && element.key === 'WdForm' }"
 		:style="{
 			backgroundColor: element.style.bgColor,
 			zIndex: element.style.zIndex
@@ -12,7 +12,7 @@
 		<div
 			v-for="item in active ? points : []"
 			:key="item"
-			class="shapePoint"
+			class="absolute w-2 h-2 bg-white border border-solid border-[#59c7f9] rounded-[50%] z-[1]"
 			:style="getPointStyle(item)"
 			@mousedown.stop.prevent="(e) => mouseDownOnPointHandle(item, e)"
 		></div>
@@ -205,30 +205,3 @@ const mod360 = (deg: number) => {
 	return (deg + 360) % 360;
 };
 </script>
-
-<style scoped lang="less">
-@import '@/style/base.less';
-.shapeBox {
-	position: absolute;
-	outline: 1px solid @shapeBorderColor;
-	&:hover {
-		cursor: move;
-	}
-}
-.active {
-	outline: 1px solid @shapeActiveBorderColor;
-	user-select: none;
-	.shapePoint {
-		position: absolute;
-		width: 8px;
-		height: 8px;
-		background-color: #ffffff;
-		border: 1px solid #59c7f9;
-		border-radius: 50%;
-		z-index: 1;
-	}
-}
-.isContainer {
-	outline: 1px solid #70ffa7;
-}
-</style>

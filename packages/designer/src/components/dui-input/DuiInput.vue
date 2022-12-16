@@ -1,7 +1,5 @@
 <template>
-	<div>
-		<el-input v-model="inputVal" placeholder="Please input" @change="valChangeHandle" />
-	</div>
+	<el-input v-model="inputVal" placeholder="Please input" @change="valChangeHandle" />
 </template>
 
 <script setup lang="ts">
@@ -28,5 +26,3 @@ const valChangeHandle = (val: string) => {
 	emit('change', val);
 };
 </script>
-
-<style scoped lang="less"></style>

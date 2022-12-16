@@ -27,7 +27,6 @@ export const setComponentData = async () => {
  */
 export const getProperties = async (tag: string) => {
 	const properties = await fileConfig.getComponentProps(tag);
-	console.log(111, properties);
 	return cloneDeep(properties);
 };
 

@@ -1,7 +1,5 @@
 <template>
-	<div class="ace-container">
-		<div class="ace-editor" ref="aceRef"></div>
-	</div>
+	<div class="w-full min-h-[300px]" ref="aceRef"></div>
 </template>
 
 <script setup lang="ts">
@@ -57,10 +55,3 @@ const setValue = (code: string) => {
 	aceEditor.value.getSession().setValue(code);
 };
 </script>
-
-<style scoped lang="less">
-.ace-editor {
-	width: 900px;
-	min-height: 300px;
-}
-</style>

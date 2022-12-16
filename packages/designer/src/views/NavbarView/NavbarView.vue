@@ -1,5 +1,7 @@
 <template>
-	<div class="main">
+	<div
+		class="w-full h-full box-border border-b border-solid border-[#363636] flex items-center px-5 text-white"
+	>
 		<el-button
 			type="primary"
 			plain
@@ -38,24 +40,3 @@ const apiHandle = () => {
 	});
 };
 </script>
-
-<style scoped lang="less">
-@import '@/style/base.less';
-.main {
-	height: 100%;
-	width: 100%;
-	box-sizing: border-box;
-	border-bottom: 1px solid @mainBoderColor;
-	display: flex;
-	align-items: center;
-	padding: 0 20px;
-	color: #ffffff;
-	position: relative;
-	.codeEditor {
-		position: absolute;
-		top: 40px;
-		left: 100px;
-		z-index: 10;
-	}
-}
-</style>

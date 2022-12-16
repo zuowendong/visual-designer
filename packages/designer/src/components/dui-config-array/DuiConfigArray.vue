@@ -1,23 +1,25 @@
 <template>
-	<div>
-		<div class="inputWrap">
-			<el-input v-model="formData.label" placeholder="label" />
-			<el-input v-model="formData.value" placeholder="value" />
-			<el-button
-				type="primary"
-				plain
-				:disabled="!(formData.label && formData.value)"
-				@click="addHandle"
-			>
-				添加
-			</el-button>
-		</div>
-		<div class="opsList">
-			<div v-for="(item, index) in optionList" :key="index" class="opsItem">
-				<span class="opItemText">{{ item.label }}</span>
-				<span class="opItemText">{{ item.value }}</span>
-				<el-button type="danger" plain @click="deleteHandle(index)">删除</el-button>
-			</div>
+	<div class="grid grid-cols-[120px_120px_100px] gap-x-1.5">
+		<el-input v-model="formData.label" placeholder="label" />
+		<el-input v-model="formData.value" placeholder="value" />
+		<el-button
+			type="primary"
+			plain
+			:disabled="!(formData.label && formData.value)"
+			@click="addHandle"
+		>
+			添加
+		</el-button>
+	</div>
+	<div class="max-h-32 mt-1 overflow-x-hidden overflow-y-auto">
+		<div
+			v-for="(item, index) in optionList"
+			:key="index"
+			class="grid grid-cols-[120px_120px_100px] gap-x-1.5 items-center py-[3px]"
+		>
+			<span class="inline-block max-w-[100px] overflow-hidden">{{ item.label }}</span>
+			<span class="inline-block max-w-[100px] overflow-hidden">{{ item.value }}</span>
+			<el-button type="danger" plain @click="deleteHandle(index)">删除</el-button>
 		</div>
 	</div>
 </template>
@@ -58,29 +60,3 @@ const deleteHandle = (index: number) => {
 	optionList.value.splice(index, 1);
 };
 </script>
-
-<style scoped lang="less">
-.inputWrap {
-	display: grid;
-	grid-template-columns: 120px 120px 100px;
-	column-gap: 6px;
-}
-.opsList {
-	max-height: 120px;
-	margin-top: 4px;
-	overflow-x: hidden;
-	overflow-y: auto;
-	.opsItem {
-		display: grid;
-		grid-template-columns: 120px 120px 100px;
-		column-gap: 6px;
-		align-items: center;
-		padding: 3px 0;
-		.opItemText {
-			display: inline-block;
-			max-width: 100px;
-			overflow: hidden;
-		}
-	}
-}
-</style>

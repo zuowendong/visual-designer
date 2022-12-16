@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="content"
+		class="w-full h-full overflow-hidden"
 		@drop.stop.prevent="dropHandle"
 		@dragover.prevent="dragOverHandle"
 		@mousedown.stop="mouseDownHandle"
@@ -31,7 +31,6 @@ const dropHandle = async (e: any) => {
 	const canvasInfo = editorDom.value.getBoundingClientRect();
 	if (compKey) {
 		let style = await genCompStyleData(compKey);
-		console.log(11111, style);
 		const initTop = e.clientY - canvasInfo.y;
 		const initLeft = e.clientX - canvasInfo.x;
 		const componentData = initCompDataByDrop(
@@ -91,11 +90,3 @@ const deselectCurComponent = (e: MouseEvent) => {
 	if (e.button !== 2) contextMenu.hideContextMenu();
 };
 </script>
-
-<style scoped lang="less">
-.content {
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-}
-</style>

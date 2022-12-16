@@ -1,9 +1,7 @@
 <template>
-	<div>
-		<el-dialog v-model="modelValue" title="查看代码" :close-on-click-modal="false" @close="onClose">
-			<CodeEditor v-model="codeContent" />
-		</el-dialog>
-	</div>
+	<el-dialog v-model="modelValue" title="查看代码" :close-on-click-modal="false" @close="onClose">
+		<CodeEditor v-model="codeContent" />
+	</el-dialog>
 </template>
 
 <script setup lang="ts">
@@ -29,5 +27,3 @@ watch(
 	}
 );
 </script>
-
-<style lang="scss" scoped></style>
