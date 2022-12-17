@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import WdInput1 from '../../components/src/WdInput/index.vue';
-
-import { WdInput } from '@form-designer/components';
+import WdButtonVue from './components/WdButton.vue';
 </script>
 
 <template>
-	<h1 class="text-3xl font-bold underline color-green">Hello world!</h1>
-	<WdInput1 />
-	<WdInput />
+	<main class="w-screen h-screen grid grid-cols-6">
+		<WdButtonVue />
+	</main>
 </template>
 
 <style scoped></style>

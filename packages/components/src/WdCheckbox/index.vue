@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full h-full flex items-center">
-		<div class="w-[100px] pl-[6px] text-[14px]">{{ label }}</div>
+		<div class="w-24 pl-1.5 text-[14px]">{{ label }}</div>
 		<div class="flex-1">
 			<el-checkbox-group v-model="checkedVal">
 				<el-checkbox
@@ -14,13 +14,13 @@
 	</div>
 </template>
 
+<script lang="ts">
+export default { name: 'WdCheckbox' };
+</script>
+
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import { toRefs, ref } from 'vue';
-
-defineOptions({
-	name: 'WdCheckbox'
-});
 
 const props = defineProps({
 	checkList: { type: Array as PropType<string[]>, default: (): string[] => [] },

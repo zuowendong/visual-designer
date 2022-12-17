@@ -2,8 +2,8 @@
 	<div>暂未开发</div>
 </template>
 
-<script setup lang="ts">
-defineOptions({
-	name: 'WdSwitch'
-});
+<script lang="ts">
+export default { name: 'WdSwitch' };
 </script>
+
+<script setup lang="ts"></script>

@@ -4,12 +4,12 @@
 	</div>
 </template>
 
+<script lang="ts">
+export default { name: 'WdText' };
+</script>
+
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
-
-defineOptions({
-	name: 'WdText'
-});
 
 const props = defineProps<{
 	text: string;

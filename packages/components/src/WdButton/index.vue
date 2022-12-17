@@ -10,14 +10,14 @@
 	>
 </template>
 
+<script lang="ts">
+export default { name: 'WdButton' };
+</script>
+
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import { toRefs, ref, watch } from 'vue';
 import { ISelectOp } from '../types';
-
-defineOptions({
-	name: 'WdButton'
-});
 
 const props = defineProps({
 	text: { type: String, default: '确定' },

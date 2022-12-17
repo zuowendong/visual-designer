@@ -7,12 +7,12 @@
 	</div>
 </template>
 
+<script lang="ts">
+export default { name: 'WdInput' };
+</script>
+
 <script setup lang="ts">
 import { toRefs } from 'vue';
-
-defineOptions({
-	name: 'WdInput'
-});
 
 const props = defineProps({
 	modelValue: { type: String, default: '' },

@@ -1,7 +1,7 @@
 <template>
-	<div :style="selectConStyle">
-		<span :style="selectLabelStyle">{{ label }}</span>
-		<div style="flex: 1">
+	<div class="w-full h-full flex items-center">
+		<div class="w-24 pl-1.5 text-[14px]">{{ label }}</div>
+		<div class="flex-1">
 			<el-select v-model="selectedValue" placeholder="please select" style="width: 100%">
 				<el-option
 					v-for="item in options"
@@ -14,13 +14,13 @@
 	</div>
 </template>
 
-<script setup lang="ts">
-import { computed, ref } from 'vue';
-import { ISelectOp } from '../types';
+<script lang="ts">
+export default { name: 'WdSelect' };
+</script>
 
-defineOptions({
-	name: 'WdSelect'
-});
+<script setup lang="ts">
+import { ref } from 'vue';
+import { ISelectOp } from '../types';
 
 const props = defineProps<{
 	modelValue: string;
@@ -29,13 +29,6 @@ const props = defineProps<{
 }>();
 
 let selectedValue = ref<string>(props.modelValue);
-
-const selectConStyle = computed(
-	() => `width: 100%; height: 100%; display: flex; align-items: center`
-);
-const selectLabelStyle = computed(
-	() => `display: inline-block; width: 80px; padding-left: 6px; font-size: 14px`
-);
 </script>
 
 <style scoped></style>
