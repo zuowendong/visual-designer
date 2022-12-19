@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<h1>按钮组件</h1>
 		<WdButton :text="text" :type="type" :show-style="showStyle" />
 	</div>
 </template>
