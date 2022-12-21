@@ -4,7 +4,7 @@
 		<div class="flex-1">
 			<el-select v-model="selectedValue" placeholder="please select" style="width: 100%">
 				<el-option
-					v-for="item in options"
+					v-for="item in options.values"
 					:key="item.value"
 					:label="item.label"
 					:value="item.value"
@@ -19,16 +19,29 @@ export default { name: 'WdSelect' };
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import type { PropType } from 'vue';
+import { ref, toRefs } from 'vue';
 import { ISelectOp } from '../types';
 
-const props = defineProps<{
-	modelValue: string;
-	label: string;
-	options: ISelectOp[];
-}>();
+const props = defineProps({
+	label: { type: String, default: '所在地' },
+	options: {
+		type: Object as PropType<{ value: string; values: ISelectOp[] }>,
+		default: () => {
+			return {
+				value: 'suzhou',
+				values: [
+					{ label: '南京', value: 'nanjing' },
+					{ label: '上海', value: 'shanghai' },
+					{ label: '苏州', value: 'suzhou' }
+				]
+			};
+		}
+	}
+});
+const { label, options } = toRefs(props);
 
-let selectedValue = ref<string>(props.modelValue);
+let selectedValue = ref<string>(options.value.value);
 </script>
 
 <style scoped></style>

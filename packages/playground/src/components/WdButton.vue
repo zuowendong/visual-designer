@@ -1,8 +1,6 @@
 <template>
-	<div>
-		<h1>按钮组件</h1>
-		<WdButton :text="text" :type="type" :show-style="showStyle" />
-	</div>
+	<h1 class="text-3xl mb-2 font-bold underline">按钮组件</h1>
+	<WdButton class="h-[32px]" :text="text" :type="type" :show-style="showStyle" />
 </template>
 
 <script setup lang="ts">

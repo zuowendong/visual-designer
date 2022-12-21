@@ -18,9 +18,11 @@ const props = defineProps({
 	row: { type: Number, default: 4 },
 	column: { type: Number, default: 2 }
 });
-const { row, column } = toRefs(props);
+const { row, column, list } = toRefs(props);
 let maskList = ref<any[]>([]);
 maskList.value = new Array(row.value * column.value);
+maskList.value = Object.assign(maskList.value, list.value);
+
 watch(
 	() => props.list,
 	(val) => {

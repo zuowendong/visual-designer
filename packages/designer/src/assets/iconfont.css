@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'iconfont'; /* Project id 3754679 */
-	src: url('iconfont.ttf?t=1667803750122') format('truetype');
+	src: url('iconfont.ttf?t=1671614871055') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +9,38 @@
 	font-style: normal;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shuzhuangtu:before {
+	content: '\eb2c';
+}
+
+.icon-qingkong:before {
+	content: '\e946';
+}
+
+.icon-zitiyulan:before {
+	content: '\ec86';
+}
+
+.icon-daima:before {
+	content: '\e631';
+}
+
+.icon-shijianxuanzeqi:before {
+	content: '\e750';
+}
+
+.icon-duoxuankuang:before {
+	content: '\e61c';
+}
+
+.icon-kaiguan:before {
+	content: '\e620';
+}
+
+.icon-radioBoxList:before {
+	content: '\e632';
 }
 
 .icon-bianji:before {

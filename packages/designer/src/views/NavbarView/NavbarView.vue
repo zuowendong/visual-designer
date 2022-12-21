@@ -2,20 +2,26 @@
 	<div
 		class="w-full h-full box-border border-b border-solid border-[#363636] flex items-center px-5 text-white"
 	>
-		<el-button
-			type="primary"
-			plain
-			:disabled="!components.length"
-			@click="componentStore.clearComponents"
-			>清空画布</el-button
-		>
-		<el-button
-			type="primary"
-			plain
-			:disabled="!(currentComponent.children && currentComponent.children.length)"
-			@click="apiHandle"
-			>代码生成</el-button
-		>
+		<div class="px-2">
+			<i class="iconfont icon-qingkong mr-1"></i>
+			<el-button
+				type="text"
+				plain
+				:disabled="!components.length"
+				@click="componentStore.clearComponents"
+				>清空画布</el-button
+			>
+		</div>
+		<div class="px-2">
+			<i class="iconfont icon-daima mr-1"></i>
+			<el-button
+				type="text"
+				plain
+				:disabled="!(currentComponent.children && currentComponent.children.length)"
+				@click="apiHandle"
+				>代码生成</el-button
+			>
+		</div>
 		<CodeBox v-model="isCodeBox" :code="codeContent" />
 	</div>
 </template>

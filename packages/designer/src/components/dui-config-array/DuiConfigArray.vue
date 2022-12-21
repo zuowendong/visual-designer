@@ -33,27 +33,21 @@ defineOptions({
 });
 
 const props = defineProps({
-	modelValue: { type: Array as PropType<ISelectOp[]>, default: () => [] }
+	modelValue: {
+		type: Object as PropType<{ value: string; values: ISelectOp[] }>,
+		default: () => {}
+	}
 });
 
 let { modelValue } = toRefs(props);
 const emit = defineEmits(['change']);
 
 let formData = ref<ISelectOp>({ label: '', value: '' });
-let optionList = ref<ISelectOp[]>(modelValue.value);
-
-watch(
-	() => props.modelValue,
-	(list) => {
-		optionList.value = list;
-	},
-	{ deep: true }
-);
+let optionList = ref<ISelectOp[]>(modelValue.value.values);
 
 const addHandle = () => {
 	optionList.value.push({ ...formData.value });
 	formData.value = { label: '', value: '' };
-
 	emit('change', optionList.value);
 };
 const deleteHandle = (index: number) => {
