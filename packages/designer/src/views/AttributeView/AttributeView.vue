@@ -2,6 +2,12 @@
 	<div
 		class="w-full py-2.5 px-6 border-l border-solid border-[#363636] overflow-x-hidden overflow-y-auto"
 	>
+		<el-tabs v-model="activeTab" class="tabCon" @tab-click="handleClick">
+			<el-tab-pane label="属性" name="first" />
+			<el-tab-pane label="数据" name="second" />
+			<el-tab-pane label="事件" name="third" />
+		</el-tabs>
+
 		<div v-for="(groupItem, i) in properties" :key="i" class="flex flex-col items-center mb-3">
 			<div
 				class="w-full h-10 leading-10 border-b border-solid border-[#363636] text-[16px] font-medium"
@@ -33,6 +39,12 @@ import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
 import { genComponentProperties } from '@/hooks/genComponentData';
 import { transformHump } from '@/utils/tool';
+
+const activeTab = ref('first');
+
+const handleClick = (tab: string, event: Event) => {
+	console.log(tab, event);
+};
 
 const componentStore = useComponentStore();
 const { currentComponentId, currentComponent } = storeToRefs(componentStore);
@@ -67,6 +79,16 @@ const branchItem = (type: string) => {
 </script>
 
 <style scoped lang="less">
+.tabCon {
+	:deep(.el-tabs__nav-wrap) {
+		&::after {
+			background-color: transparent;
+		}
+		.el-tabs__item {
+			color: #fff;
+		}
+	}
+}
 .branchItem {
 	flex-direction: column;
 	align-items: flex-start;

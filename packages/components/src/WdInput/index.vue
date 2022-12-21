@@ -12,7 +12,7 @@ export default { name: 'WdInput' };
 </script>
 
 <script setup lang="ts">
-import { toRefs, ref } from 'vue';
+import { toRefs, ref, watch } from 'vue';
 
 const props = defineProps({
 	modelValue: { type: String, default: '' },
@@ -21,6 +21,13 @@ const props = defineProps({
 const { modelValue, label } = toRefs(props);
 
 let inputVal = ref(modelValue.value);
+
+watch(
+	() => props.modelValue,
+	(val) => {
+		inputVal.value = val;
+	}
+);
 </script>
 
 <style scoped></style>

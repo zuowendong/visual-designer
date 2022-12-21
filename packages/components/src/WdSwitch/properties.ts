@@ -10,5 +10,10 @@ export const properties: IProperties[] = [
 			{ name: '高度', key: 'height', type: 'dui-input-number', value: 50 },
 			...new baseProperty().arttrs
 		]
+	},
+	{
+		id: 'switchSetting',
+		name: '开关配置',
+		attrs: [{ name: '标签名', key: 'label', type: 'dui-input-text', value: '🐏没🐏' }]
 	}
 ];
