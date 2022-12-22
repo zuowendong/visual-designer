@@ -5,7 +5,8 @@ export default class BaseProperty {
 			{ name: '坐标X', key: 'left', type: 'dui-input-number', value: 0 },
 			{ name: '坐标Y', key: 'top', type: 'dui-input-number', value: 0 },
 			{ name: '背景色', key: 'bgColor', type: 'dui-color-picker', value: '' },
-			{ name: '层级', key: 'zIndex', type: 'dui-input-number', value: 1 }
+			{ name: '层级', key: 'zIndex', type: 'dui-input-number', value: 1 },
+			{ name: '锁定', key: 'locked', type: 'dui-switch', value: false }
 		];
 	}
 }

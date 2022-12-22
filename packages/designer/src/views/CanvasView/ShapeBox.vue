@@ -1,7 +1,11 @@
 <template>
 	<div
 		class="absolute outline-1 outline outline-[#70c0ff] hover:cursor-move"
-		:class="{ active, 'outline-[#70ffa7]': isContainer && element.key === 'WdForm' }"
+		:class="{
+			active,
+			'outline-[#70ffa7]': isContainer && element.key === 'WdForm',
+			'opacity-80 outline-dashed outline-[#ccc] hover:cursor-pointer bgImg': element.style.locked
+		}"
 		:style="{
 			backgroundColor: element.style.bgColor,
 			zIndex: element.style.zIndex
@@ -13,6 +17,9 @@
 			v-for="item in active ? points : []"
 			:key="item"
 			class="absolute w-2 h-2 bg-white border border-solid border-[#59c7f9] rounded-[50%] z-[1]"
+			:class="{
+				'bg-transparent border border-solid border-transparent': element.style.locked
+			}"
 			:style="getPointStyle(item)"
 			@mousedown.stop.prevent="(e) => mouseDownOnPointHandle(item, e)"
 		></div>
@@ -40,6 +47,9 @@ let cursors: { [k: string]: string } = reactive<any>({});
 const mouseDownOnShapeHandle = (e: MouseEvent) => {
 	componentStore.setChoosedComponentStatus(true);
 	componentStore.setCurrentComponent(element.value, componentId.value);
+
+	// 锁定
+	if (element.value.style.locked) return;
 
 	cursors = getCursor(); // 根据旋转角度获取光标位置
 
@@ -118,6 +128,9 @@ const { currentComponent, isContainer } = storeToRefs(componentStore);
  */
 
 const mouseDownOnPointHandle = (point: string, e: MouseEvent) => {
+	// 锁定
+	if (element.value.style.locked) return;
+
 	const pos = { ...defaultStyle.value };
 	const height = Number(pos.height);
 	const width = Number(pos.width);
@@ -205,3 +218,13 @@ const mod360 = (deg: number) => {
 	return (deg + 360) % 360;
 };
 </script>
+
+<style scoped lang="less">
+.bgImg {
+	&:hover {
+		background-image: url('../../assets/images/locked.svg');
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+	}
+}
+</style>

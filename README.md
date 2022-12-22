@@ -43,10 +43,10 @@ pnpm gen:wd
    3. ~~wd-select~~
    4. ~~wd-text~~
    5. wd-time-picker
-   6. wd-switch
-   7. wd-checkbox
-   8. wd-radio
-   9. wd-button
+   6. ~~wd-switch~~
+   7. ~~wd-checkbox~~
+   8. ~~wd-radio~~
+   9. ~~wd-button~~
 6. dui 组件
    1. ~~dui-input-text~~
    2. ~~dui-input-number~~
@@ -60,7 +60,7 @@ pnpm gen:wd
 8. 容器内子组件删除，指定拖入
 9. 组合
 10. ~~复制粘贴~~
-11. 锁定
+11. ~~锁定(只针对画布中操作)~~
 12. ~~层级~~
 13. 对齐线
 14. 吸附

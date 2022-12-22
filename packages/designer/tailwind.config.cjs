@@ -6,7 +6,11 @@ module.exports = {
 		'../components/src/**/*.{vue,js,ts,jsx,tsx}'
 	],
 	theme: {
-		extend: {}
+		extend: {
+			backgroundImage: {
+				'img-locked': "url('./src/assets/images/locked.png)"
+			}
+		}
 	},
 	plugins: [],
 	important: true

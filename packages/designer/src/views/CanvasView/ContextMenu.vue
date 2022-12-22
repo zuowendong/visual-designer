@@ -1,6 +1,6 @@
 <template>
 	<ul
-		v-show="showMenu"
+		v-show="showMenu && !currentComponent.style.locked"
 		class="w-44 py-1.5 bg-white border border-solid border-[#eee] rounded-sm shadow-[3px_3px_3px_rgba(#000, 0.15)] list-none absolute z-[999]"
 		:style="{ top: menuTop + 'px', left: menuLeft + 'px' }"
 		@mouseup="mouseUpHandle"
@@ -102,8 +102,8 @@ const contextMenus = reactive([
 		background-color: rgba(209, 68, 36, 0.2);
 	}
 	&.disable {
-		color: #b1b1b1;
-		cursor: no-drop;
+		color: #b1b1b1 !important;
+		cursor: no-drop !important;
 	}
 }
 </style>
