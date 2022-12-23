@@ -3,7 +3,7 @@ const Router = require('koa-router');
 const { koaBody } = require('koa-body');
 
 const user = require('./routes/user.js');
-const component = require('./routes/components.js');
+const component = require('./routes/components');
 
 //koa实例化
 const app = new Koa();

@@ -1,6 +1,8 @@
 const router = require('koa-router')();
-const { getCode } = require('../controllers/component');
+const { componentCode } = require('../controllers/component');
 
-router.post('/info', (ctx) => getCode(ctx));
+router.post('/code', (ctx) => {
+	componentCode(ctx);
+});
 
 module.exports = router;

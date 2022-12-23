@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url';
-
+import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
@@ -11,7 +11,14 @@ import defineOptions from 'unplugin-vue-define-options/vite';
 export default defineConfig(({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd());
 	return {
-		// base: '/form-designer/',
+		build: {
+			rollupOptions: {
+				input: {
+					main: resolve(__dirname, 'index.html'),
+					preview: resolve(__dirname, 'preview.html')
+				}
+			}
+		},
 		plugins: [
 			vue(),
 			defineOptions(),
