@@ -19,6 +19,10 @@
 		</div>
 		<div class="px-2">
 			<i class="iconfont icon-zitiyulan mr-1"></i>
+			<el-button type="text" :disabled="!components.length" @click="saveHandle">保存</el-button>
+		</div>
+		<div class="px-2">
+			<i class="iconfont icon-zitiyulan mr-1"></i>
 			<el-button type="text" :disabled="!components.length" @click="previewHandle">预览</el-button>
 		</div>
 		<CodeBox v-model="isCodeBox" :code="codeContent" />
@@ -31,18 +35,23 @@ import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
 import { genFormCode } from '@/hooks/genFormCode';
 import CodeBox from './CodeBox.vue';
+import { genCode } from '../../api/component';
+import { saveScene } from '../../api/scene';
 
 const componentStore = useComponentStore();
 const { currentComponent, components } = storeToRefs(componentStore);
 
 let codeContent = ref('');
 let isCodeBox = ref(false);
-const apiHandle = () => {
+const apiHandle = async () => {
 	const formCode = genFormCode(currentComponent.value);
-	axios.post('/api/component/code', formCode).then(({ data }) => {
-		isCodeBox.value = true;
-		codeContent.value = data.data;
-	});
+	const { data } = await genCode(formCode);
+	isCodeBox.value = true;
+	codeContent.value = data;
+};
+
+const saveHandle = async () => {
+	const { data } = await saveScene(components.value);
 };
 
 const previewHandle = () => {

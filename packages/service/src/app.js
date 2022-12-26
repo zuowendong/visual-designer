@@ -2,8 +2,8 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const { koaBody } = require('koa-body');
 
-const user = require('./routes/user.js');
-const component = require('./routes/components');
+const component = require('./routes/component');
+const scene = require('./routes/scene');
 
 //koa实例化
 const app = new Koa();
@@ -15,8 +15,8 @@ router.get('/', async (ctx) => {
 	ctx.body = 'hello World !!';
 });
 
-router.use('/user', user.routes());
 router.use('/component', component.routes());
+router.use('/scene', scene.routes());
 
 app.use(router.routes());
 app.use(router.allowedMethods());
