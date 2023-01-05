@@ -17,7 +17,8 @@ export const properties: IProperties[] = [
 		attrs: [
 			{ name: '字号', key: 'fontSize', type: 'dui-input-number', value: 16 },
 			{ name: '颜色', key: 'color', type: 'dui-color-picker', value: '#fff' },
-			{ name: '文本', key: 'text', type: 'dui-input-text', value: '文本标签' }
+			{ name: '文本', key: 'text', type: 'dui-input-text', value: '文本标签' },
+			{ name: '背景图', key: 'bgImg', type: 'dui-upload', value: '' }
 		]
 	}
 ];

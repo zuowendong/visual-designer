@@ -4,7 +4,7 @@
 		class="relative w-full h-full bg-[#2f2f2f] m-auto select-none overflow-hidden"
 		@contextmenu="contextMenuHandle"
 	>
-		<div class="w-full pl-1.5 text-[14px]">{{ components }}</div>
+		{{ components }}
 		<Grid />
 		<ShapeBox
 			v-for="item in components"

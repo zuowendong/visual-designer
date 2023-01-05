@@ -5,3 +5,4 @@ export { default as DuiColorPicker } from './dui-color';
 export { default as DuiLayoutArray } from './dui-layout-array';
 export { default as DuiConfigArray } from './dui-config-array';
 export { default as DuiSwitch } from './dui-switch';
+export { default as DuiUpload } from './dui-upload';

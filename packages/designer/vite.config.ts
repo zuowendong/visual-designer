@@ -11,14 +11,6 @@ import defineOptions from 'unplugin-vue-define-options/vite';
 export default defineConfig(({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd());
 	return {
-		build: {
-			rollupOptions: {
-				input: {
-					main: resolve(__dirname, 'index.html'),
-					preview: resolve(__dirname, 'preview.html')
-				}
-			}
-		},
 		plugins: [
 			vue(),
 			defineOptions(),
@@ -37,6 +29,7 @@ export default defineConfig(({ command, mode }) => {
 		},
 		server: {
 			host: '0.0.0.0',
+			port: 5733,
 			proxy: {
 				'/api': {
 					target: env.VITE_BASE_URL,

@@ -30,13 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios';
 import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
 import { genFormCode } from '@/hooks/genFormCode';
 import CodeBox from './CodeBox.vue';
 import { genCode } from '../../api/component';
-import { saveScene } from '../../api/scene';
 
 const componentStore = useComponentStore();
 const { currentComponent, components } = storeToRefs(componentStore);
@@ -51,14 +49,11 @@ const apiHandle = async () => {
 };
 
 const saveHandle = async () => {
-	const { data } = await saveScene(components.value);
+	// const { data } = await saveScene(components.value);
+	console.log(JSON.stringify(components.value));
 };
 
 const previewHandle = () => {
-	let linkDom = document.createElement('a');
-	var event = new MouseEvent('click');
-	linkDom.target = '_blank';
-	linkDom.href = `${import.meta.env.VITE_BASE_URL}preview.html`;
-	linkDom.dispatchEvent(event);
+	window.open('http://localhost:5733/preview', '_blank');
 };
 </script>
