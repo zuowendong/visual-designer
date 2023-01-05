@@ -54,6 +54,7 @@ const saveHandle = async () => {
 };
 
 const previewHandle = () => {
+	localStorage.setItem('componentData', JSON.stringify(components.value));
 	window.open('http://localhost:5733/preview', '_blank');
 };
 </script>
