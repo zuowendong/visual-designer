@@ -1,20 +1,10 @@
-class FileConfig {
-	public getAllBuildModule = () => {
-		const buildInfoModules = import.meta.globEager('./**/build.json');
-		return buildInfoModules;
-	};
-
-	public getComponentProps = async (tag: string) => {
-		// @ts-ignore
-		const file = await import(`./${tag}/properties.ts`);
-		return file.properties;
-	};
-
-	public fetchComponent = async (tag: string) => {
-		// @ts-ignore
-		const modules = await import(`./${tag}/index.vue`);
-		return modules;
-	};
-}
-
-export default new FileConfig();
+export { default as WdButton } from './WdButton';
+export { default as WdCheckbox } from './WdCheckbox';
+export { default as WdForm } from './WdForm';
+export { default as WdInput } from './WdInput';
+export { default as WdRadio } from './WdRadio';
+export { default as WdSelect } from './WdSelect';
+export { default as WdSwitch } from './WdSwitch';
+export { default as WdText } from './WdText';
+export { default as WdTimePicker } from './WdTimePicker';
+export { default as WdImage } from './WdImage';

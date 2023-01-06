@@ -9,7 +9,6 @@ declare module '@vue/runtime-core' {
 	export interface GlobalComponents {
 		DuiColor: typeof import('./src/components/dui-color/DuiColor.vue')['default'];
 		DuiConfigArray: typeof import('./src/components/dui-config-array/DuiConfigArray.vue')['default'];
-		DuiImage: typeof import('./src/components/dui-image/DuiImage.vue')['default'];
 		DuiInput: typeof import('./src/components/dui-input/DuiInput.vue')['default'];
 		DuiInputNumber: typeof import('./src/components/dui-input-number/DuiInputNumber.vue')['default'];
 		DuiLayoutArray: typeof import('./src/components/dui-layout-array/DuiLayoutArray.vue')['default'];

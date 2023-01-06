@@ -5,7 +5,11 @@
 			v-for="item in components"
 			:key="item.id"
 			class="absolute"
-			:style="getShapeStyle(item.style)"
+			:style="{
+				...getShapeStyle(item.style),
+				backgroundColor: item.style.bgColor,
+				zIndex: item.style.zIndex
+			}"
 		>
 			<Container v-if="item.key === 'WdForm'" :comp-item="item" />
 			<component
@@ -21,22 +25,16 @@
 
 <script setup lang="ts">
 import { getShapeStyle } from '@/utils/formatStyle';
-import { fileConfig } from '@form-designer/components';
-import { componentInstall } from '@/hooks/component';
+// import {} from '@form-designer/components';
+import { createDesignerUI } from '@form-designer/components';
 
 import Container from '../CanvasView/Container.vue';
 
 const components: any = ref([]);
-const initData = async () => {
-	const componentDataStr = localStorage.getItem('componentData');
-	components.value = JSON.parse(componentDataStr!);
-	for (let i = 0; i < components.value.length; i++) {
-		const component = components.value[i];
-		const module = await fileConfig.fetchComponent(component.key);
-		componentInstall(component.key, module.default);
-	}
-};
-initData();
+const componentDataStr = localStorage.getItem('componentData');
+components.value = JSON.parse(componentDataStr!);
+
+window['$app'].use(createDesignerUI());
 console.log(window['$app']._context.components);
 const getComponentProps = (id: string) => {
 	return components.value.find((item: any) => item.id === id)!.style;
