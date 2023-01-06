@@ -11,9 +11,7 @@
 				zIndex: item.style.zIndex
 			}"
 		>
-			<Container v-if="item.key === 'WdForm'" :comp-item="item" />
 			<component
-				v-else
 				:is="item.key"
 				:data-key="item.key"
 				:data-compid="item.id"
@@ -25,10 +23,7 @@
 
 <script setup lang="ts">
 import { getShapeStyle } from '@/utils/formatStyle';
-// import {} from '@form-designer/components';
 import { createDesignerUI } from '@form-designer/components';
-
-import Container from '../CanvasView/Container.vue';
 
 const components: any = ref([]);
 const componentDataStr = localStorage.getItem('componentData');

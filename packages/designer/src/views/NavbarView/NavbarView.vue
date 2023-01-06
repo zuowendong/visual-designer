@@ -30,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
 import { genFormCode } from '@/hooks/genFormCode';
@@ -53,8 +54,14 @@ const saveHandle = async () => {
 	console.log(JSON.stringify(components.value));
 };
 
+const router = useRouter();
+
 const previewHandle = () => {
 	localStorage.setItem('componentData', JSON.stringify(components.value));
-	window.open(`${location.href}preview`, '_blank');
+	// window.open(`${location.href}preview`, '_blank');
+
+	router.push({
+		name: 'preview'
+	});
 };
 </script>
