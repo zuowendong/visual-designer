@@ -5,7 +5,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import WdCheckbox from '../../../components/src/WdCheckbox/index.vue';
 
 const checkList = ref(['数学']);
 const boxList = ref(['语文', '数学']);

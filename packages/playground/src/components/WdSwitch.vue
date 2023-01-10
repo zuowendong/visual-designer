@@ -3,8 +3,6 @@
 	<WdSwitch />
 </template>
 
-<script setup lang="ts">
-import WdSwitch from '../../../components/src/WdSwitch/index.vue';
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

@@ -3,8 +3,6 @@
 	<WdRadio />
 </template>
 
-<script setup lang="ts">
-import WdRadio from '../../../components/src/WdRadio/index.vue';
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

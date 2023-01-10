@@ -14,7 +14,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import WdForm from '../../../components/src/WdForm/index.vue';
 
 const list = ref([
 	{ name: 'jack', age: 18 },

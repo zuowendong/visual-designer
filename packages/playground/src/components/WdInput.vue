@@ -5,7 +5,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import WdInput from '../../../components/src/WdInput/index.vue';
 
 let subject = ref('数学');
 </script>

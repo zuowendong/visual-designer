@@ -3,8 +3,6 @@
 	<WdSelect />
 </template>
 
-<script setup lang="ts">
-import WdSelect from '../../../components/src/WdSelect/index.vue';
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

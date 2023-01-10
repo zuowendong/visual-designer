@@ -3,37 +3,35 @@
 </template>
 
 <script lang="ts">
-export default { name: 'WdChartMap' };
+export default { name: 'WdChartBar' };
 </script>
 
 <script lang="ts" setup>
 import echarts from '../charts';
 import { onBeforeUnmount, onMounted } from 'vue';
-function drawLine() {
-	// 基于准备好的dom，初始化echarts实例
-	let myChart1 = echarts.init(document.getElementById('chartMap') as HTMLElement);
-	// 绘制图表配置
+
+const initCharts = () => {
+	let myChart = echarts.init(document.getElementById('chartMap') as HTMLElement);
 	let option = {
-		tooltip: {},
 		xAxis: {
-			data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 		},
-		yAxis: {},
+		yAxis: {
+			type: 'value'
+		},
 		series: [
 			{
-				name: '销量',
-				type: 'bar',
-				data: [5, 20, 36, 10, 10, 20],
-				color: 'rgb(11, 234, 246)'
+				data: [120, 200, 150, 80, 70, 110, 130],
+				type: 'bar'
 			}
 		]
 	};
-	myChart1.setOption(option);
-	// 图表随着窗口大小的变化而变化
-}
+	myChart.setOption(option);
+};
 
 onMounted(() => {
-	drawLine();
+	initCharts();
 });
 
 // 处理echarts自适应

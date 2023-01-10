@@ -9,4 +9,4 @@ export { default as WdText } from './WdText';
 export { default as WdTimePicker } from './WdTimePicker';
 export { default as WdImage } from './WdImage';
 
-export { default as WdChartMap } from './WdChartMap';
+export { default as WdChartBar } from './WdChartBar';

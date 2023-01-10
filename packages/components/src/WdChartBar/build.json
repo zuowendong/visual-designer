@@ -1,7 +1,7 @@
 {
-	"tag": "WdChartMap",
+	"tag": "WdChartBar",
 	"label": "普通柱图",
 	"icon": "quanping",
-	"categoryName": "图标类",
+	"categoryName": "图表类",
 	"categoryKey": "charts"
 }
