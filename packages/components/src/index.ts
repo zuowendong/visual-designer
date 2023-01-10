@@ -10,6 +10,7 @@ export { components };
 export const createDesignerUI = () => {
 	// 预处理...
 	// components['WdButton'].name = 'WdButton';
+	console.log(1111, components);
 	return {
 		install: (app: App) => {
 			forEach(components, (component) => {

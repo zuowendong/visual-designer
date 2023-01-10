@@ -15,9 +15,9 @@ import { storeToRefs } from 'pinia';
 
 import Editor from './Editor.vue';
 import { useComponentStore } from '@/stores/component';
-import { genCompStyleData } from '@/hooks/genComponentData';
+import { genCompStyleData } from '@/utils/genComponentData';
 import { useContextMenu } from '@/stores/contextMenu';
-import { initCompDataByDrop } from '@/hooks/formatComponentData';
+import { initCompDataByDrop } from '@/utils/formatComponentData';
 import { useSideMenus } from '@/stores/sideMenus';
 
 const componentStore = useComponentStore();

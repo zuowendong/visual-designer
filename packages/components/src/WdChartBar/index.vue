@@ -1,5 +1,5 @@
 <template>
-	<div id="chartMap" class="w-full h-full"></div>
+	<div ref="chartBar" class="w-full h-full"></div>
 </template>
 
 <script lang="ts">
@@ -8,10 +8,11 @@ export default { name: 'WdChartBar' };
 
 <script lang="ts" setup>
 import echarts from '../charts';
-import { onBeforeUnmount, onMounted } from 'vue';
+import { onMounted, ref, onBeforeUnmount } from 'vue';
 
+let chartBar = ref();
 const initCharts = () => {
-	let myChart = echarts.init(document.getElementById('chartMap') as HTMLElement);
+	let chartDom = echarts.init(chartBar.value as HTMLElement);
 	let option = {
 		xAxis: {
 			type: 'category',
@@ -27,31 +28,28 @@ const initCharts = () => {
 			}
 		]
 	};
-	myChart.setOption(option);
+	chartDom.setOption(option);
+	resizeChartDom(chartDom);
 };
 
-onMounted(() => {
-	initCharts();
-});
+// 兼容性 chrome
+let resizeObserver = ref();
+const resizeChartDom = (chartDom: any) => {
+	resizeObserver.value = new ResizeObserver((entries) => {
+		const dom = entries[0].target;
+		chartDom.resize({
+			width: dom.clientWidth,
+			height: dom.clientHeight
+		});
+	});
+	resizeObserver.value.observe(chartBar.value);
+};
 
-// 处理echarts自适应
-let getDOMFlag = true;
-let myChart1: any = null;
-let myChart2: any = null;
-window.addEventListener('resize', function () {
-	if (getDOMFlag) {
-		myChart1 = echarts.init(document.getElementById('myChart1') as HTMLElement);
-		myChart2 = echarts.init(document.getElementById('myChart2') as HTMLElement);
-	}
-	myChart1.resize();
-	myChart2.resize();
-});
+onMounted(() => initCharts());
 
-// 销毁echarts
 onBeforeUnmount(() => {
-	var myChartone = echarts.init(document.getElementById('myChart1') as HTMLElement);
-	myChartone.dispose();
-	var myChartwo = echarts.init(document.getElementById('myChart2') as HTMLElement);
-	myChartwo.dispose();
+	let chartDom = echarts.init(chartBar.value as HTMLElement);
+	chartDom.dispose();
+	resizeObserver.value && resizeObserver.value.unobserve(chartBar.value);
 });
 </script>

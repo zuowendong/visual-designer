@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
-import { genComponentProperties } from '@/hooks/genComponentData';
+import { genComponentProperties } from '@/utils/genComponentData';
 import { transformHump } from '@/utils/tool';
 
 const componentStore = useComponentStore();

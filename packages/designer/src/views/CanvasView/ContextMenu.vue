@@ -24,7 +24,7 @@
 import { storeToRefs } from 'pinia';
 import { useContextMenu } from '@/stores/contextMenu';
 import { useComponentStore } from '@/stores/component';
-import { initCompDataByCopy } from '@/hooks/formatComponentData';
+import { initCompDataByCopy } from '@/utils/formatComponentData';
 import { useSideMenus } from '@/stores/sideMenus';
 
 const contextMenu = useContextMenu();

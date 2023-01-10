@@ -33,7 +33,7 @@
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
-import { genFormCode } from '@/hooks/genFormCode';
+import { genFormCode } from '@/utils/genFormCode';
 import CodeBox from './CodeBox.vue';
 import { genCode } from '../../api/component';
 

@@ -28,8 +28,8 @@ import { storeToRefs } from 'pinia';
 
 import type { IMenusModel, IMenuModel } from '@/types/menus';
 import { fileConfig } from '@visual-designer/components';
-import { genMenuOps } from '@/hooks/genComponentData';
-import { componentInstall } from '@/hooks/component';
+import { genMenuOps } from '@/utils/genComponentData';
+import { componentInstall } from '@/utils/component';
 import { useSideMenus } from '@/stores/sideMenus';
 import LiveTimeComp from './LiveTiemComp.vue';
 
