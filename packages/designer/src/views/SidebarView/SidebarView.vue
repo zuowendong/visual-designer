@@ -27,7 +27,7 @@
 import { storeToRefs } from 'pinia';
 
 import type { IMenusModel, IMenuModel } from '@/types/menus';
-import { fileConfig } from '@form-designer/components';
+import { fileConfig } from '@visual-designer/components';
 import { genMenuOps } from '@/hooks/genComponentData';
 import { componentInstall } from '@/hooks/component';
 import { useSideMenus } from '@/stores/sideMenus';

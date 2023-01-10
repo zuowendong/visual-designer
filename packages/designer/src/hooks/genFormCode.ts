@@ -1,6 +1,6 @@
 import type { IFormCodeModel } from '@/types/formCode';
 import type { ComponentModel } from '@/types/component';
-import type { ISelectOp } from '@form-designer/components';
+import type { ISelectOp } from '@visual-designer/components';
 
 export const genFormCode = (component: ComponentModel): IFormCodeModel => {
 	// 展示类型

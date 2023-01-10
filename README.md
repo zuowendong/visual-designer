@@ -1,8 +1,8 @@
-# Form Designer
+# Visual Designer
 
 ## :eyes: Preview
 
-<!-- <https://zuowendong.github.io/form-designer/> -->
+<!-- <https://zuowendong.github.io/visual-designer/> -->
 
 :arrow_right: <http://47.106.9.107/>
 

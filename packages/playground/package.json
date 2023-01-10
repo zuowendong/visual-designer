@@ -9,7 +9,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@form-designer/components": "workspace:*",
+		"@visual-designer/components": "workspace:*",
 		"element-plus": "^2.2.19",
 		"vue": "^3.2.41"
 	},

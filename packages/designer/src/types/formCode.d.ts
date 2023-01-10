@@ -1,4 +1,4 @@
-import type { ISelectOp } from '@form-designer/components';
+import type { ISelectOp } from '@visual-designer/components';
 
 export interface IFormCodeModel {
 	isDialog: boolean; // 是否弹窗

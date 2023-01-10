@@ -1,4 +1,4 @@
-import { fileConfig } from '@form-designer/components';
+import { fileConfig } from '@visual-designer/components';
 import { cloneDeep } from 'lodash-es';
 
 /**

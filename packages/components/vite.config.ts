@@ -13,11 +13,12 @@ export default defineConfig({
 			fileName: (format) => `wd.${format}.js`
 		},
 		rollupOptions: {
-			external: ['vue', 'lodashEs'],
+			external: ['vue', 'lodashEs', 'echarts'],
 			output: {
 				globals: {
 					vue: 'Vue',
-					lodashEs: 'lodashEs'
+					lodashEs: 'lodashEs',
+					echarts: 'ECharts'
 				}
 			}
 		}

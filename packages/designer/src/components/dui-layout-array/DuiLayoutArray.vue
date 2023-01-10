@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
-import type { ISelectOp } from '@form-designer/components';
+import type { ISelectOp } from '@visual-designer/components';
 
 defineOptions({
 	name: 'DuiLayoutArray'

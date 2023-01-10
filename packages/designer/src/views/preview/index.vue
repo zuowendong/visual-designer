@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { getShapeStyle } from '@/utils/formatStyle';
-import { createDesignerUI } from '@form-designer/components';
+import { createDesignerUI } from '@visual-designer/components';
 
 const components: any = ref([]);
 const componentDataStr = localStorage.getItem('componentData');
