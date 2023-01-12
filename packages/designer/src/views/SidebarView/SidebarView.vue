@@ -8,7 +8,7 @@
 				<div
 					v-for="(menu, mIndex) in categoryItem.list"
 					:key="mIndex"
-					class="w-36 h-8 border border-solid border-[#979797] text-[#979797] text-center cursor-grab py-0.5 px-[5px] mb-1.5 rounded-md flex items-center justify-center select-none bg-[#2f2f2f] text-[14px] active:text-[#1e80ff] active:cursor-grabbing"
+					class="itemWrapper"
 					draggable="true"
 					@dragstart="dragStartHandle($event, menu)"
 				>
@@ -49,3 +49,9 @@ const dragStartHandle = async (e: DragEvent, data: IMenuModel) => {
 	sideMenus.setCheckedMenu(data);
 };
 </script>
+
+<style scoped lang="less">
+.itemWrapper {
+	@apply w-36 h-8 border border-solid border-[#979797] text-[#979797] text-center cursor-grab py-0.5 px-2 mb-1.5 rounded-md select-none bg-[#2f2f2f] text-[14px] active:text-[#1e80ff] active:cursor-grabbing flex items-center pl-3;
+}
+</style>
