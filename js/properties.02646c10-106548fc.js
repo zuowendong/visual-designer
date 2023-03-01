@@ -1,0 +1,1 @@
+import{i as e}from"./baseProperty.f0e04b9f-7a707f60.js";const t=[{id:"base",name:"\u57FA\u672C\u914D\u7F6E",attrs:[{name:"\u5BBD\u5EA6",key:"width",type:"dui-input-number",value:500},{name:"\u9AD8\u5EA6",key:"height",type:"dui-input-number",value:300},...new e().arttrs]}];export{t as properties};
