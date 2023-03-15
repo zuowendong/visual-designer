@@ -5,3 +5,5 @@ interface Window {
 }
 
 declare let defineOptions;
+
+declare module 'rollup-plugin-external-globals';

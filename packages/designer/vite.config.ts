@@ -6,11 +6,16 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import defineOptions from 'unplugin-vue-define-options/vite';
+import { configManualChunk } from './build/optimizer';
+import { visualizer } from 'rollup-plugin-visualizer';
+import viteCompression from 'vite-plugin-compression';
+import externalGlobals from 'rollup-plugin-external-globals';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd());
 	return {
+		base: '/visual-designer/',
 		plugins: [
 			vue(),
 			defineOptions(),
@@ -20,6 +25,16 @@ export default defineConfig(({ command, mode }) => {
 			}),
 			Components({
 				resolvers: [ElementPlusResolver()]
+			}),
+			viteCompression({
+				ext: '.gz',
+				deleteOriginFile: false
+			}),
+			visualizer({
+				filename: './node_modules/.cache/visualizer/stats.html',
+				open: true,
+				gzipSize: true,
+				brotliSize: true
 			})
 		],
 		resolve: {
@@ -36,6 +51,25 @@ export default defineConfig(({ command, mode }) => {
 					changeOrigin: true,
 					rewrite: (path) => path.replace(/^\/api/, '')
 				}
+			}
+		},
+		build: {
+			reportCompressedSize: false,
+			sourcemap: false,
+			rollupOptions: {
+				// 分包策略
+				manualChunks: configManualChunk,
+				output: {
+					chunkFileNames: 'js/[name]-[hash].js',
+					entryFileNames: 'js/[name]-[hash].js',
+					assetFileNames: '[ext]/[name]-[hash].[ext]'
+				},
+				external: ['ace-builds'],
+				plugins: [
+					externalGlobals({
+						'ace-builds': 'ace'
+					})
+				]
 			}
 		}
 	};

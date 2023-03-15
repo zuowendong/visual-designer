@@ -1,44 +1,41 @@
 <template>
-	<div class="select-none py-2.5 px-6">
-		<div
-			v-for="compItem in list"
-			:key="compItem.id"
-			class="h-6 leading-6 text-[14px] text-[#979797] hover:text-[#59c7f9] hover:cursor-pointer"
-			:style="{ paddingLeft: `${compItem.depth * 16}px` }"
-		>
-			<i v-if="compItem.key === 'root'" class="iconfont icon-shuzhuangtu mr-2"></i>
-			<span
-				:class="{
-					'text-white': compItem.key === 'root',
-					'text-[#59c7f9] cursor-pointer': currentComponent.id === compItem.id
-				}"
-				@click="chooseHandle(compItem)"
+	<VirtualList :list="liveTimeComps">
+		<template #default="{ row }">
+			<div
+				class="box-border w-full h-full"
+				:style="{ paddingLeft: `${row.depth * 16}px` }"
+				@click="chooseHandle(row)"
 			>
-				{{ compItem.label }}
-			</span>
-		</div>
-	</div>
+				<i v-if="row.key === 'root'" class="iconfont icon-shuzhuangtu mr-2"></i>
+				<span
+					:class="{
+						'text-white': row.key === 'root',
+						'text-[#59c7f9] cursor-pointer': currentComponent.id === row.id
+					}"
+				>
+					{{ row.label }}
+				</span>
+			</div>
+		</template>
+	</VirtualList>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import type { PropType } from 'vue';
 import type { ILiveTimeCompModel } from '@/types/menus';
 import { useComponentStore } from '@/stores/component';
+import VirtualList from '@/components/VirtualList.vue';
+import { useSideMenus } from '@/stores/sideMenus';
 
+const sideMenus = useSideMenus();
+const { liveTimeComps } = storeToRefs(sideMenus);
 const componentStore = useComponentStore();
 const { currentComponent } = storeToRefs(componentStore);
-
-const props = defineProps({
-	list: { type: Array as PropType<ILiveTimeCompModel[]>, default: (): ILiveTimeCompModel[] => [] }
-});
-const { list } = toRefs(props);
-
-const chooseHandle = (compItem: ILiveTimeCompModel) => {
+function chooseHandle(compItem: ILiveTimeCompModel) {
 	if (compItem.key === 'root') {
 		console.log('展开收起');
 	} else {
 		componentStore.setCurrentComponentById(compItem.id);
 	}
-};
+}
 </script>

@@ -10,12 +10,7 @@
 		</div>
 		<div class="px-2">
 			<i class="iconfont icon-daima mr-1"></i>
-			<el-button
-				type="text"
-				:disabled="!(currentComponent.children && currentComponent.children.length)"
-				@click="apiHandle"
-				>代码生成</el-button
-			>
+			<el-button type="text" @click="handleCode">代码生成</el-button>
 		</div>
 		<div class="px-2">
 			<i class="iconfont icon-zitiyulan mr-1"></i>
@@ -23,45 +18,39 @@
 		</div>
 		<div class="px-2">
 			<i class="iconfont icon-zitiyulan mr-1"></i>
-			<el-button type="text" :disabled="!components.length" @click="previewHandle">预览</el-button>
+			<el-button type="text" @click="previewHandle">预览</el-button>
 		</div>
-		<CodeBox v-model="isCodeBox" :code="codeContent" />
+		<AsyncCodeBoxComp v-model="isCodeBox" :code="codeContent" />
 	</div>
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useComponentStore } from '@/stores/component';
-import { genFormCode } from '@/utils/genFormCode';
-import CodeBox from './CodeBox.vue';
-import { genCode } from '../../api/component';
 
 const componentStore = useComponentStore();
-const { currentComponent, components } = storeToRefs(componentStore);
+const { components } = storeToRefs(componentStore);
+
+const AsyncCodeBoxComp = defineAsyncComponent(() => import('./CodeBox.vue'));
 
 let codeContent = ref('');
 let isCodeBox = ref(false);
-const apiHandle = async () => {
-	const formCode = genFormCode(currentComponent.value);
-	const { data } = await genCode(formCode);
+function handleCode() {
 	isCodeBox.value = true;
-	codeContent.value = data;
-};
+	codeContent.value = 'gengerate code';
+}
 
-const saveHandle = async () => {
-	// const { data } = await saveScene(components.value);
+function saveHandle() {
 	console.log(JSON.stringify(components.value));
-};
+}
 
 const router = useRouter();
-
-const previewHandle = () => {
+function previewHandle() {
 	localStorage.setItem('componentData', JSON.stringify(components.value));
-	// window.open(`${location.href}preview`, '_blank');
-
 	router.push({
 		name: 'preview'
 	});
-};
+}
 </script>

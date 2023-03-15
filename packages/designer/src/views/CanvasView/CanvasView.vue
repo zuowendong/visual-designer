@@ -1,8 +1,8 @@
 <template>
 	<div
 		class="w-full h-full overflow-hidden"
-		@drop.stop.prevent="dropHandle"
-		@dragover.prevent="dragOverHandle"
+		@drop.stop.prevent="handleDrop"
+		@dragover.prevent="handleDragOver"
 		@mousedown.stop="mouseDownHandle"
 		@mouseup="deselectCurComponent"
 	>
@@ -26,7 +26,7 @@ const { editorDom, isChoosedComponent, isContainer } = storeToRefs(componentStor
 const sideMenus = useSideMenus();
 const { checkedMenu } = storeToRefs(sideMenus);
 // 当元素或选中的文本在可释放目标上被释放时触发
-const dropHandle = async (e: any) => {
+async function handleDrop(e: any) {
 	const compKey = e.dataTransfer.getData('component');
 	const canvasInfo = editorDom.value.getBoundingClientRect();
 	if (compKey) {
@@ -59,34 +59,33 @@ const dropHandle = async (e: any) => {
 		// 重置选中的左侧菜单
 		sideMenus.resetMenu();
 	}
-};
+}
 
 // affect which cursor is displayed while dragging.
-const dragOverHandle = (e: any) => {
+function handleDragOver(e: any) {
 	e.dataTransfer.dropEffect = 'copy';
-
 	// 拖入到容器组件上方
 	if (e.target.dataset.key === 'WdForm' || e.target.parentElement.dataset.key === 'WdForm') {
 		isContainer.value = true;
 	} else {
 		isContainer.value = false;
 	}
-};
+}
 
 // 指针设备按钮按下时触发
-const mouseDownHandle = () => {
+function mouseDownHandle() {
 	// 取消选中组件
 	componentStore.setChoosedComponentStatus(false);
-};
+}
 
 const contextMenu = useContextMenu();
 // 指针设备按钮放开时触发
-const deselectCurComponent = (e: MouseEvent) => {
+function deselectCurComponent(e: MouseEvent) {
 	// 未选中组件，currentComponet为空
 	if (!isChoosedComponent.value) {
 		componentStore.setCurrentComponent({ id: '', label: '', key: '', style: {} }, '');
 	}
 	// 右击才显示菜单
 	if (e.button !== 2) contextMenu.hideContextMenu();
-};
+}
 </script>

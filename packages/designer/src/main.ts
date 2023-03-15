@@ -8,7 +8,7 @@ import router from './router';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 
-import DuiComponent from './components';
+import DuiComponent from './dui-components';
 
 const app = createApp(App);
 

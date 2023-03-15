@@ -2,7 +2,7 @@
 	<div
 		ref="editor"
 		class="relative w-full h-full bg-[#2f2f2f] m-auto select-none overflow-hidden"
-		@contextmenu="contextMenuHandle"
+		@contextmenu="handleContextMenu"
 	>
 		<!-- <span>{{ components }}</span> -->
 		<Grid />
@@ -47,16 +47,16 @@ onMounted(() => componentStore.setEditorDom(editor.value));
 
 const contextMenu = useContextMenu();
 // 菜单选择
-const contextMenuHandle = (e: MouseEvent) => {
+function handleContextMenu(e: MouseEvent) {
 	e.stopPropagation();
 	e.preventDefault();
 	const editorStyle = editor.value.getBoundingClientRect();
 	let top = e.clientY - editorStyle.y;
 	let left = e.clientX - editorStyle.x;
 	contextMenu.showContextMenu(top, left);
-};
+}
 
-const getComponentProps = (id: string) => {
+function getComponentProps(id: string) {
 	return components.value.find((item) => item.id === id)!.style;
-};
+}
 </script>

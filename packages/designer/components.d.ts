@@ -7,14 +7,7 @@ export {};
 
 declare module '@vue/runtime-core' {
 	export interface GlobalComponents {
-		DuiColor: typeof import('./src/components/dui-color/DuiColor.vue')['default'];
-		DuiConfigArray: typeof import('./src/components/dui-config-array/DuiConfigArray.vue')['default'];
-		DuiInput: typeof import('./src/components/dui-input/DuiInput.vue')['default'];
-		DuiInputNumber: typeof import('./src/components/dui-input-number/DuiInputNumber.vue')['default'];
-		DuiLayoutArray: typeof import('./src/components/dui-layout-array/DuiLayoutArray.vue')['default'];
-		DuiLayoutNumber: typeof import('./src/components/dui-layout-number/DuiLayoutNumber.vue')['default'];
-		DuiSwitch: typeof import('./src/components/dui-switch/DuiSwitch.vue')['default'];
-		DuiUpload: typeof import('./src/components/dui-upload/DuiUpload.vue')['default'];
+		CodeEditor: typeof import('./src/components/CodeEditor.vue')['default'];
 		ElButton: typeof import('element-plus/es')['ElButton'];
 		ElColorPicker: typeof import('element-plus/es')['ElColorPicker'];
 		ElDialog: typeof import('element-plus/es')['ElDialog'];
@@ -29,5 +22,6 @@ declare module '@vue/runtime-core' {
 		ElUpload: typeof import('element-plus/es')['ElUpload'];
 		RouterLink: typeof import('vue-router')['RouterLink'];
 		RouterView: typeof import('vue-router')['RouterView'];
+		VirtualList: typeof import('./src/components/VirtualList.vue')['default'];
 	}
 }

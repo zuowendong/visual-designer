@@ -3,7 +3,7 @@
 		v-show="showMenu && !currentComponent.style.locked"
 		class="w-44 py-1.5 bg-white border border-solid border-[#eee] rounded-sm shadow-[3px_3px_3px_rgba(#000, 0.15)] list-none absolute z-[999]"
 		:style="{ top: menuTop + 'px', left: menuLeft + 'px' }"
-		@mouseup="mouseUpHandle"
+		@mouseup="handleMouse"
 	>
 		<li
 			v-for="(item, i) in contextMenus"
@@ -32,12 +32,12 @@ const { menuTop, menuLeft, showMenu, copyCompData } = storeToRefs(contextMenu);
 
 const componentStore = useComponentStore();
 const { currentComponent, editorDom } = storeToRefs(componentStore);
-const mouseUpHandle = () => {
+function handleMouse() {
 	componentStore.setChoosedComponentStatus(true);
-};
+}
 
 const sideMenus = useSideMenus();
-const pasteHandle = (e: MouseEvent) => {
+function handlePaste(e: MouseEvent) {
 	const canvasInfo = editorDom.value.getBoundingClientRect();
 	const initTop = e.clientY - canvasInfo.y;
 	const initLeft = e.clientX - canvasInfo.x;
@@ -45,7 +45,7 @@ const pasteHandle = (e: MouseEvent) => {
 	const componentData = initCompDataByCopy(copyCompData.value, initTop, initLeft);
 	componentStore.addComponent(componentData);
 	sideMenus.setLiveTimeComps();
-};
+}
 
 const contextMenus = reactive([
 	{
@@ -58,7 +58,7 @@ const contextMenus = reactive([
 		title: '粘贴',
 		subtitle: 'Ctrl + V',
 		disableFun: () => !copyCompData.value.id,
-		event: pasteHandle
+		event: handlePaste
 	},
 	{
 		title: '删除',

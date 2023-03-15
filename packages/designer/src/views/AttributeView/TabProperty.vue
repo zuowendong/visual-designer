@@ -38,28 +38,28 @@ watch(currentComponentId, async () => {
 	await getProperties();
 });
 
-const getProperties = async () => {
+async function getProperties() {
 	if (currentComponent.value.key) {
 		properties.value = await genComponentProperties(currentComponent.value.key);
 	} else {
 		properties.value = [];
 	}
-};
+}
 
-const genCompAttrs = (attrKey: string) => {
+function genCompAttrs(attrKey: string) {
 	return currentComponent.value.style[attrKey];
-};
+}
 
-const updateCurrentStyle = (val: any, attrKey: string) => {
+function updateCurrentStyle(val: any, attrKey: string) {
 	// componentStore.setShapeStyle({ [attrKey]: val });
 	componentStore.updateCurrentComponent({ [attrKey]: val });
-};
+}
 
 // 垂直布局
-const branchItem = (type: string) => {
+function branchItem(type: string) {
 	const whiteList = ['dui-config-array'];
 	return whiteList.includes(type);
-};
+}
 </script>
 
 <style scoped lang="less">

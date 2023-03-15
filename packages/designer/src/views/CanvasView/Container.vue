@@ -30,12 +30,12 @@ const { compItem } = toRefs(props);
 
 const componentStore = useComponentStore();
 const { components, currentComponent } = storeToRefs(componentStore);
-const getComponentProps = (id: string) => {
+function getComponentProps(id: string) {
 	return components.value.find((item) => item.id === id)!.style;
-};
+}
 
-const mouseDownOnFormItem = (componentData: ComponentModel) => {
+function mouseDownOnFormItem(componentData: ComponentModel) {
 	componentStore.setChoosedComponentStatus(true);
 	componentStore.setCurrentComponent(componentData, componentData.id);
-};
+}
 </script>

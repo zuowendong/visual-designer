@@ -22,9 +22,9 @@ import TabData from './TabData.vue';
 import TabEvent from './TabEvent.vue';
 
 const activeTab = ref('property');
-const handleClick = (tab: string, event: Event) => {
+function handleClick(tab: string, event: Event) {
 	console.log(tab, event);
-};
+}
 </script>
 
 <style scoped lang="less">

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import CodeEditor from './CodeEditor.vue';
+import CodeEditor from '@/components/CodeEditor.vue';
 
 const props = defineProps({
 	modelValue: { type: Boolean, default: false },

@@ -1,6 +1,6 @@
 <template>
 	<main
-		class="w-screen h-screen grid grid-cols-[200px_auto_400px] grid-rows-[60px_auto] bg-[#1a1a1a] text-white"
+		class="w-screen h-screen grid grid-cols-[200px_auto_400px] grid-rows-[60px_auto] bg-[#1a1a1a] text-white overflow-x-hidden overflow-y-auto"
 	>
 		<section class="col-start-1 col-end-4">
 			<NavbarView />
