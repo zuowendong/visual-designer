@@ -2,7 +2,7 @@
 	<div ref="container" class="box-border w-full h-full overflow-y-auto" @scroll="handleScroll">
 		<div ref="panel" :style="{ paddingTop: `${paddingTop}px` }">
 			<div
-				class="h-10 leading-10 text-[14px] text-[#979797] hover:text-[#59c7f9] hover:cursor-pointer flex"
+				class="h-6 leading-6 text-[14px] text-[#979797] hover:text-[#59c7f9] hover:cursor-pointer flex"
 				v-for="item in visibleList"
 				:key="item.id"
 			>

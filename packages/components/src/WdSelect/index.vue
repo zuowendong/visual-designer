@@ -1,16 +1,13 @@
 <template>
 	<div class="w-full h-full flex items-center">
-		<div class="w-24 pl-1.5 text-[14px]">{{ label }}</div>
-		<div class="flex-1">
-			<el-select v-model="selectedValue" placeholder="please select" style="width: 100%">
-				<el-option
-					v-for="item in options.values"
-					:key="item.value"
-					:label="item.label"
-					:value="item.value"
-				/>
-			</el-select>
-		</div>
+		<el-select v-model="selectedValue" placeholder="please select" style="width: 100%">
+			<el-option
+				v-for="item in options.values"
+				:key="item.value"
+				:label="item.label"
+				:value="item.value"
+			/>
+		</el-select>
 	</div>
 </template>
 
@@ -24,7 +21,6 @@ import { ref, toRefs } from 'vue';
 import { ISelectOp } from '../types';
 
 const props = defineProps({
-	label: { type: String, default: '所在地' },
 	options: {
 		type: Object as PropType<{ value: string; values: ISelectOp[] }>,
 		default: () => {
@@ -39,7 +35,7 @@ const props = defineProps({
 		}
 	}
 });
-const { label, options } = toRefs(props);
+const { options } = toRefs(props);
 
 let selectedValue = ref<string>(options.value.value);
 </script>

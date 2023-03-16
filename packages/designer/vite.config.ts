@@ -5,11 +5,11 @@ import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import defineOptions from 'unplugin-vue-define-options/vite';
 import { configManualChunk } from './build/optimizer';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteCompression from 'vite-plugin-compression';
 import externalGlobals from 'rollup-plugin-external-globals';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -18,7 +18,7 @@ export default defineConfig(({ command, mode }) => {
 		base: '/visual-designer/',
 		plugins: [
 			vue(),
-			defineOptions(),
+			vueJsx(),
 			AutoImport({
 				imports: ['vue'],
 				resolvers: [ElementPlusResolver()]

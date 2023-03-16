@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue';
-import DuiUpload from './DuiUpload.vue';
+import DuiUpload from './DuiUpload';
 
 DuiUpload.install = (app: App) => {
 	app.component(DuiUpload.name, DuiUpload);

@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue';
-import DuiInputNumber from './DuiInputNumber.vue';
+import DuiInputNumber from './DuiInputNumber';
 
 DuiInputNumber.install = (app: App) => {
 	app.component(DuiInputNumber.name, DuiInputNumber);

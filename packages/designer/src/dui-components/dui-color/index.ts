@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue';
-import DuiColorPicker from './DuiColor.vue';
+import DuiColorPicker from './DuiColor';
 
 DuiColorPicker.install = (app: App) => {
 	app.component(DuiColorPicker.name, DuiColorPicker);
