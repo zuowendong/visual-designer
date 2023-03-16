@@ -1,0 +1,1 @@
+import{i as e}from"./baseProperty.f0e04b9f-75887b8b.js";const t=[{id:"base",name:"基本配置",attrs:[{name:"宽度",key:"width",type:"dui-input-number",value:500},{name:"高度",key:"height",type:"dui-input-number",value:300},...new e().arttrs,{name:"背景色",key:"bgColor",type:"dui-color-picker",value:"#fff"}]}];export{t as properties};

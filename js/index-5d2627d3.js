@@ -1,1 +1,0 @@
-import{_ as e}from"./index-461ad52c.js";import{q as o,y as n}from"./element-376b2e7c.js";import"./lodashEs-e691f57a.js";const r={};function t(c,s){return o(),n("div",null,"TODO: \u83B7\u53D6\u5230\u5DF2\u7ECF\u4F7F\u7528\u5230\u7684dui-component, \u5728\u9884\u89C8\u9875\u9762\u52A0\u8F7D")}const m=e(r,[["render",t]]);export{m as default};
