@@ -1,11 +1,28 @@
-# ---> Vue
-# gitignore template for Vue.js projects
-#
-# Recommended template: Node.gitignore
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# TODO: where does this rule come from?
-docs/_book
+node_modules
+.DS_Store
+dist
+dist-ssr
+coverage
+*.local
 
-# TODO: where does this rule come from?
-test/
+/cypress/videos/
+/cypress/screenshots/
 
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
