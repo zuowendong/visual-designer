@@ -1,0 +1,14 @@
+@import './light.scss';
+@import './dark.scss';
+
+:root {
+  --theme-color: #{$light-color};
+  --theme-background: #{$light-background};
+  --theme-border: #{$light-border};
+}
+
+.dark {
+  --theme-color: #{$dark-color};
+  --theme-background: #{$dark-background};
+  --theme-border: #{$dark-border};
+}
