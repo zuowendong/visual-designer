@@ -7,15 +7,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { setTheme } from '@/utils/theme'
+import { getLocalStorage, setLocalStorage } from '@/utils/storage'
 
 let isDark = ref(false)
 function handleSwitch() {
   isDark.value = !isDark.value
   let type = isDark.value ? 'dark' : 'light'
   setTheme(type)
+  setLocalStorage('theme', type)
 }
+
+function initTheme() {
+  let theme = getLocalStorage('theme')
+  if (theme) {
+    isDark.value = theme === 'light' ? false : true
+    setTheme(theme)
+  }
+}
+onMounted(() => initTheme())
 </script>
 
 <style scoped lang="scss">
@@ -27,6 +38,7 @@ function handleSwitch() {
   background-color: var(--theme-background);
   border: 1px solid var(--theme-border);
   cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
 }
 .icon {
   position: absolute;
@@ -34,7 +46,6 @@ function handleSwitch() {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  transition: margin-right 2s;
 }
 .light {
   left: 1px;
