@@ -1,1 +1,3 @@
-export { default as NavigationView } from './Navigation/NavigationView.vue'
+export { default as NavigationView } from './navigation/NavigationView.vue'
+export { default as SidebarList } from './sidebar-list/SidebarList.vue'
+export { default as CanvasBox } from './canvas-box/CanvasBox.vue'

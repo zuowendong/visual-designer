@@ -1,2 +1,4 @@
-export { default as Text } from './text'
-export { default as Select } from './select'
+import WdText from './text'
+import WdSelect from './select'
+
+export { WdText, WdSelect }

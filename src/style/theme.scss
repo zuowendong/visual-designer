@@ -3,12 +3,14 @@
 
 :root {
   --theme-color: #{$light-color};
-  --theme-background: #{$light-background};
+  --theme-bg: #{$light-bg};
   --theme-border: #{$light-border};
+  --theme-canvas-bg: #{$light-canvas-bg};
 }
 
 .dark {
   --theme-color: #{$dark-color};
-  --theme-background: #{$dark-background};
+  --theme-bg: #{$dark-bg};
   --theme-border: #{$dark-border};
+  --theme-canvas-bg: #{$dark-canvas-bg};
 }

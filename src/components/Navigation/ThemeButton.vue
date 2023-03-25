@@ -35,7 +35,7 @@ onMounted(() => initTheme())
   width: 40px;
   height: 22px;
   border-radius: 11px;
-  background-color: var(--theme-background);
+  background-color: var(--theme-bg);
   border: 1px solid var(--theme-border);
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;

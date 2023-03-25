@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue'
-import Select from './select'
+import Select from './select.vue'
 
 Select.install = (app: App) => {
   app.component(Select.name, Select)

@@ -4,18 +4,16 @@
       <NavigationView />
     </header>
     <aside>
-      left aside
-
-      <WdText />
+      <SidebarList />
     </aside>
-    <main>canvas</main>
+    <main><CanvasBox /></main>
     <aside>right aside</aside>
   </article>
 </template>
 
 <script setup lang="ts">
-import { NavigationView } from '@/components'
-import WdText from '@designer/ui'
+import { NavigationView, SidebarList, CanvasBox } from '@/components'
+// import { WdText } from '@designer/ui'
 </script>
 
 <style scoped lang="scss">
@@ -23,7 +21,7 @@ article {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 200px auto 300px;
+  grid-template-columns: 150px auto 300px;
   grid-template-rows: 60px auto;
   header {
     grid-column-start: 1;
@@ -37,6 +35,7 @@ article {
     box-sizing: border-box;
     border-left: 1px solid var(--theme-border);
     border-right: 1px solid var(--theme-border);
+    padding: 10px 20px;
   }
 }
 </style>
