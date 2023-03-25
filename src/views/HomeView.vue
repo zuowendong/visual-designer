@@ -3,7 +3,11 @@
     <header>
       <NavigationView />
     </header>
-    <aside>left aside</aside>
+    <aside>
+      left aside
+
+      <WdText />
+    </aside>
     <main>canvas</main>
     <aside>right aside</aside>
   </article>
@@ -11,6 +15,7 @@
 
 <script setup lang="ts">
 import { NavigationView } from '@/components'
+import WdText from '@designer/ui'
 </script>
 
 <style scoped lang="scss">
@@ -20,8 +25,6 @@ article {
   display: grid;
   grid-template-columns: 200px auto 300px;
   grid-template-rows: 60px auto;
-  color: var(--theme-color);
-  background-color: var(--theme-background);
   header {
     grid-column-start: 1;
     grid-column-end: 4;
