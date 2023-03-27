@@ -10,12 +10,20 @@
       <CanvasBox />
       <CanvasFooter />
     </main>
-    <aside>right aside</aside>
+    <aside>
+      <SidebarComponent />
+    </aside>
   </article>
 </template>
 
 <script setup lang="ts">
-import { NavigationView, SidebarList, CanvasBox, CanvasFooter } from '@/components'
+import {
+  NavigationView,
+  SidebarList,
+  CanvasBox,
+  CanvasFooter,
+  SidebarComponent
+} from '@/components'
 // import { WdText } from '@designer/ui'
 </script>
 
@@ -41,6 +49,9 @@ article {
     border-left: 1px solid var(--theme-border);
     border-right: 1px solid var(--theme-border);
     padding: 10px 20px 40px 20px;
+    overflow: hidden;
+  }
+  aside {
     overflow: hidden;
   }
 }

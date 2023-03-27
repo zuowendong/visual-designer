@@ -1,6 +1,7 @@
 <template>
   <div class="listMain">
     <div class="menuContainer">
+      <header>{{ $t('component-list') }}</header>
       <div
         v-for="compItem in componentList"
         :key="compItem.id"
@@ -38,6 +39,16 @@ function handleDragStart(e: DragEvent, compItem: IComponent) {
   .menuContainer {
     height: 50%;
     overflow: auto;
+    header {
+      width: 100%;
+      height: 32px;
+      box-sizing: border-box;
+      padding-left: 6px;
+      line-height: 32px;
+      font-size: 16px;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
     .compItem {
       width: 100%;
       height: 32px;

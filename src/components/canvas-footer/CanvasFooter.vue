@@ -1,7 +1,7 @@
 <template>
   <div class="canvasFooter">
     <div class="sizeTool">
-      <span class="title">画布大小:</span>
+      <span class="title">{{ $t('canvas-size') }}:</span>
       <input
         type="text"
         v-model="canvasSize.width"
