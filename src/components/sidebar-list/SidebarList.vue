@@ -1,7 +1,13 @@
 <template>
   <div class="listMain">
     <div class="menuContainer">
-      <div v-for="compItem in componentList" :key="compItem.id" class="compItem">
+      <div
+        v-for="compItem in componentList"
+        :key="compItem.id"
+        class="compItem"
+        draggable="true"
+        @dragstart="handleDragStart($event, compItem)"
+      >
         <span>{{ compItem.name }}</span>
       </div>
     </div>
@@ -11,10 +17,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-let componentList = ref([
+interface ICompItem {
+  id: number
+  name: string
+  key: string
+}
+
+let componentList = ref<ICompItem[]>([
   { id: 1, name: '文字标签', key: 'WdText' },
   { id: 2, name: '下拉框', key: 'WdSelect' }
 ])
+
+function handleDragStart(e: DragEvent, compItem: ICompItem) {
+  e.dataTransfer?.setData('component', compItem.key)
+}
 </script>
 
 <style scoped lang="scss">

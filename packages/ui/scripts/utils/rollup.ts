@@ -1,8 +1,8 @@
 import { compPackage } from './path'
 
-export const target = 'esnext'
+// export const target = 'esnext'
 
-export const getCompPackage = () => {
+const getCompPackage = () => {
   const { version, dependencies = {}, peerDependencies = {} } = require(compPackage)
   return {
     version,
