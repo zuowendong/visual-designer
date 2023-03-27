@@ -16,19 +16,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { IComponent } from '@/types'
 
-interface ICompItem {
-  id: number
-  name: string
-  key: string
-}
-
-let componentList = ref<ICompItem[]>([
-  { id: 1, name: '文字标签', key: 'WdText' },
-  { id: 2, name: '下拉框', key: 'WdSelect' }
+let componentList = ref<IComponent[]>([
+  { id: '1', name: '文字标签', key: 'WdText' },
+  { id: '2', name: '下拉框', key: 'WdSelect' }
 ])
 
-function handleDragStart(e: DragEvent, compItem: ICompItem) {
+function handleDragStart(e: DragEvent, compItem: IComponent) {
   e.dataTransfer?.setData('component', compItem.key)
 }
 </script>
