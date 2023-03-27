@@ -1,15 +1,17 @@
 <template>
   <div class="main">
     <div class="left"></div>
-    <div class="title">大屏设计器</div>
+    <div class="title">{{ $t('title') }}</div>
     <div class="right">
       <ThemeButton />
+      <SwitchLanguage />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import ThemeButton from './ThemeButton.vue'
+import SwitchLanguage from './SwitchLanguage.vue'
 </script>
 
 <style scoped lang="scss">
@@ -32,6 +34,8 @@ import ThemeButton from './ThemeButton.vue'
   .right {
     justify-self: end;
     align-self: center;
+    display: flex;
+    align-items: center;
   }
 }
 </style>

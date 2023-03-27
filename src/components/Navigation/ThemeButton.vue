@@ -39,6 +39,7 @@ onMounted(() => initTheme())
   border: 1px solid var(--theme-border);
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
+  margin-left: 20px;
 }
 .icon {
   position: absolute;

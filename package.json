@@ -17,6 +17,7 @@
     "@designer/ui": "workspace:*",
     "pinia": "^2.0.32",
     "vue": "^3.2.47",
+    "vue-i18n": "9.3.0-beta.17",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
