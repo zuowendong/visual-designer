@@ -6,9 +6,9 @@ export interface IComponent {
 }
 
 export interface ICompStyle {
-  width: number
-  height: number
-  x: number
-  y: number
+  width?: number
+  height?: number
+  x?: number
+  y?: number
   [k: string]: any
 }

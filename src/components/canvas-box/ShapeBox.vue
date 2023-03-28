@@ -3,7 +3,7 @@
     class="shapeBox"
     :style="shapeStyle"
     @click.stop.prevent
-    @mousedown.stop="handleMouseDownOnShape"
+    @mousedown.stop="shapeMousedown($event, props.element)"
   >
     <slot></slot>
   </div>
@@ -12,6 +12,7 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue'
 import type { IComponent } from '@/types'
+import { useShapeMove } from '@/hooks/shapeMove'
 
 const props = defineProps({
   active: { type: Boolean, default: false },
@@ -28,9 +29,7 @@ const shapeStyle = computed(() => {
   return `width: ${width}px; height: ${height}px; left: ${left}px; top: ${top}px`
 })
 
-function handleMouseDownOnShape(e: MouseEvent) {
-  console.log(e)
-}
+const { shapeMousedown } = useShapeMove()
 </script>
 
 <style scoped lang="scss">

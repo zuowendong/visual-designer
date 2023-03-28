@@ -1,3 +1,3 @@
-import type { IComponent } from './component'
+import type { IComponent, ICompStyle } from './component'
 
-export { IComponent }
+export { IComponent, ICompStyle }
