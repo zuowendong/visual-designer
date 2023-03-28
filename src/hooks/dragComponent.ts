@@ -10,21 +10,19 @@ function getInitCompPosition(e: DragEvent, canvasDom: HTMLElement) {
   }
 }
 
-export function useHandleDrag() {
+export function useDragComponent() {
   const componentStore = useComponentStore()
+  const { compDataFactory } = useComponent()
 
   function handleDrop(e: DragEvent, dom: HTMLElement | null) {
     e.preventDefault()
-
     let initCompData = reactive<ICompFactory>({ key: '', width: 100, height: 100, x: 0, y: 0 })
     if (dom) {
       const { x, y } = getInitCompPosition(e, dom)
       initCompData = { ...initCompData, x, y }
     }
-
     const compKey = e.dataTransfer?.getData('component') as string
     initCompData = { ...initCompData, key: compKey }
-    const { compDataFactory } = useComponent()
     componentStore.addComponent({ ...compDataFactory(initCompData) })
   }
 
@@ -35,6 +33,7 @@ export function useHandleDrag() {
 
   function handleMousedown() {
     console.log('取消选择组件')
+    componentStore.setCurrentComp(null)
   }
 
   return {

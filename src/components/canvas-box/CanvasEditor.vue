@@ -7,7 +7,12 @@
     @mousedown="handleMousedown"
   >
     <span>{{ componentStore.componentMap }}</span>
-    <ShapeBox v-for="comp in componentStore.componentMap" :key="comp[0]" :element="comp[1]">
+    <ShapeBox
+      v-for="comp in componentStore.componentMap"
+      :key="comp[0]"
+      :element="comp[1]"
+      :is-active="comp[0] === componentStore.currentComponent.id"
+    >
       <component :is="comp[1].key"></component>
     </ShapeBox>
   </div>
@@ -18,7 +23,7 @@ import { ref, watch } from 'vue'
 import { useCanvasStore } from '@/stores/canvas'
 import { useComponentStore } from '@/stores/component'
 import ShapeBox from './ShapeBox.vue'
-import { useHandleDrag } from '@/hooks/dragover'
+import { useDragComponent } from '@/hooks/dragComponent'
 
 let canvasWidth = ref('')
 let canvasHeight = ref('')
@@ -34,7 +39,7 @@ watch(
 
 const componentStore = useComponentStore()
 const editorRef = ref<HTMLElement | null>(null)
-const { handleDrop, handleDragover, handleMousedown } = useHandleDrag()
+const { handleDrop, handleDragover, handleMousedown } = useDragComponent()
 </script>
 
 <style scoped lang="scss">
