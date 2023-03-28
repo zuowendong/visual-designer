@@ -55,8 +55,8 @@ let currentTab = ref(ComponentProperty)
       border-bottom: 2px solid transparent;
     }
     .activeItem {
-      color: #2980ff;
-      border-bottom: 2px solid #2980ff;
+      color: var(--theme-active);
+      border-bottom: 2px solid var(--theme-active);
     }
   }
   .operationBox {

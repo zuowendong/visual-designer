@@ -1,8 +1,15 @@
 <template>
-  <div class="editorMain">
-    <div v-for="comp in componentStore.componentMap" :key="comp[0]">
+  <div
+    ref="editorRef"
+    class="editorMain"
+    @drop="handleDrop($event, editorRef)"
+    @dragover="handleDragover"
+    @mousedown="handleMousedown"
+  >
+    <span>{{ componentStore.componentMap }}</span>
+    <ShapeBox v-for="comp in componentStore.componentMap" :key="comp[0]" :element="comp[1]">
       <component :is="comp[1].key"></component>
-    </div>
+    </ShapeBox>
   </div>
 </template>
 
@@ -10,6 +17,8 @@
 import { ref, watch } from 'vue'
 import { useCanvasStore } from '@/stores/canvas'
 import { useComponentStore } from '@/stores/component'
+import ShapeBox from './ShapeBox.vue'
+import { useHandleDrag } from '@/hooks/dragover'
 
 let canvasWidth = ref('')
 let canvasHeight = ref('')
@@ -24,6 +33,8 @@ watch(
 )
 
 const componentStore = useComponentStore()
+const editorRef = ref<HTMLElement | null>(null)
+const { handleDrop, handleDragover, handleMousedown } = useHandleDrag()
 </script>
 
 <style scoped lang="scss">
@@ -32,10 +43,6 @@ const componentStore = useComponentStore()
   width: v-bind(canvasWidth);
   height: v-bind(canvasHeight);
   background-color: var(--theme-canvas-bg);
-  .component {
-    position: absolute;
-    top: 10px;
-    height: 10px;
-  }
+  user-select: none;
 }
 </style>
