@@ -13,6 +13,15 @@
     "format": "prettier --write src/",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*.{jsx,ts,tsx,vue}": [
+      "prettier --write .",
+      "eslint --fix"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "@designer/ui": "workspace:*",
     "pinia": "^2.0.32",

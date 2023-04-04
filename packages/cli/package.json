@@ -1,0 +1,17 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "designer-ui.umd.js",
+  "module": "designer-ui.mjs",
+  "scripts": {
+    "build:components": "node ./commands/build.js",
+    "build:lib": "pnpm build:components && cp package.json ../ui/dist && cp README.md ../ui/dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fs-extra": "^11.1.1"
+  }
+}

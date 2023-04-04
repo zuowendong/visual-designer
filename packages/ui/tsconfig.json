@@ -1,13 +1,11 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "types/*"],
-  "exclude": ["src/**/__tests__/*"],
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "types/*": ["./types/*"]
-    }
-  }
+    "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "isolatedModules": true,
+    "allowJs": true
+  },
+  "include": ["**/*.ts", "**/src/*.tsx", "index.ts"],
+  "exclude": []
 }
