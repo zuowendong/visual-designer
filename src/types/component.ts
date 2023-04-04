@@ -1,7 +1,10 @@
-export interface IComponent {
+export interface IComponentMenu {
   id: string
   name?: string
   key: string
+}
+
+export interface IComponent extends IComponentMenu {
   style: ICompStyle
 }
 

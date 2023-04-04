@@ -17,14 +17,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { IComponent } from '@/types'
+import type { IComponentMenu } from '@/types'
 
-let componentList = ref<IComponent[]>([
+let componentList = ref<IComponentMenu[]>([
   { id: '1', name: '文字标签', key: 'WdText' },
   { id: '2', name: '下拉框', key: 'WdSelect' }
 ])
 
-function handleDragStart(e: DragEvent, compItem: IComponent) {
+function handleDragStart(e: DragEvent, compItem: IComponentMenu) {
   e.dataTransfer?.setData('component', compItem.key)
 }
 </script>
