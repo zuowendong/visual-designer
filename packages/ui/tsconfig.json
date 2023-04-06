@@ -4,7 +4,9 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "isolatedModules": true,
-    "allowJs": true
+    "allowJs": true,
+    "declaration": true,
+    "declarationDir": "./dist/types"
   },
   "include": ["**/*.ts", "**/src/*.tsx", "index.ts"],
   "exclude": []

@@ -5,8 +5,8 @@ import App from './App.vue'
 import router from './router'
 
 import './style/index.scss'
-// import WdUI from '@designer/ui'
-import WdUI from '../packages/ui/dist'
+import WdUI from '@designer/ui'
+// import WdUI from '../packages/ui/dist'
 
 import { i18n } from '@/lang'
 

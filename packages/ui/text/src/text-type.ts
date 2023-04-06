@@ -8,10 +8,17 @@ export type TextStyle = {
 export const textProps = {
   text: {
     type: String,
-    required: true
+    required: true,
+    default: '文字标签'
   },
   style: {
-    type: Object as PropType<TextStyle>
+    type: Object as PropType<TextStyle>,
+    default: (): TextStyle => {
+      return {
+        fontSize: 26,
+        color: 'rgba(51, 51, 51, 1)'
+      }
+    }
   }
 } as const
 

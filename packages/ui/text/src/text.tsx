@@ -7,7 +7,7 @@ export default defineComponent({
   emits: [],
   setup(props: TextProps, ctx) {
     const textStyle = computed(() => {
-      return `color: ${props.style?.color}; fontSize: ${props.style?.fontSize}px;`
+      return `color: ${props.style?.color}; font-size: ${props.style?.fontSize}px;`
     })
     return () => <div style={textStyle.value}>{props.text}</div>
   }

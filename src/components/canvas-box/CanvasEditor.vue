@@ -6,6 +6,7 @@
     @dragover="handleDragover"
     @mousedown="handleMousedown"
   >
+    <WdText :text="WdTextVal" />
     <span>{{ componentStore.componentMap }}</span>
     <ShapeBox
       v-for="comp in componentStore.componentMap"
@@ -27,6 +28,8 @@ import { useDragComponent } from '@/hooks/dragComponent'
 
 let canvasWidth = ref('')
 let canvasHeight = ref('')
+
+let WdTextVal = ref('11111111')
 
 const canvasStore = useCanvasStore()
 watch(
