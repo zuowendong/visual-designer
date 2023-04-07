@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import Text from './src/text'
+import Text from './text'
 
 Text.install = function (app: App): void {
   app.component(Text.name, Text)

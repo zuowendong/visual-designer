@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import Tree from './src/tree'
+import Tree from './tree'
 
 Tree.install = function (app: App): void {
   app.component(Tree.name, Tree)

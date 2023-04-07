@@ -2,12 +2,30 @@
   "name": "@designer/ui",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/designer-ui.mjs",
-  "module": "./dist/designer-ui.mjs",
+  "main": "./es/index.js",
+  "module": "./es/index.js",
+  "types": "./es/types/index.d.ts",
+  "files": [
+    "es"
+  ],
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./es/index.js"
+    }
+  },
+  "sideEffects": [
+    "es/**/style/*",
+    "es/style.js",
+    "*.css"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vite-plugin-dts": "^2.2.0"
+  }
 }
