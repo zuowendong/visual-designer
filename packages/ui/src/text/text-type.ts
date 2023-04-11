@@ -1,9 +1,4 @@
-import type { PropType, ExtractPropTypes } from 'vue'
-
-export type TextStyle = {
-  fontSize: Number
-  color: String
-}
+import type { ExtractPropTypes } from 'vue'
 
 export const textProps = {
   text: {
@@ -11,14 +6,13 @@ export const textProps = {
     required: true,
     default: '文字标签'
   },
-  style: {
-    type: Object as PropType<TextStyle>,
-    default: (): TextStyle => {
-      return {
-        fontSize: 26,
-        color: 'rgba(51, 51, 51, 1)'
-      }
-    }
+  fontSize: {
+    type: Number,
+    default: 26
+  },
+  color: {
+    type: String,
+    default: 'rgba(51, 51, 51, 1)'
   }
 } as const
 

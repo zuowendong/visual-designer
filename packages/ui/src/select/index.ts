@@ -1,16 +1,18 @@
 import type { App } from 'vue'
 import staticData from '../utils'
 
-import Tree from './tree'
+import Select from './select'
+import { properties } from './prop'
 
 staticData.setStaticData({
-  component: Tree
+  component: Select,
+  properties
 })
 
-export { Tree }
+export { Select }
 
 export default {
   install(app: App): void {
-    app.use(Tree as any)
+    app.use(Select as any)
   }
 }

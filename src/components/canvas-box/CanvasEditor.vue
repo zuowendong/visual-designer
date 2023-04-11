@@ -6,7 +6,7 @@
     @dragover="handleDragover"
     @mousedown="handleMousedown"
   >
-    <WdText :text="WdTextVal" />
+    <WdText />
     <span>{{ componentStore.componentMap }}</span>
     <ShapeBox
       v-for="comp in componentStore.componentMap"
@@ -25,11 +25,23 @@ import { useCanvasStore } from '@/stores/canvas'
 import { useComponentStore } from '@/stores/component'
 import ShapeBox from './ShapeBox.vue'
 import { useDragComponent } from '@/hooks/dragComponent'
+import { staticData } from '@designer/ui'
+
+console.log(111111, staticData.getStaticData())
+
+async function test() {
+  staticData.getJsonDataArray().then((dataArray) => {
+    // 在控制台中输出数组
+    console.log(222222, dataArray)
+  })
+}
+
+test()
 
 let canvasWidth = ref('')
 let canvasHeight = ref('')
 
-let WdTextVal = ref('11111111')
+// let WdTextVal = ref('Component map data')
 
 const canvasStore = useCanvasStore()
 watch(

@@ -1,15 +1,17 @@
 import type { App } from 'vue'
-import Text from './text'
+import staticData from '../utils'
 
-Text.install = function (app: App): void {
-  app.component(Text.name, Text)
-}
+import Text from './text'
+import { properties } from './prop'
+
+staticData.setStaticData({
+  component: Text,
+  properties
+})
 
 export { Text }
 
 export default {
-  title: '文字标签',
-  category: '通用',
   install(app: App): void {
     app.use(Text as any)
   }
