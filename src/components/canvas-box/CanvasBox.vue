@@ -9,9 +9,12 @@ import { onMounted, ref } from 'vue'
 import CanvasEditor from './CanvasEditor.vue'
 import { useCanvasStore } from '@/stores/canvas'
 
-let canvasRef = ref(null)
+let canvasRef = ref<HTMLDivElement>()
 const canvasStore = useCanvasStore()
-onMounted(() => canvasStore.initSize(canvasRef.value as unknown as HTMLElement))
+onMounted(() => {
+  if (!canvasRef.value) return
+  canvasStore.initSize(canvasRef.value)
+})
 </script>
 
 <style scoped lang="scss">

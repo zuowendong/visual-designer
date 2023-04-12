@@ -9,7 +9,7 @@ export function useShapeMove() {
   const componentStore = useComponentStore()
 
   function shapeMousedown(e: MouseEvent, compItem: IComponent) {
-    componentStore.setCurrentComp(compItem.id)
+    componentStore.setCurrentComp(compItem)
     cursors = getCursorDirection()
 
     const initialX = e.clientX
@@ -26,7 +26,10 @@ export function useShapeMove() {
         x: originalX + (moveAfterX - initialX),
         y: originalY + (moveAfterY - initialY)
       }
-      componentStore.updateComponentStyle(newPosition)
+      componentStore.updateComponentStyle({
+        ...componentPosition,
+        ...newPosition
+      })
     }
 
     function up() {

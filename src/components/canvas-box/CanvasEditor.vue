@@ -6,15 +6,17 @@
     @dragover="handleDragover"
     @mousedown="handleMousedown"
   >
-    <WdText />
-    <span>{{ componentStore.componentMap }}</span>
+    <WdText :text="WdTextVal" />
+    <span>{{ componentStore.componentList }}</span>
     <ShapeBox
-      v-for="comp in componentStore.componentMap"
-      :key="comp[0]"
-      :element="comp[1]"
-      :is-active="comp[0] === componentStore.currentComponent.id"
+      v-for="(comp, index) of componentStore.componentList"
+      :key="comp.id"
+      :element="comp"
+      :is-active="comp.id === componentStore.currentComponent.id"
+      :tabindex="index"
+      @keydown.stop="handleKeyDown($event, comp.id)"
     >
-      <component :is="comp[1].key"></component>
+      <component :is="comp.key"></component>
     </ShapeBox>
   </div>
 </template>
@@ -25,23 +27,11 @@ import { useCanvasStore } from '@/stores/canvas'
 import { useComponentStore } from '@/stores/component'
 import ShapeBox from './ShapeBox.vue'
 import { useDragComponent } from '@/hooks/dragComponent'
-import { staticData } from '@designer/ui'
-
-console.log(111111, staticData.getStaticData())
-
-async function test() {
-  staticData.getJsonDataArray().then((dataArray) => {
-    // 在控制台中输出数组
-    console.log(222222, dataArray)
-  })
-}
-
-test()
 
 let canvasWidth = ref('')
 let canvasHeight = ref('')
 
-// let WdTextVal = ref('Component map data')
+let WdTextVal = ref('Component map data')
 
 const canvasStore = useCanvasStore()
 watch(
@@ -55,6 +45,12 @@ watch(
 const componentStore = useComponentStore()
 const editorRef = ref<HTMLElement | null>(null)
 const { handleDrop, handleDragover, handleMousedown } = useDragComponent()
+
+function handleKeyDown(event: KeyboardEvent, id: string) {
+  if (event.key === 'Delete') {
+    componentStore.deleteComponent(id)
+  }
+}
 </script>
 
 <style scoped lang="scss">

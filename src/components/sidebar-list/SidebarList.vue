@@ -9,19 +9,74 @@
         draggable="true"
         @dragstart="handleDragStart($event, compItem)"
       >
+        <span>{{ compItem.id }}</span>
         <span>{{ compItem.name }}</span>
       </div>
+
+      <MenuTree :data="treeData" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import type { IComponentMenu } from '@/types'
+import { staticData } from '@designer/ui'
+import MenuTree from './tree/tree'
+import { TreeData } from './tree/tree-types'
 
-let componentList = ref<IComponentMenu[]>([
-  { id: '1', name: '文字标签', key: 'WdText' },
-  { id: '2', name: '下拉框', key: 'WdSelect' }
+export interface ComponentMenu {
+  category: string
+  categoryName: string
+  label: string
+  name: string
+}
+
+let componentList = ref<IComponentMenu[]>([])
+async function getComponentList() {
+  staticData.getJsonDataArray().then((list: ComponentMenu[]) => {
+    componentList.value = list.map((item, index): IComponentMenu => {
+      return {
+        ...item,
+        id: (index + 1).toString(),
+        key: item.label
+      }
+    })
+
+    console.log('menus', componentList.value)
+  })
+}
+onMounted(() => getComponentList())
+
+const treeData = ref<TreeData>([
+  {
+    label: '一级1',
+    level: 1,
+    open: true,
+    children: [
+      {
+        label: '二级1-1',
+        level: 2,
+        children: [{ label: '三级1-1-1', level: 3 }]
+      }
+    ]
+  },
+  {
+    label: '一级2',
+    level: 1,
+    open: false,
+    children: [
+      {
+        label: '二级2-1',
+        level: 2
+      },
+      {
+        label: '二级2-2',
+        level: 2,
+        children: [{ label: '三级级2-2-1', level: 3 }]
+      }
+    ]
+  }
 ])
 
 function handleDragStart(e: DragEvent, compItem: IComponentMenu) {
