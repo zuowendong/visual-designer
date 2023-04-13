@@ -2,17 +2,19 @@
 @import './dark.scss';
 
 :root {
-  --theme-color: #{$light-color} !important;
-  --theme-bg: #{$light-bg} !important;
-  --theme-border: #{$light-border} !important;
-  --theme-canvas-bg: #{$light-canvas-bg} !important;
-  --theme-active: #{$light-active} !important;
+  --theme-text: #{$light-text};
+  --theme-color: #{$light-color};
+  --theme-bg: #{$light-bg};
+  --theme-border: #{$light-border};
+  --theme-canvas-bg: #{$light-canvas-bg};
+  --theme-active: #{$light-active};
 }
 
 .dark {
-  --theme-color: #{$dark-color} !important;
-  --theme-bg: #{$dark-bg} !important;
-  --theme-border: #{$dark-border} !important;
-  --theme-canvas-bg: #{$dark-canvas-bg} !important;
-  --theme-active: #{$dark-active} !important;
+  --theme-text: #{$dark-text};
+  --theme-color: #{$dark-color};
+  --theme-bg: #{$dark-bg};
+  --theme-border: #{$dark-border};
+  --theme-canvas-bg: #{$dark-canvas-bg};
+  --theme-active: #{$dark-active};
 }

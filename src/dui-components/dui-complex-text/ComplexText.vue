@@ -72,7 +72,10 @@ let textData = ref<TextData>({
     display: flex;
     flex-direction: column;
     .label {
+      box-sizing: border-box;
       margin-top: 4px;
+      padding-left: 10px;
+      color: var(--theme-text);
     }
   }
 }

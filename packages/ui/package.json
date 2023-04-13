@@ -26,6 +26,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "vite": "^4.1.4",
     "vite-plugin-dts": "^2.2.0"
   }
 }
