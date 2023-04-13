@@ -1,7 +1,7 @@
 <template>
   <div class="text">
-    <div class="label">样式</div>
-    <DuiComplexText />
+    <div class="label">基本配置</div>
+    <DuiComplexBase />
   </div>
   <div class="text">
     <div class="label">样式</div>
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { DuiComplexText } from '@/dui-components'
+import { DuiComplexText, DuiComplexBase } from '@/dui-components'
 </script>
 
 <style scoped lang="scss">
@@ -18,7 +18,8 @@ import { DuiComplexText } from '@/dui-components'
   display: flex;
   padding-bottom: 30px;
   .label {
-    width: 60px;
+    flex-shrink: 0;
+    width: 34px;
     padding-top: 4px;
     padding-right: 5px;
     margin-right: 15px;

@@ -1,10 +1,4 @@
-import type { PropType } from 'vue'
 import { PropertyData } from '../env'
-
-type FontText = {
-  fontSize: number
-  color: string
-}
 
 export const properties: PropertyData[] = [
   {
@@ -14,14 +8,12 @@ export const properties: PropertyData[] = [
       {
         name: '宽度',
         key: 'width',
-        type: Number,
         compKey: 'dui-input-number',
         value: 200
       },
       {
         name: '高度',
         key: 'height',
-        type: String,
         compKey: 'dui-input-number',
         value: 30
       }
@@ -34,7 +26,6 @@ export const properties: PropertyData[] = [
       {
         name: '文本',
         key: 'fontText',
-        type: Object as PropType<FontText>,
         required: true,
         compKey: 'dui-input-text',
         value: {
