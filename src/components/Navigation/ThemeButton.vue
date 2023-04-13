@@ -8,14 +8,16 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { setTheme } from '@/utils/theme'
+import { useThemeStore } from '@/stores/theme'
 import { getLocalStorage, setLocalStorage } from '@/utils/storage'
+
+const themeStore = useThemeStore()
 
 let isDark = ref(false)
 function handleSwitch() {
   isDark.value = !isDark.value
   let type = isDark.value ? 'dark' : 'light'
-  setTheme(type)
+  themeStore.setTheme(type)
   setLocalStorage('theme', type)
 }
 
@@ -23,7 +25,7 @@ function initTheme() {
   let theme = getLocalStorage('theme')
   if (theme) {
     isDark.value = theme === 'light' ? false : true
-    setTheme(theme)
+    themeStore.setTheme(theme)
   }
 }
 onMounted(() => initTheme())

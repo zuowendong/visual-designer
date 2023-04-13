@@ -11,7 +11,9 @@
       </div>
     </div>
     <div class="operationBox">
-      <component :is="currentTab"></component>
+      <n-config-provider :theme="themeStore.naiveTheme">
+        <component :is="currentTab"></component>
+      </n-config-provider>
     </div>
   </div>
 </template>
@@ -22,6 +24,9 @@ import { useI18n } from 'vue-i18n'
 import ComponentProperty from './ComponentProperty.vue'
 import ComponentData from './ComponentData.vue'
 import ComponentEvent from './ComponentEvent.vue'
+import { useThemeStore } from '@/stores/theme'
+
+const themeStore = useThemeStore()
 
 const { t } = useI18n()
 const TABS = reactive([
