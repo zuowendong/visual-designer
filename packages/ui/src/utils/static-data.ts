@@ -8,7 +8,7 @@ type OptionsData = {
 }
 
 class StaticData {
-  constructor(private component: any = 'unkonow') {}
+  constructor() {}
 
   async setStaticData(options: OptionsData) {
     const { component, properties } = options
@@ -18,16 +18,10 @@ class StaticData {
     }
 
     component.staticData = {
-      props: properties ? formatPropType(properties) : null
-    }
-
-    this.component = component
-  }
-
-  getStaticData() {
-    const { name, ...params } = this.component
-    return {
-      [name]: params.staticData
+      props: properties ? formatPropType(properties) : null,
+      data: null,
+      events: null,
+      functions: null
     }
   }
 
@@ -44,6 +38,11 @@ class StaticData {
       }
     }
     return dataArray
+  }
+
+  async fetchComponent(keyPath: string) {
+    const file = await import(`../${keyPath}/${keyPath}.tsx`)
+    return file.default
   }
 }
 

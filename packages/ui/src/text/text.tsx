@@ -7,7 +7,7 @@ export default defineComponent({
   emits: [],
   setup(props: TextProps) {
     const textStyle = computed(() => {
-      return `color: ${props.color}; font-size: ${props.fontSize}px;`
+      return `width: 100%; height: 100%; color: ${props.fontStyle.color}; font-size: ${props.fontStyle.fontSize}px; font-weight: ${props.fontStyle.fontWeight}; letter-spacing: ${props.fontStyle.letterSpacing}px; line-height: ${props.fontStyle.lineHeight}px; text-align: ${props.fontStyle.textAlign}`
     })
     return () => (
       <div class="wd-text_default" style={textStyle.value}>

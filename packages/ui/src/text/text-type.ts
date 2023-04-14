@@ -1,4 +1,14 @@
-import type { ExtractPropTypes } from 'vue'
+import type { PropType, ExtractPropTypes } from 'vue'
+
+type FontStyle = {
+  fontSize: number
+  color: string
+  fontWeight: string
+  letterSpacing: number
+  lineHeight: number
+  textAlign: string
+  [k: string]: any
+}
 
 export const textProps = {
   text: {
@@ -6,13 +16,18 @@ export const textProps = {
     required: true,
     default: '文字标签'
   },
-  fontSize: {
-    type: Number,
-    default: 26
-  },
-  color: {
-    type: String,
-    default: 'rgba(51, 51, 51, 1)'
+  fontStyle: {
+    type: Object as PropType<FontStyle>,
+    default: (): FontStyle => {
+      return {
+        fontSize: 24,
+        color: '#3D39B1FF',
+        fontWeight: 'normal',
+        letterSpacing: 0,
+        lineHeight: 30,
+        textAlign: 'center'
+      }
+    }
   }
 } as const
 

@@ -21,19 +21,20 @@ export const properties: PropertyData[] = [
   },
   {
     id: 'style',
-    name: '文字样式',
+    name: '样式',
     attrs: [
       {
-        name: '字号',
-        key: 'fontSize',
-        compKey: 'dui-input-number',
-        value: 24
-      },
-      {
-        name: '颜色',
-        key: 'color',
-        compKey: 'dui-color-picker',
-        value: 'rgba(51, 51, 51, 1)'
+        name: '字体',
+        key: 'fontStyle',
+        compKey: 'dui-complex-text',
+        value: {
+          fontSize: 24,
+          color: '#3D39B1FF',
+          fontWeight: 'normal',
+          letterSpacing: 0,
+          lineHeight: 30,
+          textAlign: 'center'
+        }
       }
     ]
   },
