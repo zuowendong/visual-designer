@@ -53,7 +53,7 @@ const { shapeMousedown, cursorPoints, pointStyle, cursorMousedown } = useShapeMo
     background-color: var(--theme-bg);
     border: 1px solid var(--theme-active);
     border-radius: 50%;
-    z-index: 1;
+    z-index: 0;
   }
 }
 </style>

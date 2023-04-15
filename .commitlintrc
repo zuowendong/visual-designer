@@ -13,7 +13,8 @@
         "test",
         "build",
         "docs",
-        "chore"
+        "chore",
+        "style"
       ]
     ],
     "subject-max-length": [

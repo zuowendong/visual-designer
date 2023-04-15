@@ -15,7 +15,11 @@
       :tabindex="index"
       @keydown.stop="handleKeyDown($event, comp.id)"
     >
-      <component :is="comp.key" v-bind="comp.style"></component>
+      <component
+        :style="compCommonStyle(comp.style)"
+        :is="comp.key"
+        v-bind="comp.style"
+      ></component>
     </ShapeBox>
   </div>
 </template>
@@ -26,6 +30,7 @@ import { useCanvasStore } from '@/stores/canvas'
 import { useComponentStore } from '@/stores/component'
 import ShapeBox from './ShapeBox.vue'
 import { useDragComponent } from '@/hooks/dragComponent'
+import { ICompStyle } from '@/types'
 
 let canvasWidth = ref('')
 let canvasHeight = ref('')
@@ -49,6 +54,10 @@ function handleKeyDown(event: KeyboardEvent, id: string) {
   if (event.key === 'Delete') {
     componentStore.deleteComponent(id)
   }
+}
+
+function compCommonStyle(style: ICompStyle) {
+  return `background-color: ${style.bgColor}`
 }
 </script>
 
