@@ -20,7 +20,7 @@ function addBaseConfig(id: string) {
         name: '背景颜色',
         key: 'bgColor',
         compKey: 'dui-color-picker',
-        value: '#3D39B1FF'
+        value: '#FFFFFF'
       },
       {
         name: '层级',

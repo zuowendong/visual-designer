@@ -15,7 +15,7 @@ export const properties: PropertyData[] = [
         name: '高度',
         key: 'height',
         compKey: 'dui-input-number',
-        value: 30
+        value: 100
       }
     ]
   },
@@ -29,10 +29,10 @@ export const properties: PropertyData[] = [
         compKey: 'dui-complex-text',
         value: {
           fontSize: 24,
-          color: '#3D39B1FF',
+          color: '#333333',
           fontWeight: 'normal',
           letterSpacing: 0,
-          lineHeight: 30,
+          lineHeight: 100,
           textAlign: 'center'
         }
       }

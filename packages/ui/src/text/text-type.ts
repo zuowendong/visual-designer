@@ -21,10 +21,10 @@ export const textProps = {
     default: (): FontStyle => {
       return {
         fontSize: 24,
-        color: '#3D39B1FF',
+        color: '#333333',
         fontWeight: 'normal',
         letterSpacing: 0,
-        lineHeight: 30,
+        lineHeight: 100,
         textAlign: 'center'
       }
     }

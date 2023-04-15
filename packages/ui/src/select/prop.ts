@@ -24,13 +24,16 @@ export const properties: PropertyData[] = [
     name: '样式',
     attrs: [
       {
-        name: '文本',
-        key: 'fontText',
-        required: true,
-        compKey: 'dui-input-text',
+        name: '字体',
+        key: 'fontStyle',
+        compKey: 'dui-complex-text',
         value: {
-          fontSize: 20,
-          color: 'red'
+          fontSize: 24,
+          color: '#333333',
+          fontWeight: 'normal',
+          letterSpacing: 0,
+          lineHeight: 100,
+          textAlign: 'center'
         }
       }
     ]
