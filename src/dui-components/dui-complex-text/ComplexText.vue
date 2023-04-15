@@ -27,6 +27,10 @@
   </div>
 </template>
 
+<script lang="ts">
+export default { name: 'DuiComplexText' }
+</script>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 import { fontWeight_options, textAlign_options } from './options-data'

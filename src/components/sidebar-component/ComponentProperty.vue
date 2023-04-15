@@ -1,47 +1,66 @@
 <template>
   <div class="propertyMain">
-    <div v-for="(item) of propConfigs" :key="item.id" class="text">
-      <div class="label" @click="handleToggle(item)">{{ item.label }}</div>
-      <div v-show="item.open" class="componentBox">
-        <component :is="item.component"></component>
+    <div
+      v-for="(configItem, key) of componentStore.componentPropConfig"
+      :key="key"
+      class="configItem"
+    >
+      <div class="title">{{ configItem.name }}</div>
+      <div v-for="(item, itemKey) of configItem.props" :key="itemKey" class="propItem">
+        <div class="label">{{ item.name }}</div>
+        <component :is="item.compKey"></component>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { DuiComplexText, DuiComplexBase } from '@/dui-components'
+import { useComponentStore } from '@/stores/component'
 
-const propConfigs = ref<any>([
-  {
-    id: 1, label: '基本配置', component: DuiComplexBase, open: true
-  },
-  {
-    id: 2, label: '样式', component: DuiComplexText, open: true
-  },
-])
-
-function handleToggle(data: any) {
-  console.log(data)
-  data.open = !data.open
-}
+const componentStore = useComponentStore()
 </script>
 
 <style scoped lang="scss">
-.text {
-  display: flex;
-  padding-bottom: 30px;
-
-  .label {
-    flex-shrink: 0;
-    width: 34px;
-    padding-top: 4px;
-    padding-right: 5px;
-    margin-right: 15px;
-    border-right: 1px solid var(--theme-border);
-    user-select: none;
-    cursor: pointer;
+.propertyMain {
+  .configItem {
+    padding-bottom: 30px;
+    .title {
+      font-size: 16px;
+      padding-bottom: 12px;
+      user-select: none;
+      cursor: pointer;
+    }
+    .propItem {
+      display: flex;
+      padding-bottom: 20px;
+      .label {
+        flex-shrink: 0;
+        width: 34px;
+        padding-top: 4px;
+        padding-right: 5px;
+        margin-right: 15px;
+        border-right: 1px solid var(--theme-border);
+      }
+      .hiddenCompBox {
+        flex: 1;
+        position: relative;
+        &::before {
+          position: absolute;
+          top: 12px;
+          width: 90%;
+          height: 1px;
+          content: '...';
+          background: var(--theme-border);
+          z-index: 0;
+        }
+        i {
+          position: absolute;
+          right: 10px;
+          color: var(--theme-color);
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
 </style>

@@ -1,4 +1,4 @@
-export interface IComponentMenu {
+export interface IComponentBase {
   id: string
   name?: string
   key: string
@@ -7,7 +7,7 @@ export interface IComponentMenu {
   category?: string
 }
 
-export interface IComponent extends IComponentMenu {
+export interface IComponent extends IComponentBase {
   style: ICompStyle
 }
 
@@ -17,4 +17,25 @@ export interface ICompStyle {
   x: number
   y: number
   [k: string]: any
+}
+
+export interface ICompStaticData {
+  data: null
+  events: null
+  functions: null
+  props: ICompProps | null
+}
+
+export interface ICompProps {
+  [k: string]: {
+    name: string
+    open?: Boolean
+    props: {
+      [k: string]: {
+        name: string
+        compKey: string
+        value: any
+      }
+    }
+  }
 }

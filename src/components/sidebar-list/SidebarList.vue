@@ -20,10 +20,12 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import type { IComponentMenu } from '@/types'
+import type { IComponentBase } from '@/types'
 import { staticData } from '@designer/ui'
 import MenuTree from './tree/tree'
 import { TreeData } from './tree/tree-types'
+import { componentInstall } from '@/utils/component'
+import { useComponentStore } from '@/stores/component'
 
 export interface ComponentMenu {
   category: string
@@ -32,10 +34,10 @@ export interface ComponentMenu {
   name: string
 }
 
-let componentList = ref<IComponentMenu[]>([])
+let componentList = ref<IComponentBase[]>([])
 async function getComponentList() {
   staticData.getJsonDataArray().then((list: ComponentMenu[]) => {
-    componentList.value = list.map((item, index): IComponentMenu => {
+    componentList.value = list.map((item, index): IComponentBase => {
       return {
         ...item,
         id: (index + 1).toString(),
@@ -79,8 +81,18 @@ const treeData = ref<TreeData>([
   }
 ])
 
-function handleDragStart(e: DragEvent, compItem: IComponentMenu) {
+const componentStore = useComponentStore()
+function handleDragStart(e: DragEvent, compItem: IComponentBase) {
   e.dataTransfer?.setData('component', compItem.key)
+
+  console.log(compItem.key)
+
+  const keyPath = compItem.key.substring(2).toLowerCase()
+  staticData.fetchComponent(keyPath).then((module) => {
+    const { staticData } = module
+    componentInstall(compItem.key, module)
+    componentStore.setComponentProps(compItem.key, staticData)
+  })
 }
 </script>
 

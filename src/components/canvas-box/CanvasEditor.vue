@@ -6,7 +6,6 @@
     @dragover="handleDragover"
     @mousedown="handleMousedown"
   >
-    <WdText :text="WdTextVal" />
     <span>{{ componentStore.componentList }}</span>
     <ShapeBox
       v-for="(comp, index) of componentStore.componentList"

@@ -1,3 +1,9 @@
-import type { IComponentMenu, IComponent, ICompStyle } from './component'
+import type {
+  IComponentBase,
+  IComponent,
+  ICompStyle,
+  ICompStaticData,
+  ICompProps
+} from './component'
 
-export { IComponentMenu, IComponent, ICompStyle }
+export { IComponentBase, IComponent, ICompStyle, ICompStaticData, ICompProps }

@@ -19,13 +19,17 @@
   </div>
 </template>
 
+<script lang="ts">
+export default { name: 'DuiComplexBase' }
+</script>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 
 type BaseData = {
-  x: number,
-  y: number,
-  bgColor: string,
+  x: number
+  y: number
+  bgColor: string
   zIndex: number
 }
 
@@ -33,7 +37,7 @@ const props = defineProps({
   x: { type: Number, default: 0 },
   y: { type: Number, default: 0 },
   bgColor: { type: String, default: '' },
-  zIndex: { type: Number, default: 0 },
+  zIndex: { type: Number, default: 0 }
 })
 
 let baseData = ref<BaseData>({
@@ -67,4 +71,5 @@ let baseData = ref<BaseData>({
     grid-column-start: 1;
     grid-column-end: 3;
   }
-}</style>
+}
+</style>
