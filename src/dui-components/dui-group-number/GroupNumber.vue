@@ -1,11 +1,17 @@
 <template>
   <div class="baseBox">
     <div class="rowItem">
-      <n-input-number v-model:value="posData.x" />
+      <n-input-number
+        v-model:value="posData.x"
+        @update:value="(data: number) => handleUpdate(data, posData.y)"
+      />
       <span class="label">X</span>
     </div>
     <div class="rowItem">
-      <n-input-number v-model:value="posData.y" />
+      <n-input-number
+        v-model:value="posData.y"
+        @update:value="(data: number) => handleUpdate(posData.x, data)"
+      />
       <span class="label">Y</span>
     </div>
   </div>
@@ -16,7 +22,7 @@ export default { name: 'DuiGroupNumber' }
 </script>
 
 <script setup lang="ts">
-import { ref, PropType } from 'vue'
+import { ref, PropType, watch } from 'vue'
 
 type PosData = {
   x: number
@@ -32,8 +38,20 @@ const props = defineProps({
     }
   }
 })
+const emits = defineEmits(['change'])
 
 let posData = ref<PosData>(props.attrValue)
+watch(
+  () => props.attrValue,
+  ({ x, y }) => {
+    posData.value = { x, y }
+  },
+  { deep: true }
+)
+
+function handleUpdate(x: number, y: number) {
+  emits('change', { x, y, position: { x, y } })
+}
 </script>
 
 <style lang="scss" scoped>

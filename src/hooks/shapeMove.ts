@@ -28,7 +28,8 @@ export function useShapeMove() {
       }
       componentStore.updateComponentStyle({
         ...componentPosition,
-        ...newPosition
+        ...newPosition,
+        position: newPosition
       })
     }
 

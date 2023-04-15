@@ -18,7 +18,8 @@ export function useComponent() {
         width,
         height,
         x,
-        y
+        y,
+        position: { x, y }
       }
     }
   }

@@ -16,9 +16,7 @@ export function useDragComponent() {
 
   function handleDrop(e: DragEvent, dom: HTMLElement | null) {
     e.preventDefault()
-
     const compKey = e.dataTransfer?.getData('component') as string
-
     let initCompData = reactive<ICompFactory>({ key: '', width: 100, height: 100, x: 0, y: 0 })
     if (dom) {
       const { x, y } = getInitCompPosition(e, dom)
