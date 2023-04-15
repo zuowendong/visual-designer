@@ -15,35 +15,56 @@ export const useComponentStore = defineStore('component', () => {
   }
 
   function addComponent(compData: IComponent) {
-    componentList.value.push(compData)
-
     const staticData = getComponentProps(compData.key)
-    console.log(staticData)
+    let initCompData: ICompStaticData = { data: null, events: null, functions: null, props: {} }
+    if (staticData) {
+      initCompData = initCompStaticData(staticData, false)
+    }
+    const { props } = initCompData
+    componentList.value.push({
+      ...compData,
+      style: {
+        ...compData.style,
+        ...props
+      }
+    })
   }
 
   const componentPropConfig = ref<ICompProps>({})
-  function initCompStaticData(staticData: ICompStaticData) {
+  function initCompStaticData(staticData: ICompStaticData, isConfig: boolean) {
+    const componentData: ICompStaticData = { data: null, events: null, functions: null, props: {} }
     const keys = Object.keys(staticData)
     for (let i = 0; i < keys.length; i++) {
       if (keys[i] === 'props') {
-        if (!staticData.props) return
-        // init component prop config
-        componentPropConfig.value = staticData.props
+        if (!staticData.props) break
+        if (isConfig) {
+          // init component prop config
+          componentPropConfig.value = staticData.props
+        } else {
+          componentData.props = initCompProps(staticData.props)
+        }
       }
       if (keys[i] === 'events') {
-        if (!staticData.events) return
+        if (!staticData.events) break
       }
       if (keys[i] === 'data') {
-        if (!staticData.props) return
+        if (!staticData.props) break
       }
       if (keys[i] === 'functions') {
-        if (!staticData.props) return
+        if (!staticData.props) break
       }
     }
+    return componentData
   }
 
   function initCompProps(props: ICompProps) {
-    // 初始化值塞入 current
+    const componentStyle: { [k: string]: any } = {}
+    Object.keys(props).forEach((key) => {
+      Object.keys(props[key].props).forEach((prop) => {
+        componentStyle[prop] = props[key].props[prop].value
+      })
+    })
+    return componentStyle
   }
 
   const currentComponent = ref<IComponent>({
@@ -61,18 +82,23 @@ export const useComponentStore = defineStore('component', () => {
       // init component static data
       const staticData = getComponentProps(compData.key)
       if (staticData) {
-        initCompStaticData(staticData)
+        initCompStaticData(staticData, true)
       }
     } else {
       resetCurrentComponent()
     }
   }
   function updateComponentStyle(compStyle: ICompStyle) {
-    const { x, y, width, height } = compStyle
+    const { x, y, width, height, ...style } = compStyle
     if (x) currentComponent.value.style.x = Math.round(x)
     if (y) currentComponent.value.style.y = Math.round(y)
     if (width) currentComponent.value.style.width = Math.round(width)
     if (height) currentComponent.value.style.height = Math.round(height)
+
+    currentComponent.value.style = {
+      ...currentComponent.value.style,
+      ...style
+    }
   }
 
   function deleteComponent(id: string) {

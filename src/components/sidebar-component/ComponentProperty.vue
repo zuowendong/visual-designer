@@ -8,7 +8,12 @@
       <div class="title">{{ configItem.name }}</div>
       <div v-for="(item, itemKey) of configItem.props" :key="itemKey" class="propItem">
         <div class="label">{{ item.name }}</div>
-        <component :is="item.compKey"></component>
+        <component
+          :is="item.compKey"
+          :attr-key="itemKey"
+          :attr-value="componentStore.currentComponent.style[itemKey]"
+          @change="handleChange"
+        ></component>
       </div>
     </div>
   </div>
@@ -16,14 +21,19 @@
 
 <script setup lang="ts">
 import { useComponentStore } from '@/stores/component'
+import type { ICompStyle } from '@/types'
 
 const componentStore = useComponentStore()
+
+function handleChange(propStyle: ICompStyle) {
+  componentStore.updateComponentStyle(propStyle)
+}
 </script>
 
 <style scoped lang="scss">
 .propertyMain {
   .configItem {
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     .title {
       font-size: 16px;
       padding-bottom: 12px;

@@ -1,8 +1,19 @@
 import type { App } from 'vue'
 import DuiComplexText from './dui-complex-text/ComplexText.vue'
 import DuiComplexBase from './dui-complex-base/ComplexBase.vue'
+import DuiInputText from './dui-input-text/InputText.vue'
+import DuiInputNumber from './dui-input-number/InputNumber.vue'
+import DuiGroupNumber from './dui-group-number/GroupNumber.vue'
+import DuiColorPicker from './dui-color-picker/ColorPicker.vue'
 
-const installs = [DuiComplexText, DuiComplexBase]
+const installs = [
+  DuiComplexText,
+  DuiComplexBase,
+  DuiInputText,
+  DuiInputNumber,
+  DuiGroupNumber,
+  DuiColorPicker
+]
 
 export default {
   install(app: App): void {

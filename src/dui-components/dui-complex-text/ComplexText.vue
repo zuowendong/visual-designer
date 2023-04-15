@@ -32,7 +32,7 @@ export default { name: 'DuiComplexText' }
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { PropType, ref } from 'vue'
 import { fontWeight_options, textAlign_options } from './options-data'
 
 type TextData = {
@@ -46,24 +46,22 @@ type TextData = {
 }
 
 const props = defineProps({
-  fontSize: { type: Number, default: 24 },
-  color: { type: String, default: '#3D39B1FF' },
-  fontWeight: { type: String, default: 'normal' },
-  fontStyle: { type: String, default: 'normal' },
-  letterSpacing: { type: Number, default: 0 },
-  lineHeight: { type: Number, default: 30 },
-  textAlign: { type: String, default: 'center' },
-  textDecoration: { type: String, default: 'none' }
+  attrKey: { type: String, default: '' },
+  attrValue: {
+    type: Object as PropType<TextData>,
+    default: (): TextData => {
+      return {
+        fontSize: 24,
+        color: '#3D39B1FF',
+        fontWeight: 'normal',
+        letterSpacing: 0,
+        lineHeight: 30,
+        textAlign: 'center'
+      }
+    }
+  }
 })
-
-let textData = ref<TextData>({
-  fontSize: 24,
-  color: '#3D39B1FF',
-  fontWeight: 'normal',
-  letterSpacing: 0,
-  lineHeight: 30,
-  textAlign: 'center'
-})
+let textData = ref<TextData>(props.attrValue)
 </script>
 
 <style scoped lang="scss">

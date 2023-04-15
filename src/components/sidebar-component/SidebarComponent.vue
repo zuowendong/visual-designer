@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, shallowRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ComponentProperty from './ComponentProperty.vue'
 import ComponentData from './ComponentData.vue'
@@ -34,7 +34,7 @@ const TABS = reactive([
   { component: ComponentData, name: computed(() => t('data')) },
   { component: ComponentEvent, name: computed(() => t('event')) }
 ])
-let currentTab = ref(ComponentProperty)
+let currentTab = shallowRef(ComponentProperty)
 </script>
 
 <style scoped lang="scss">

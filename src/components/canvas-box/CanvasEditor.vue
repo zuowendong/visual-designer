@@ -15,7 +15,7 @@
       :tabindex="index"
       @keydown.stop="handleKeyDown($event, comp.id)"
     >
-      <component :is="comp.key"></component>
+      <component :is="comp.key" v-bind="comp.style"></component>
     </ShapeBox>
   </div>
 </template>
