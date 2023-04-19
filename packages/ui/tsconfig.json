@@ -6,6 +6,6 @@
     "isolatedModules": true,
     "allowJs": true
   },
-  "include": ["**/*.ts", "**/src/*.tsx", "src/index.tsx.ts", "tree/tree.tsx", "text/text.tsx"],
+  "include": ["**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
   "exclude": []
 }

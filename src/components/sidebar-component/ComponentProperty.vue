@@ -26,8 +26,6 @@ import type { ICompStyle } from '@/types'
 const componentStore = useComponentStore()
 
 function handleChange(propStyle: ICompStyle) {
-  console.log(1111111, propStyle)
-
   componentStore.updateComponentStyle(propStyle)
 }
 </script>
@@ -44,7 +42,7 @@ function handleChange(propStyle: ICompStyle) {
     }
     .propItem {
       display: flex;
-      padding-bottom: 20px;
+      padding-bottom: 14px;
       .label {
         flex-shrink: 0;
         width: 34px;

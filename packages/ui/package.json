@@ -4,7 +4,7 @@
   "description": "",
   "main": "./es/index.js",
   "module": "./es/index.js",
-  "types": "./es/types/index.d.ts",
+  "types": "./es/index.d.ts",
   "files": [
     "es"
   ],
@@ -20,7 +20,7 @@
     "*.css"
   ],
   "scripts": {
-    "build": "vite build"
+    "build": "rm -rf es && vite build"
   },
   "keywords": [],
   "author": "",

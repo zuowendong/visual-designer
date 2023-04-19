@@ -50,7 +50,7 @@ watch(
 )
 
 function handleUpdate(x: number, y: number) {
-  emits('change', { x, y, position: { x, y } })
+  emits('change', { x, y, [props.attrKey]: { x, y } })
 }
 </script>
 

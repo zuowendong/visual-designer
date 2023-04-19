@@ -9,7 +9,7 @@ export default defineConfig({
     vueJsx(),
     dts({
       entryRoot: './src',
-      outputDir: 'es/types',
+      outputDir: 'es',
       insertTypesEntry: true,
       skipDiagnostics: true,
       tsConfigFilePath: './tsconfig.json'
@@ -19,7 +19,7 @@ export default defineConfig({
     target: 'modules',
     outDir: 'es',
     rollupOptions: {
-      external: ['vue', /\.scss/],
+      external: ['vue', 'echarts'],
       input: './src/index.ts',
       output: [
         {
@@ -33,8 +33,7 @@ export default defineConfig({
     },
     lib: {
       name: 'ui',
-      entry: 'src/index.ts',
-      formats: ['es']
+      entry: 'src/index.ts'
     }
   }
 })

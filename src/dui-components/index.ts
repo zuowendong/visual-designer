@@ -5,6 +5,7 @@ import DuiInputText from './dui-input-text/InputText.vue'
 import DuiInputNumber from './dui-input-number/InputNumber.vue'
 import DuiGroupNumber from './dui-group-number/GroupNumber.vue'
 import DuiColorPicker from './dui-color-picker/ColorPicker.vue'
+import DuiCheckboxText from './dui-checkbox-text/CheckboxText.vue'
 
 const installs = [
   DuiComplexText,
@@ -12,7 +13,8 @@ const installs = [
   DuiInputText,
   DuiInputNumber,
   DuiGroupNumber,
-  DuiColorPicker
+  DuiColorPicker,
+  DuiCheckboxText
 ]
 
 export default {
