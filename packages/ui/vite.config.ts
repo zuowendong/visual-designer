@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
+import visualizer from 'rollup-plugin-visualizer'
 
 export default defineConfig({
   plugins: [
@@ -13,13 +14,14 @@ export default defineConfig({
       insertTypesEntry: true,
       skipDiagnostics: true,
       tsConfigFilePath: './tsconfig.json'
-    })
+    }),
+    visualizer({ open: true })
   ],
   build: {
     target: 'modules',
     outDir: 'es',
     rollupOptions: {
-      external: ['vue', 'echarts'],
+      external: ['vue'],
       input: './src/index.ts',
       output: [
         {

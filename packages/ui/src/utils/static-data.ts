@@ -41,8 +41,7 @@ class StaticData {
   }
 
   async fetchComponent(keyPath: string) {
-    const file = await import(`../${keyPath}/${keyPath}.tsx`)
-    return file.default
+    return await import(`../${keyPath}/index.ts`)
   }
 }
 

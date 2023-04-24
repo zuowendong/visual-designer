@@ -3,7 +3,7 @@ import { chartProps, type ChartProps } from './chartbar-type'
 import BaseChart from '../base-chart/BaseChart.vue'
 
 export default defineComponent({
-  name: 'WdSelect',
+  name: 'WdChartbar',
   components: { BaseChart },
   props: chartProps,
   emits: [],

@@ -9,7 +9,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AInputNumber: typeof import('ant-design-vue/es')['InputNumber']
     CanvasBox: typeof import('./src/components/canvas-box/CanvasBox.vue')['default']
     CanvasEditor: typeof import('./src/components/canvas-box/CanvasEditor.vue')['default']
     CanvasFooter: typeof import('./src/components/canvas-footer/CanvasFooter.vue')['default']
@@ -17,7 +16,6 @@ declare module '@vue/runtime-core' {
     ComponentEvent: typeof import('./src/components/sidebar-component/ComponentEvent.vue')['default']
     ComponentProperty: typeof import('./src/components/sidebar-component/ComponentProperty.vue')['default']
     NavigationView: typeof import('./src/components/navigation/NavigationView.vue')['default']
-    NCheckbox: typeof import('naive-ui')['NCheckbox']
     NColorPicker: typeof import('naive-ui')['NColorPicker']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NInput: typeof import('naive-ui')['NInput']

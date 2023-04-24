@@ -84,13 +84,13 @@ const treeData = ref<TreeData>([
 const componentStore = useComponentStore()
 function handleDragStart(e: DragEvent, compItem: IComponentBase) {
   e.dataTransfer?.setData('component', compItem.key)
-
-  console.log(compItem.key)
-
-  const keyPath = compItem.key.substring(2).toLowerCase()
-  staticData.fetchComponent(keyPath).then((module) => {
-    const { staticData } = module
-    componentInstall(compItem.key, module)
+  const compKey = compItem.key.substring(2)
+  const keyPath = compKey.toLowerCase()
+  staticData.fetchComponent(keyPath).then((module: any) => {
+    console.log(111111, module)
+    const { staticData } = module[compKey]
+    // window['$app'].use(module.default)
+    componentInstall(compItem.key, module[compKey])
     componentStore.setComponentProps(compItem.key, staticData)
   })
 }

@@ -1,14 +1,13 @@
 {
-  "name": "vite-project",
+  "name": "screen-designer",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
+    "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "build:ui": "pnpm -F ui build",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "prepare": "husky install"
@@ -50,6 +49,7 @@
     "nanoid": "^3.3.6",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.4",
+    "rollup-plugin-visualizer": "^5.9.0",
     "sass": "^1.59.3",
     "typescript": "~4.8.4",
     "unplugin-vue-components": "^0.24.1",
