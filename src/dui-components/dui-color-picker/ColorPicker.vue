@@ -13,11 +13,11 @@ const props = defineProps({
   attrKey: { type: String, default: '' },
   attrValue: { type: String, default: '' }
 })
-const emits = defineEmits(['change'])
+const emits = defineEmits(['update:attrValue'])
 
 let value = ref<string>(props.attrValue)
 function handleUpdate(value: string) {
-  emits('change', {
+  emits('update:attrValue', {
     [props.attrKey]: value
   })
 }

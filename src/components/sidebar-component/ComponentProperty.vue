@@ -1,5 +1,6 @@
 <template>
   <div class="propertyMain">
+    <DuiGroupSlider :attr-value="test" @update:attrValue="handleTest" />
     <div
       v-for="(configItem, key) of componentStore.componentPropConfig"
       :key="key"
@@ -12,7 +13,7 @@
           :is="item.compKey"
           :attr-key="itemKey"
           :attr-value="componentStore.currentComponent.style[itemKey]"
-          @change="handleChange"
+          @@update:attrValue="handleUpdateAttrValue"
         ></component>
       </div>
     </div>
@@ -20,13 +21,18 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useComponentStore } from '@/stores/component'
 import type { ICompStyle } from '@/types'
 
 const componentStore = useComponentStore()
-
-function handleChange(propStyle: ICompStyle) {
+function handleUpdateAttrValue(propStyle: ICompStyle) {
   componentStore.updateComponentStyle(propStyle)
+}
+
+const test = ref([20, 40])
+function handleTest(val: number[]) {
+  console.log(val)
 }
 </script>
 

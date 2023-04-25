@@ -13,7 +13,7 @@ const props = defineProps({
   attrKey: { type: String, default: '' },
   attrValue: { type: Number, default: 0 }
 })
-const emits = defineEmits(['change'])
+const emits = defineEmits(['update:attrValue'])
 
 let value = ref(props.attrValue)
 watch(
@@ -23,7 +23,7 @@ watch(
   }
 )
 function handleUpdate(value: number) {
-  emits('change', {
+  emits('update:attrValue', {
     [props.attrKey]: value
   })
 }

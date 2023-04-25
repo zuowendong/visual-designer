@@ -41,7 +41,7 @@ const props = defineProps({
     }
   }
 })
-const emits = defineEmits(['change'])
+const emits = defineEmits(['update:attrValue'])
 
 let checkboxText = ref<CheckboxText>(props.attrValue)
 const checkedText = computed(() => (checkboxText.value.checked ? '显示' : '不显示'))
@@ -56,10 +56,7 @@ watch(
 )
 
 function handleUpdate(checked: boolean, label: string) {
-  console.log(555555, {
-    [props.attrKey]: { checked, label }
-  })
-  emits('change', {
+  emits('update:attrValue', {
     [props.attrKey]: { checked, label }
   })
 }

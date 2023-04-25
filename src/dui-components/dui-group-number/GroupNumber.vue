@@ -38,7 +38,7 @@ const props = defineProps({
     }
   }
 })
-const emits = defineEmits(['change'])
+const emits = defineEmits(['update:attrValue'])
 
 let posData = ref<PosData>(props.attrValue)
 watch(
@@ -50,7 +50,7 @@ watch(
 )
 
 function handleUpdate(x: number, y: number) {
-  emits('change', { x, y, [props.attrKey]: { x, y } })
+  emits('update:attrValue', { x, y, [props.attrKey]: { x, y } })
 }
 </script>
 
