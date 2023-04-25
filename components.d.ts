@@ -29,5 +29,6 @@ declare module '@vue/runtime-core' {
     SidebarList: typeof import('./src/components/sidebar-list/SidebarList.vue')['default']
     SwitchLanguage: typeof import('./src/components/navigation/SwitchLanguage.vue')['default']
     ThemeButton: typeof import('./src/components/navigation/ThemeButton.vue')['default']
+    VirtualList: typeof import('./src/components/sidebar-list/VirtualList.vue')['default']
   }
 }

@@ -6,4 +6,6 @@ import type {
   ICompProps
 } from './component'
 
-export { IComponentBase, IComponent, ICompStyle, ICompStaticData, ICompProps }
+import type { IMenu } from './menu'
+
+export { IComponentBase, IComponent, ICompStyle, ICompStaticData, ICompProps, IMenu }

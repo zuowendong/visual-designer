@@ -13,13 +13,10 @@
       :element="comp"
       :is-active="comp.id === componentStore.currentComponent.id"
       :tabindex="index"
+      :style="compCommonStyle(comp.style)"
       @keydown.stop="handleKeyDown($event, comp.id)"
     >
-      <component
-        :style="compCommonStyle(comp.style)"
-        :is="comp.key"
-        v-bind="comp.style"
-      ></component>
+      <component :is="comp.key" v-bind="comp.style"></component>
     </ShapeBox>
   </div>
 </template>
@@ -57,7 +54,7 @@ function handleKeyDown(event: KeyboardEvent, id: string) {
 }
 
 function compCommonStyle(style: ICompStyle) {
-  return `background-color: ${style.bgColor}`
+  return `background-color: ${style.bgColor}; z-index: ${style.zIndex}`
 }
 </script>
 

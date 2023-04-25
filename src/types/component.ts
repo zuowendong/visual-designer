@@ -1,10 +1,6 @@
 export interface IComponentBase {
   id: string
-  name: string
   key: string
-  label?: string
-  categoryName: string
-  category: string
 }
 
 export interface IComponent extends IComponentBase {
