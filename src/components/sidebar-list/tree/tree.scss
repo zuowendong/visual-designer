@@ -1,9 +1,34 @@
+.tree {
+  width: 100%;
+  user-select: none;
+}
+
 .rawNode {
   line-height: 30px;
   display: flex;
   align-items: center;
 
   .icon {
+    display: flex;
+    padding-right: 2px;
     cursor: pointer;
+  }
+}
+
+.compItem {
+  width: 100%;
+  height: 30px;
+  box-sizing: border-box;
+  padding-left: 12px;
+  line-height: 30px;
+  border: 1px solid var(--theme-border);
+  color: var(--theme-color);
+  margin-bottom: 10px;
+  border-top-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    background-color: #91caff;
   }
 }

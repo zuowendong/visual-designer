@@ -2,18 +2,7 @@
   <div class="listMain">
     <div class="menuContainer">
       <header>{{ $t('component-list') }}</header>
-      <div
-        v-for="compItem in componentList"
-        :key="compItem.id"
-        class="compItem"
-        draggable="true"
-        @dragstart="handleDragStart($event, compItem)"
-      >
-        <span>{{ compItem.id }}</span>
-        <span>{{ compItem.name }}</span>
-      </div>
-
-      <MenuTree :data="treeData" />
+      <MenuTree :data="treeList" />
     </div>
   </div>
 </template>
@@ -22,10 +11,8 @@
 import { onMounted, ref } from 'vue'
 import type { IComponentBase } from '@/types'
 import { staticData } from '@designer/ui'
-import MenuTree from './tree/tree'
+import MenuTree from './tree/menu-tree'
 import { TreeData } from './tree/tree-types'
-import { componentInstall } from '@/utils/component'
-import { useComponentStore } from '@/stores/component'
 
 export interface ComponentMenu {
   category: string
@@ -34,64 +21,45 @@ export interface ComponentMenu {
   name: string
 }
 
+let treeList = ref<TreeData[]>([])
 let componentList = ref<IComponentBase[]>([])
 async function getComponentList() {
-  staticData.getJsonDataArray().then((list: ComponentMenu[]) => {
-    componentList.value = list.map((item, index): IComponentBase => {
-      return {
-        ...item,
-        id: (index + 1).toString(),
-        key: item.label
-      }
-    })
-
-    console.log('menus', componentList.value)
+  const list: ComponentMenu[] = await staticData.getJsonDataArray()
+  componentList.value = list.map((item, index): IComponentBase => {
+    return {
+      ...item,
+      id: (index + 1).toString(),
+      key: item.label
+    }
   })
+  treeList.value = genTreeData(componentList.value)
 }
-onMounted(() => getComponentList())
 
-const treeData = ref<TreeData>([
-  {
-    label: '一级1',
-    level: 1,
-    open: true,
-    children: [
-      {
-        label: '二级1-1',
-        level: 2,
-        children: [{ label: '三级1-1-1', level: 3 }]
-      }
-    ]
-  },
-  {
-    label: '一级2',
-    level: 1,
-    open: false,
-    children: [
-      {
-        label: '二级2-1',
-        level: 2
-      },
-      {
-        label: '二级2-2',
-        level: 2,
-        children: [{ label: '三级级2-2-1', level: 3 }]
-      }
-    ]
+onMounted(async () => {
+  await getComponentList()
+})
+
+function genTreeData(list: IComponentBase[]): TreeData[] {
+  const categoryMap = new Map()
+  let treeObj: { [k: string]: TreeData[] } = {}
+  for (let i = 0; i < list.length; i++) {
+    categoryMap.set(list[i].category, list[i].categoryName)
+    const row = { ...list[i], level: 2 }
+    if (treeObj[list[i].category]) {
+      treeObj[list[i].category].push(row)
+    } else {
+      treeObj[list[i].category] = [row]
+    }
   }
-])
 
-const componentStore = useComponentStore()
-function handleDragStart(e: DragEvent, compItem: IComponentBase) {
-  e.dataTransfer?.setData('component', compItem.key)
-  const compKey = compItem.key.substring(2)
-  const keyPath = compKey.toLowerCase()
-  staticData.fetchComponent(keyPath).then((module: any) => {
-    console.log(111111, module)
-    const { staticData } = module[compKey]
-    // window['$app'].use(module.default)
-    componentInstall(compItem.key, module[compKey])
-    componentStore.setComponentProps(compItem.key, staticData)
+  const keys = Object.keys(treeObj)
+  return keys.map((key) => {
+    return {
+      name: categoryMap.get(key),
+      level: 1,
+      open: true,
+      children: treeObj[key]
+    }
   })
 }
 </script>
