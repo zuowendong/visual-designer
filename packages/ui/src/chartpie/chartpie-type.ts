@@ -28,6 +28,12 @@ export const chartProps = {
         label: ''
       }
     }
+  },
+  annularRadius: {
+    type: Array as PropType<number[]>,
+    default: (): number[] => {
+      return [0, 50]
+    }
   }
 } as const
 

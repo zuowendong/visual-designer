@@ -40,6 +40,12 @@ export const properties: PropertyData[] = [
           checked: false,
           label: ''
         }
+      },
+      {
+        name: '环形范围',
+        key: 'annularRadius',
+        compKey: 'dui-group-slider',
+        value: [0, 50]
       }
     ]
   }
