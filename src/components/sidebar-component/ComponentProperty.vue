@@ -45,11 +45,12 @@ function handleChange(propStyle: ICompStyle) {
       padding-bottom: 14px;
       .label {
         flex-shrink: 0;
-        width: 34px;
+        width: 60px;
         padding-top: 4px;
         padding-right: 5px;
         margin-right: 15px;
         border-right: 1px solid var(--theme-border);
+        text-align: right;
       }
       .hiddenCompBox {
         flex: 1;
