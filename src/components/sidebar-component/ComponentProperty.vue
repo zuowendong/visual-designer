@@ -13,7 +13,7 @@
           :is="item.compKey"
           :attr-key="itemKey"
           :attr-value="componentStore.currentComponent.style[itemKey]"
-          @@update:attrValue="handleUpdateAttrValue"
+          @update:attrValue="handleUpdateAttrValue"
         ></component>
       </div>
     </div>

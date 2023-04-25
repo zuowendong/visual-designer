@@ -16,13 +16,8 @@ export default defineComponent({
           subtext: props.subTitle.checked ? props.subTitle.label : '',
           left: 'center'
         },
-        tooltip: {
-          trigger: 'item'
-        },
-        legend: {
-          orient: 'vertical',
-          left: 'left'
-        },
+        tooltip: { trigger: 'item' },
+        legend: { orient: 'vertical', left: 'left' },
         series: [
           {
             name: 'Access From',
